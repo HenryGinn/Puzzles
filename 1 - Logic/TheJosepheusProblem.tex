@@ -1,0 +1,22 @@
+\subsection{The Josepheus Problem}
+
+I found this problem on Numberphile in 2016. This is a good problem to talk about on a walk, although a pen and paper can be beneficial. I gave this problem while on a walk on a holiday to Dublin with friends and together they figured it out in about 10 minutes, including the extension (this has been listed as a hint). This problem does not need advanced maths or logic, and trying out some situations and seeing what happens gives a good entry into the problem. I give this problem a difficulty rating of 3/10.
+
+You are part of a group of $n$ knights who have decided to commit ritual suicide in the following way. All the knights stand in the circle, and the starting knight kills the person to their left, going clockwise. The next surviving knight does the same, and this repeats until there is one knight left who would them kill themselves. You have decided you do not fancy killing yourself however, and want to place yourself in the circle so that you are the last surviving knight, and no other knights will find out you did not kill yourself. If the knights are numbered from 1 to $n$ going clockwise, what position should you stand in to survive?
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item Run the game through for several small cases ($n < 10$). Some values of $n$ will lead to easier cases than others - make a conjecture about this and prove it.
+	\item The easy cases are when $n$ is a power of 2
+	\item How can you reduce the case of an arbitrary $n$ to a case involving a power of 2?
+	\item Extension: find a nice representation of the solution in binary
+\end{enumerate}
+
+\textbf{Solution:}
+
+When $n = 2^k$, knight 1 kills 2, knight 3 kills 4, and so on until a loop is complete and it is the turn of knight 1 to kill again. All of the even numbered knights would be dead, and if they were renumbered then the situation would be indistinguishable from starting with $n = 2^{k - 1}$. This means that if $n$ is a power of 2, you should go in the first position.
+
+If $n = 2^k + m$ where $0 \leq m \le 2^k$ then after $m$ knights have been killed the problem has been reduced to the case where $n$ is a power of 2. This case has been solved already, so it suffices to find the knight that starts the $n = 2^k$ game. There is one killer knight for each killed knight which meas if $m$ knights are killed then knight $2m + 1$ is the knight of interest. For this to be well-defined we need to have not wrapped around the full circle which means we need $2m + 1 \leq n$. This will be the case as $2m + 1 = (m + 1) + m \leq 2^k + m = n$.
+
+If $b_k b_{k-1} \dots b_1 b_0$ is the binary expansion of $n$ then $b_{k-1} b_{k-2} \dots b_1 b_0$ is the binary expansion of $m$. Multiplying $m$ by 2 is a bit shift to the left, and adding 1 gives the binary expansion of $2m + 1$ as $b_{k-1} b_{k-2} \dots b_1 b_0 1$. This is the same as if we took the leading 1 in the binary expansion of $n$ and moved it to the end of the number.

@@ -1,0 +1,25 @@
+% Date added: 2024/09/21
+
+\subsection{Sum of Many Dice}
+
+I thought of this puzzle while  was a trainee teacher. It is reasonably simple but employs a nice trick. Everyone I have asked this as of the time of writing has not got it, but my dad went straight for the solution and said that was just the obvious way of solving it. I am inclined to agree, but given how most people have not got it, I rate this puzzle a 3/10 in terms of difficulty.
+
+Three regular six sided dice are rolled and the total is found. what is more likely to happen, the sum is equal to 9, or 10?
+
+\textbf{Hints:}
+
+\begin{enumerate}
+    \item It is not necessary to enumerate all combinations that give a total of 9 and 10.
+    \item Think about the shape of the distribution of the total of the dice rolls.
+    \item Calculate the mean of the distribution.
+\end{enumerate}
+
+\textbf{Solution:}
+
+The mean of one dice is 3.5, and by linearity of expectation the mean of the sum of three dice is 10.5. The probability is lowest for the sums of 3 and 18 which can only be achieved in one way, and increase as they get to the middle with the peak at 10 and 11. The exact probability does not need to be computed as only the order is of interest, and this can be determined by the distance from the peak. 9 is further from 10.5 than 10 is, therefore it has a lower probability.
+
+To give a better intuition as to why the probability is increasing up to the middle and then decreases, consider the state space as a 6 by 6 by 6 cubic grid. Each of the dimensions represents one of the dice, and each cell represents one possible result of the three dice. Cells with the same total lie on the same diagonal plane ($x + y + z = p$ if the axes of the cube lie on the coordinate axes), and each cell has the same probability of occurring. This means the highest probability total is where the plane has the largest intersection with the cube. As the plane moves through the cube, the intersection can be seen to increase until it is halfway through, after which it decreases.
+
+\textbf{Extensions and Comments:}
+
+I like this problem because it is very simple and the solution easily cuts away what is unnecessary. This problem can very easily be extended for any number of dice as long as there are more than one dice\footnote{If there is only one dice then the distribution is not strictly convex from below, therefore the probabilities are weak inequalities rather than strict.}, and any number of sides on the dice. This even works if the dice are different sizes, the distribution will still be convex by the same argument, and the mean can be found by adding the individual means of the dice. I imagine if a version of this problem was given with a hundred dice and totals of 364 and 335 then people would be more suspicious and get the answer faster.

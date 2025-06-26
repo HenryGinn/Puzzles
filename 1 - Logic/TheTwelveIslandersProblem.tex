@@ -1,0 +1,58 @@
+% Date added: 2024/09/21
+
+\subsection{The Twelve Islanders Problem}
+
+This is a classic problem. I first came across this problem when My Oxford admissions tutor, Jeremy, gave it to me in 2016. There he posed it as doing it in as few steps as possible rather than the version presented here where it is given that it is possible with three. I next encountered it on an episode of Brooklyn 99 which I imagine played a large part in the popularisation of the problem. I solved it after my second watch through in 2024 and it took me an hour. Chat GPT version 4o is unable to solve it, even with prodding, and I think it is actually quite hard. Jeremy said very few people had managed to solve it, and I rate it as 8 out of 10 in terms of difficulty. this is a good problem to talk about on a walk with others, although a pen and paper is beneficial.
+
+There are twelve people on an island. Eleven of them have the exact same weight, but the last one is a different weight, either lighter or heavier. There is a set of scales on the island that can be used only three times. There is no limit on how many people can be on either side of the scales, and it will either tilt left, right, or stay balanced. The problem is to find a strategy where the odd islander can be identified, and whether they are heavier or lighter than the others.
+
+\textbf{Hints:}
+
+\begin{enumerate}
+    \item There are three possible states at each weighing, and three weighings means 27 possible outcomes. There are twelve possible islanders who could be the odd one out, and two states they could be in (heavier or lighter), meaning 24 possible states. This means almost all information needs to be extracted from each weighing. If there is an inefficiency in the strategy, it likely will not be possible to solve in three weighings.
+    \item The first weighing is comparing four islanders against another four islanders.
+    \item After the first weighing, there will be at least four islanders that are ruled out, but you know they are the same weight. They can be used in future weighings.
+\end{enumerate}
+
+\textbf{Solution:}
+
+As mentioned in the hints, the most important part is extracting as much information as possible. The first deduction made is that to gain any information at all, there must be an equal number of people on each side of the scales at any step in the whole process. For the first weighing, all the islanders are indistinguishable as we have zero knowledge that sets any apart from the rest, therefore the only decision is how many to put on each side.
+
+Many people's first thought is to have 6 on either side. It cannot stay level as 5 equal weight islanders will cancel out and leave an imbalance. Note that this is already enough to rule out this option - the maximum number of states that could be distinguished is $2 \cdot 3^2 = 18$, less than the 24 needed. Spelling it out further, if it goes to the left then either the odd one out is heavy and on the left or light and on the right, and opposite if it went right. The odd one out could still be any of the islanders, and could still be heavier or lighter, showing just how little information this gains.
+
+If 5 people are put on either side of the scale and it balances then too much information has been gained about the 2 left over. There are 4 possible states, but the scales could determine up to 9 states with the remaining weighings. There is only a difference of 3 between the maximum number of discernible states and the number of states needed to be determined, and in this setup 5 of those are thrown away, meaning it cannot be possible to extract enough information to determine who the odd one out would be if the scales did not balance.
+
+A similar argument can be made if 3 people are put on either side of the scales. If the scales balance then the problem has been reduced to determining the odd one out among 6 islanders in two weighings. This has 12 different states, but two weighings only gives 9 states, therefore it is impossible. We can conclude that 4 islanders are needed on either side of the scales for the first weighing, and the problem now splits into two cases. Case 1 is easier, and is where the scales balance, meaning the odd one out is among the 4 islanders not on the scales, and case 2 is where they do not balance. After the first weighing, the islanders are no longer indistinguishable as we have information about which ones are the same size and other comparative information, meaning which islanders are put on the scale is now important. We discuss case 1 first. 
+
+If 2 people are put on either side of the scales then the same problem with weighing 6 vs 6 in the first weighing occurs, and we do not gain any real information. Weighing 1 vs 1 also does not work. If an islander of known weight is weighed against an unknown weight islander and they balance, then there are 3 islanders who could all be heavier or lighter and this is impossible to determine, therefore two unknown weight islanders must be weighed against each other. If these islanders balance then there are two possible islanders it could be, but of unknown weight, giving 4 cases to be determined in one weighing which is impossible. This means weighing 1 vs 1 or 2 vs 2 cannot work.
+
+Weighing 3 vs 3 has 7 possible weighings depending on how many unknown islanders are on each side, with known islanders filling up the remaining spaces: 3 vs 1, 3 vs 0, 2 vs 2, 2 vs 1, 2 vs 0, 1 vs 1, and 1 vs 0. Putting unknown islanders on both sides means that if the scales do not balance, then no information is gained about whether the odd one out is heavier or lighter, and unless there is only one islander on each side then the odd one out cannot be determined. This leaves only 3 vs 0, 2 vs 0, and 1 vs 0 as remaining cases. If 1 or 2 unknown islanders are weighed and it balances, then there are at least 2 unknown islanders to determine. This is impossible, and there must therefore be 3 unknown islanders on one side and none on the other if 3 islanders are weighed against each other.
+
+If the three unknown islanders balance the three known islanders, then the unweighed unknown islander is the odd one out, and whether they are lighter or heavier can be determined with the last weighing. If the three unknowns are heavier/lighter than the known islanders, then the odd one out is heavier/lighter, and is among those three. Weighing one of the unknowns against another is the last weighing, and the three outcomes determine which one is the odd one out. Suppose A, B, and C are the unknowns and A is weighed against B. If they balance, C is the odd one out, if it goes left, A is the odd one out, and if it goes right, B is the odd one out.
+
+As seen in case 1, the odd one out of three islanders can be determined in a single weighing if some information is known about the group of islanders. We can do no more than three as this is the maximum number of outcomes from a weighing. This means the 8 possible islanders that could be the odd one out from the first weighing in case 2 needs to be reduced to a group of 3 islanders from the second weighing. If three islanders from one side, without loss of generality let us say the heavy side, are left out of the weighing, and all other islanders are included in the second weighing, then the odd one out is determinable if the scales balance. As previously seen, this extracts as much information as possible in the case where the scales balance so this is well motivated.
+
+Denote the islanders on the heavy side of the first weighing in case 2 by H, and L for those on the other side. The islanders who were not weighed and deduced to be of regular weight are denoted by~K (for ``known"). For convenience the word ``potentially" has been dropped when referring to potentially heavy and potentially light islanders. There are six possible weighings that do not include three heavy islanders, two that weigh 3 vs 3, and three that weigh 4 vs 4, as shown below. These are all configurations as adding known islanders to both sides of a weighing gives an equivalent weighing as they cancel out. Note that two potentially light or two potentially heavy islanders cannot cancel out because it is not known whether they are the same weight. For each side of the scales that go down, there needs to be at most three islanders that could be responsible. If this is not the case then we would need to distinguish between more than three islanders in one weighing which is impossible.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ccccc}
+        HKL vs LLL & & HKKK vs LLLL & & HLKK vs KLLL\vspace{4mm}  \\
+        & HLL vs KLL & & HLLL vs KKKL
+    \end{tabular}
+\end{table}
+
+In the first configuration, the scales could go left because of the heavy islander on the left or the three light islanders on the right, therefore it must be excluded. Similar arguments can be made with the other configurations in the first row which rules them out. This leaves configurations three and five as the only remaining options, and both can be seen to work.
+
+For HLL vs KLL, if the scales go left then the odd one out is either the heavy islander or the two light islanders on the right. If the two light islanders are compared then the three outcomes determine which is the odd one out. If the scale goes right then the two light islanders on the left are the only possible candidates for being the odd one out, and the last weighing can determine the answer easily. For HLLL vs KKKL, if the scale goes left then either the heavy islander on the left or the light islander on the right is responsible, and comparing one of these against a known weight islander determines which is the odd one out. If the scale goes right then one of the three lights on the left is responsible, and determining which of the three is the odd one out has already been seen to be possible.
+
+Earlier it was decided to leave three heavy islanders off the scales, but there are three other choices that could have been made instead. Leaving three light islanders off is clearly equivalent, but leaving two heavy and one light islanders off is a distinctly different case (or equivalently, one heavy and two light islanders). If two heavy and one light islanders are left off and the scale with all other unknown islanders on it balances, then weighing the two heavy islanders against each other determines the odd one out. There are 2 other heavy islanders and three light islanders that can be arranged on the scales in the ways listed below. Following a similar reasoning as seen previously, the first two do not work, and the last two do, giving a total of four working configurations. These are all the possible solutions to the problem.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ccccccc}
+        HHK vs LLL & & HHL vs KLL & & HKL vs HLL & & HHLL vs KKKL
+    \end{tabular}
+\end{table}
+
+\textbf{Extensions and Comments:}

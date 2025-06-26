@@ -1,0 +1,19 @@
+
+\subsection{5 by 6 Magic Rectangle}
+
+This is question 1 from the 1979 Grade 5 Leningrad Mathematical Olympiad\cite{Grade5LeningradOlympiad}, so it was designed for children aged around 11. Despite this, most people I ask have not been able to solve it and give up very quickly. Personally I think the success rate would be higher if people were more tenacious, and I give this problem a difficulty of 2/10.
+
+The numbers 1 to 30 are each to be placed in a 5 by 6 grid such that all the rows sum to the same total, and all the columns sum to the same total. Determine whether this is possible, and if so, provide a solution.
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item Be more systematic than trying to move the numbers around to get the same totals.
+	\item Think about how you would calculate the totals for the rows and columns.
+\end{enumerate}
+
+This problem becomes easy when you think about it systematically. Before placing any numbers in the table, the totals for the rows and columns should be found as a target to aim for. The sum of all the column totals will be equal to the sum of all the numbers in the grid, and similarly for the rows. This total is an invariant of the problem, any arrangement of numbers will give the same total sum. This invariant can be determined using the formula for the sum of the first $n$ natural numbers, giving $S = \frac{1}{2} \cdot 30 \cdot 31 = 15 \cdot 31$. As the column total is a constant, the sum of the column totals will be a multiple of 6 as there are six columns. This means the sum of all numbers in the grid is also a multiple of 6. $S = 15 \cdot 31$, which are both odd, therefore the column total cannot be a whole number. As the column total is the sum of whole numbers, this is a contradiction, and the task is impossible.
+
+\textbf{Extensions and Comments:}
+
+This method will show that such a grid is impossible if and only if the dimensions of the grid are of different parities. This can be done by substituting general odd and even numbers into the formula $\frac{1}{2} \cdot nm  \cdot (nm + 1)$. In the case of two even number or two odd numbers, the expression can be expanded and divided by either of the numbers to get a whole number. In the case of one number being even and the other being odd, it can be seen that dividing the expression by the even number gives $\frac{1}{2} \cdot \text{ODD} \cdot {\text{EVEN} + 1}$ which cannot be an integer (THIS IS INCORRECT, FIX THIS). Passing this test does not imply that such a magic rectangle is possible however, for example there are only two possible 2 by 2 grids and neither of them are magic.

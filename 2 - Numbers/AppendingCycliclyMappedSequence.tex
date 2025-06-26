@@ -1,0 +1,34 @@
+\subsection{Appending Cyclicly Mapped Sequence}
+
+This problem was part of the coding assessment for Blackrock which I was helping a friend with. I originally did this in the naive way as I had the power of Python, but looking at it further I realised there was a simple solution. This puzzle does not require any large leaps in understanding and the solution builds quite naturally. I consider this problem a 4/10 in terms of difficulty.
+
+At the 0$^\text{th}$ iteration, a sequence is the single digit 0. On each iteration, all zeros are mapped to one, all ones are mapped to two, and all twos are mapped to zero. The transformed sequence is then appended on to the end of the original sequence to get the sequence for the next iteration. The question is to find a nice method or expression to determine the value of the digit at index $n$ where the first digit is defined to be at index 0. The first few terms are shown below.
+
+\begin{center}
+    0  \\
+    01  \\
+    0112  \\
+    01121220  \\
+    0112122012202002
+\end{center}
+
+\textbf{Hints:}
+
+\begin{enumerate}
+    \item It is not necessary to generate the whole sequence.
+    \item The transformation can be thought of as adding one and taking the result modulo 3.
+    \item Initially forget about taking the result modulo 3, and assume a base with infinitely many symbols.
+    \item Convert $n$ to binary.
+\end{enumerate}
+
+\textbf{Solution:}
+
+The digit sum of the binary digits of $n$ modulo 3 gives the answer. At any given iteration, an index is either part of the original sequence in the previous iteration, or is part of the appended sequence. The digit would have had one added to it modulo three at an iteration if and only if it was in the appended part at that iteration, and therefore the history of each position should be understood.
+
+Take $13$ as an example. At the fourth iteration, it is in the appended part as it is larger than $8$. The digit that got mapped is $13 - 8 = 5$. At the third iteration this index was also in the appended part as it is larger than $4$, and the mapped digit was $1$. This was in the original part of the sequence at the second iteration, and in the appended part at the first iteration. Going from the last iteration backwards, this gives a history of appended, appended, original, appended, matching perfectly with the binary expansion, $1101$.
+
+To see this relationship with the binary more generally, note that at iteration $n$, the index $k$ is in the appended part if and only if $k \ \text{mod} \ 2^{n-1}$ is in the appended part. This is the case if and only if the $n^\text{th}$ binary digit of $k$ is $1$, as the binary expansion of $k \ \text{mod} \ 2^{n-1}$ is the same as that of $k$ but truncated to leave the last $n$ digits. To get the digit at the $k^\text{th}$ position, it is only necessary to find the number of times it was in the appended part as this is the number of times a 1 was added to it. This corresponds exactly to the sum of the digits in the binary expansion of $k$, and $\text{mod}$ commutes with addition, therefore the modulus can be taken after the sum.
+
+\textbf{Extensions and Comments:}
+
+This solution builds quite naturally and an initial approach of testing some examples does well to give an intuition as to how the problem works. I think this would work better as a supervised interview question instead of as a coding test. The line of Python code needed is `sum([int(i) for i in bin(k)[2:]]) \% 3`. This problem easily extends for transformation rules that use addition of any constant modulo any other positive natural number by the same argument, although with the extra step of multiplying the sum of binary digits by the constant added to the appended part. The time and memory complexity of the solution offered here is $O(\log k)$, whereas the naive method of generating the sequence has a complexity of $O(n)$.

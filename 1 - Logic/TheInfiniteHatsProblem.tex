@@ -1,0 +1,49 @@
+\subsection{The Infinite Hats Problem}
+
+This puzzle frustrated me when I first heard it as I knew I would not be figuring it out. It appears completely impossible, and this is the reaction of everyone I have shared it with, and I imagine whoever came up with it did so as a demonstration of the weird results implied by the axiom of choice. I do not think it is fair to give this puzzle to a non-mathematician with the expectation that they could solve it as only a mathematician would think of using the machinary needed to solve it. The solution is surprisingly simple, yet I still believe this puzzle deserves a difficulty rating of 9/10. Annoyingly when I first came across it there were no hints, and I could only solve it after hearing the first stage of the solution which is a very big hint.
+
+There are a countably infinite number of logicians who are all be given a hat with a real number number on it. The logicians cannot see their own number (including via reflective surfaces or other mechanisms) and they are not allowed to communicate with others. Simultaneously they will announce what they believe to be the number on their hat. They win the game if at most finitely many of the logicians guess correctly. They are allowed to strategise beforehand - what strategy should they use?
+
+\begin{itemize}
+	\item There is no pattern or connection between these numbers - they are selected completely independently and no information can be gained about what a given number is using knowledge of other numbers.
+	\item The logicians can see the number of every other logician.
+	\item All the logicians can be trusted to always follow the strategy perfectly (although if there were finitely many bad actors who deliberately guessed wrong this would not make a difference).
+	\item The logicians are capable of performing any mathematical operation and have no bound on how much information they can remember.
+	\item You may assume the axiom of choice.
+\end{itemize}
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item The logicians will not know whether they guessed correctly, even after everyone has announced their guess. This information is impossible to determine because of the independence of the numbers. Do not focus on a single logician - only the collective matters.
+	\item The logicians can decide a priori on an ordering of themselves, and this gives a sequence of real numbers. Consider the space of sequences of real numbers.
+	\item Construct a suitable equivalence relation between sequences of real numbers.
+	\item Define two sequences to be ``close" if they differ in only finitely many positions.
+\end{enumerate}
+
+\textbf{Solution:}
+
+As there are a countable number of logicians there exists an ordering of them which they can agree on in advance. Taking each logicians number in this order defines a sequence. Consider two sequences $(a_n)$ and $(b_n)$ and define $I_{a, b} = {n | a_n \neq b_n}$ to be the indicies where $(a_n) and (b_n)$ differ. We say $(a_n) ~ (b_n)$ if and only if $|I_{a, b}|$ is finite. This equivalence relation captures the idea that two sequences are close. First we show this is in fact an equivalence relation.
+
+The relation is clearly reflexive as a sequence differs from itself in zero locations which is finite. $(a_n)$ differs from $(b_n)$ in exactly the same places that $(b_n)$ differs from $(a_n)$ and thus symmetry is inherited from the non-equals relation. For sequences $(a_n)$, $(b_n)$, and $(c_n)$, we see the relation is transitive by equation~\ref{eqn:TheInfiniteHatsProblemTransitivity}.
+
+\begin{equation}
+	|I_{a, c}| \leq |I_{a, b} \cup I_{b, c}| \leq |I_{a, b}| + |I_{b, c}| \leq \infty
+	\label{eqn:TheInfiniteHatsProblemTransitivity}
+\end{equation}
+
+This equivalence relation partitions the set of real sequences into equivalence classes. Within each equivalence class, each sequence is close to each other sequence. Each sequence is in an equivalence class, and no sequence is in more than one equivalence class. The first follows as a sequence must be close to itself, and the second follows by transivitiy. Using the axiom of choice, an element of each equivalence class can be chosen. This is done for each equivalence class, and the logicians can all agree which sequence is chosen for each equivalence class.
+
+Let the sequence defined by the numbers on the logician's hats be $(x_n)$. Logician $k$ can define a sequence $(y^k_n)$ by $x_1, \dots, x_{k-1}, y, x_{k+1}, \dots$ where $y$ is the unknown number that is on their hat. For all possible values of $y$, $(y^k_n)$ will belong to the same equivalence class as $(x_n)$ as they only differ in position $k$. Each logician can do this and they will each identify the same equivalence class by transivity (This follows because $(y_n^{k_1}) ~ (y_n^{k_2}) \forall k_1, k_2 \in \mathbb{N}$). All logicians agree on the representative sequence, $(z_n)$ for that equivalence class.
+
+The strategy for the $k^\text{th}$ logician is to guess $z_k$. The resulting sequence of guesses must differ in only finitely many locations as $(z_n) ~ (x_n)$.
+
+\textbf{Extensions and Comments:}
+
+I think this puzzle seems so hard because it is natural to focus on how a single logician could get the answer correct. Suppose there was only one logician with a natural number on their head, and they had as many guesses as they like to guess the number. We would expect them to need an infinite number of guesses before they guessed correctly, and as the natural numbers are countable this seems far easier than guessing a number from an uncountable set such as the real numbers.
+
+Having only a finite number guess wrong seems very restrictive given how much smaller any finite number is than infinity. When seeing the answer however I thought that the number being finite seemed less restrictive. Once the equivalence relation puts us in the domain of dealing with finite numbers, all over control follows by pushing any difficulties under the rug of finite + finite = finite. This problem highlighted to me how hard it is to have a good intuition for finite numbers vs infinite numbers.
+
+I believe we can even construct a more restrictive version of this problem. Suppose all the logicians were in a line facing the same direction such that they can see all the hats in front of them but none of the hats behind them. The logician in position $k$ would not be able to see $k - 1$ numbers, but given that this is a finite number they would still be able to identify which equivalence class the sequence lived in. The strategy should work exactly the same way. As noted in the hints, any finite number of malicious actors who do not conform to the strategy can also be tolerated.
+
+Part of my frustration with this problem was that I could not get a foothold into it, although once the equivalence relation on real sequences was given I saw the rest of the solution immediately. To me this highlights the importance of hints in a problem, and in particular giving hints in a sequence where as little information is imparted at a time. I do not think I would have got this without hints, but I feel the hint I did receive robbed me of solving the problem properly.

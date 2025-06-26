@@ -1,0 +1,93 @@
+% Date added: 12/09/2024
+
+\subsection{Six Digit And Two Set Comparison}
+
+I found this problem in a book of problems from the Grade Five Leningrad Mathematical Olympiad~\cite{Grade5LeningradOlympiad}, in particular, this is question two from 1989. I have only found one person who could solve this as of 2024 so it may be trickier than it seems given it is designed for 11 year old children.
+
+Consider the set of six digit numbers including leading zeros, that is, 000000 to 999999. Set $X$ is defined as all such numbers where the first three digits sum to the same amount as the sum of the last three digits. Set $Y$ is defined as all such numbers where all the digits add up to 27. Show that sets $X$ and $Y$ are the same size.
+
+\textbf{Hints:}
+
+\begin{enumerate}
+    \item The size of each set does not need to be determined.
+    \item The fact that $27 = 3 \cdot 9 = \frac{6}{2} \cdot (\text{base} - 1)$ is not a coincidence.
+    \item Make a bijection between the sets.
+\end{enumerate}
+
+\textbf{Solution:}
+
+Denote the number as the concatenation of six digits, $abcABC$, and using the same notation consider the map $\phi(abcABC) = (9 - a)(9 - b)(9 - c)ABC$. Intuitively it can be seen that $\phi$ uniquely pairs up numbers between the two sets, meaning that they must be the same size as otherwise one set would not be big enough to produce pairs for the other set.
+
+To prove this, it is shown that $\phi$ is a bijective involution between the sets, implying that they are the same size. First we see that $\phi$ is well-defined, as each digit from 0 to 9 is mapped to another digit from 0 to 9. Therefore the result of applying $\phi$ to a six digit base ten number is another six digit base ten number, and each digit in the input only affects the digit in the same position in the output. The following implications show that $\phi$ maps $X$ to $Y$.
+
+\begin{align*}
+    & abcABC \in X  \\
+    \iff & a + b + c = A + B + C  \\
+    \iff & 27 = (9 - a) + (9 - b) + (9 - c) + A + B + C  \\
+    \iff & 27 = \text{Digit sum}(\phi(abcABC))  \\
+    \iff & \phi(abcABC) \in Y
+\end{align*}
+
+It is clear that $\phi(\phi(abcABC)) = abcABC$. This implies that it is impossible for $\phi$ to map two distinct inputs to the same output, as otherwise $\phi$ would need to map that result to both inputs simultaneously. This also implies that every six digit number must be in the image of $\phi$, meaning the reverse implications presented previously combined with $\phi^2$ being the identity map implies that $\phi$ maps $Y$ to $X$. Together this shows that $X$ and $Y$ are at least as large as each other, and therefore the same size.
+
+\textbf{Extensions and Comments:}
+
+A similar problem can be given in any base, and for any even number of digits with a near identical proof. I like this problem because it uses a way of understanding size that is very fundamental, but people do not usually think about. The size of each set does not need to be determined, but it can be found by taking square of the number of occurrences for each unique digit sum, and adding together. This gives 55252 as the size of $X$ and $Y$.
+
+The relationship between the sums of the first and last three digits and the total sum is actually much closer than this problem suggests. In the notation used previously, define the difference to be $A + B +C - a - b -c$, and the total to be the digit sum. Define $X_d$ to be the set of numbers that have the same difference, and define $Y_t$ to be the set of numbers that have the same total. Almost identical reasoning used to solve this puzzle can be used to show that $|X_{d-27}| = |Y_t|$. Additionally, a map that subtracts each digit from 9 can be used to show that $|X_d| = |X_{-d}|$ and $|Y_t| = |Y_{54 - t}|$. This property extends to other bases and other even number of digits, and is demonstrated explicitly in table~\ref{tab:SixDigitAndTwoSetComparison}.
+
+\begin{table}[H]
+    \centering
+    \caption{The distribution of the size of $X_d$ and $Y_t$}
+    \label{tab:SixDigitAndTwoSetComparison}
+    \begin{tabular}{cc@{\hspace{12mm}}cc}
+        \myhline
+        \multicolumn{2}{c@{\hspace{12mm}}}{Difference} & \multicolumn{2}{c@{\hspace{6mm}}}{Total}  \\
+        Value & Count & Value & Count  \\
+        \myhline
+        -27 &     1 &     0 &     1  \\
+        -26 &     6 &     1 &     6  \\
+        -25 &    21 &     2 &    21  \\
+        -24 &    56 &     3 &    56  \\
+        -23 &   126 &     4 &   126  \\
+        -22 &   252 &     5 &   252  \\
+        -21 &   462 &     6 &   462  \\
+        -20 &   792 &     7 &   792  \\
+        -19 &  1287 &     8 &  1287  \\
+        -18 &  2002 &     9 &  2002  \\
+        -17 &  2997 &    10 &  2997  \\
+        -16 &  4332 &    11 &  4332  \\
+        -15 &  6062 &    12 &  6062  \\
+        -14 &  8232 &    13 &  8232  \\
+        -13 & 10872 &    14 & 10872  \\
+        -12 & 13992 &    15 & 13992  \\
+        -11 & 17577 &    16 & 17577  \\
+        -10 & 21582 &    17 & 21582  \\
+         -9 & 25927 &    18 & 25927  \\
+         -8 & 30492 &    19 & 30492  \\
+         -7 & 35127 &    20 & 35127  \\
+         -6 & 39662 &    21 & 39662  \\
+         -5 & 43917 &    22 & 43917  \\
+         -4 & 47712 &    23 & 47712  \\
+         -3 & 50877 &    24 & 50877  \\
+         -2 & 53262 &    25 & 53262  \\
+         -1 & 54747 &    26 & 54747  \\
+          0 & 55252 &    27 & 55252  \\
+          1 & 54747 &    28 & 54747  \\
+          2 & 53262 &    29 & 53262  \\
+          3 & 50877 &    30 & 50877  \\
+          4 & 47712 &    31 & 47712  \\
+          5 & 43917 &    32 & 43917  \\
+          6 & 39662 &    33 & 39662  \\
+          7 & 35127 &    34 & 35127  \\
+          8 & 30492 &    35 & 30492  \\
+          9 & 25927 &    36 & 25927  \\
+         10 & 21582 &    37 & 21582  \\
+         11 & 17577 &    38 & 17577  \\
+         12 & 13992 &    39 & 13992  \\
+         13 & 10872 &    40 & 10872  \\
+         14 &  8232 &    41 &  8232  \\
+         15 &  6062 &    42 &  6062  \\
+        \myhline
+    \end{tabular}
+\end{table}

@@ -1,0 +1,33 @@
+\subsection{The Three Hats Problem}
+
+I came across this problem from a YouTube video by one of my undergraduate friends, JPiMaths. I failed to solve this and gave up too soon. I attempted a brute force approach and in hindsight this was a bad idea, this problem lends itself better to thinking about it rather than programming it. When giving this problem I think coming up with the idea of how to find a strategy rather than explicitly finding a strategy is more important. I give this problem a 5/10 in difficulty, and a pen and paper, or even a spreadsheet would help.
+
+There are three people who are given hats that could be either red, blue, or yellow. The hats could all be the same colour, all different colours, or two the same colour and the third a different colour. They cannot see their own hats, and they cannot communicate to the others. Simultaneously, they will have to guess the colour of their own hat, and they win the game if at least one of them guesses correctly. They are allowed to come up with a strategy before the game starts - what should their strategy be?
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item Think about what information each person has available to them.
+	\item There are $3^3 = 27$ combinations of hats - this is the number of scenarios that their strategy will collectively need to work for.
+	\item Each person can see two other people who each could be wearing three different hats - this means each person can distinguish $3^2 = 9$ states.
+	\item Across the three of them they can potentially combine to distinguish between a maximum of $3 \cdot 9 = 27$ scenarios. How can this be achieved?
+	\item For each possible scenario, only person can guess correctly as otherwise there is not enough information to have at least one person be correct in all other scenarios.
+\end{enumerate}
+
+\textbf{Solution:}
+
+The only information available is what colour hat the other two people are wearing for each of the three people. Each person could be looking at nine different combinations, and each of these will correspond to a guess. For a given person, we can take an ordered pair (the two colours the person is looking at) and the colour that the person guesses, and map it to the scenario where it is correct. This function is well-defined because the scenario being mapped to is unique. The ordered pair fixes what the other two could be wearing, and the guess fixes what the given person is wearing.
+
+As each person sees nine distinguishable states, they can only be correct in nine scenarios when using a deterministic strategy. If any two people are both correct for the same scenario, then together they would not be able to cover all 27 scenarios. The question now turns to how to construct such a map for each person so that all 27 scenarios are covered (note that at this stage we have not shown that this is possible). We can think of this as a lookup that takes in a person, the hat colour of the person to their left, and the hat colour of the person to their right, and gives a scenario. The problem is finding a surjective lookup of this form.
+
+
+
+\textbf{Extensions and Comments:}
+
+There are $3^27$ possible lookups to search through which sounds intimidating, but it is in fact possible to brute force it manually at this stage. Using a spreadsheet to compute which scenarios are guessed correctly for a given map, we can recurse through the space, rejecting an entry to the lookup if it does not cover a new scenario. This turns out to prune the tree very efficiently. I did not even need to backtrack when finding a solution this way, and my Python code finds all solutions in 3 seconds. It is possible to be more analytical about this however.
+
+If all three are wearing the same colour hat, say blue, then all are looking at blue hats. We know that one of them must guess blue as otherwise this scenario would not be covered, but if all guess blue then more than one would guess correctly. Therefore for the pairs (red, red), (blue, blue), and (yellow, yellow), only one person can guess red, blue, and yellow respectively. In particular this shows that each person must have a different map for the 9 states.
+
+A person cannot guess the same thing for any triple of pairs where either the first in the pair or the second in the pair are all the same. Consider what happens when person 1 always guesses red when they see person 2 and person 3 wearing either (red, red), (red, blue), or (red, yellow). If person 3 is looking at person 1 wearing and red person 2 wearing red, then it is impossible for them to guess anything. The scenarios (red, red, red), (red, red, blue), and (red, red, yellow) have already been covered by person 1. Person 3 sees (red, red) in all three cases, and so cannot map (red, red) to anything new. The reasoning is similar for the other cases.
+
+It is also the case that each person guesses three of each colour. I have not been able to prove this however, or verify whether it occurs for any other non-trivial number of people and colours. There are $10752 = 6 \cdot 2^8 \cdot 7$ lookups that work for the $n = 3$ case. Being a multiple of 6 is not a surprise as any permutation of the three colours for a given solution will also work as a solution. I suspect there is a reason why such a large power of 2 is a factor and why 7 appears, but I have not been able to make progress on this.

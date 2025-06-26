@@ -1,0 +1,170 @@
+\documentclass[hidelinks, 11 pt]{article}
+
+\usepackage[a4paper, top=25.4mm, bottom=25.4mm, left=19.1mm, right=19.1mm, footskip=8mm]{geometry}
+\usepackage[skip=7pt]{parskip}
+\usepackage[list=true, listformat=simple]{subcaption}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{titletoc}
+\usepackage[nameinlink]{cleveref}
+\usepackage{lipsum}
+\usepackage{silence}
+
+%\WarningFilter{caption}{Unused \captionsetup}
+
+% References
+\Crefname{figure}{}{}
+\newcommand\crefrangeconjunction{--}
+
+% ########### Header and footer ###########
+
+% Defining marks
+\renewcommand{\sectionmark}[1]{\gdef\leftmark{#1}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\fancypagestyle{fancy}{
+    \fancyhf{}
+    \fancyhead[L]{\nouppercase{\leftmark}}
+    \fancyhead[R]{\nouppercase{\rightmark}}
+    \fancyfoot[C]{\thepage}
+}
+
+\fancypagestyle{subcontents}{
+    \fancyhf{}
+    \fancyhead[L]{\nouppercase{\leftmark}}
+    \fancyhead[R]{}
+    \fancyfoot[C]{\thepage}
+}
+
+\setlength{\headheight}{13.6pt}
+
+% Use fancy page style unless otherwise specified
+\pagestyle{fancy}
+
+% ########### Maths environment spacing ###########
+
+% Redefining space around equation environment
+\AtBeginEnvironment{equation}{\vspace{-6mm}}
+\AtBeginEnvironment{equation*}{\vspace{-6mm}}
+\AtEndEnvironment{equation}{\vspace{-10mm}}
+\AtEndEnvironment{equation*}{\vspace{-10mm}}
+
+% Redefining space around align environment
+\AtBeginEnvironment{align}{\vspace{-6mm}}
+\AtBeginEnvironment{align*}{\vspace{-6mm}}
+\AtEndEnvironment{align}{\vspace{-10mm}}
+\AtEndEnvironment{align*}{\vspace{-10mm}}
+
+% Redefining space around subequations environment
+\AtEndEnvironment{subequations}{\vspace{1mm}}
+\AtEndEnvironment{subequations*}{\vspace{1mm}}
+
+% ########### Other ###########
+
+% Redefining space around figures and tables
+\AtBeginEnvironment{figure}{\vspace{-1mm}}
+\AtEndEnvironment{table}{\vspace{-4mm}}
+
+% Redefining space around figure captions
+\captionsetup[figure]{aboveskip=2mm, belowskip=-2mm}
+\captionsetup[subfigure]{aboveskip=2mm, belowskip=1mm}
+
+% Biblography spacing
+\let\OLDthebibliography\thebibliography
+\renewcommand\thebibliography[1]{
+  \OLDthebibliography{#1}
+  \setlength{\parskip}{0pt}
+  \setlength{\itemsep}{5pt plus 0.3ex}
+}
+
+% Spacing around headings
+\setlength{\parindent}{0pt}
+\titlespacing*{\section}{0pt}{10pt}{5pt}
+\titlespacing*{\subsection}{0pt}{5pt}{5pt}
+
+% Other spacing
+\setlength{\parindent}{0mm} % Start of paragraph line indent
+\setlength{\skip\footins}{5mm} % Footnotes
+
+% Section formatting
+\titleformat{\section}
+  {\centering\Large\bfseries\MakeUppercase}
+  {\thesection}{1em}{}
+
+% Tables
+\renewcommand{\thetable}{\Roman{table}} % Count in roman numerals
+\newcommand{\myhline}{\hline\noalign{\vskip 2pt}} % Space after hline
+
+% Change the figure and table captions
+\captionsetup[table]{labelfont=bf, labelsep=colon}
+\captionsetup[figure]{labelfont=bf, labelsep=colon}
+
+\newcommand\innercontentsname[1]{%
+  Contents for section~\ref{#1}}
+
+
+\let\oldthesubsection\thesubsection
+
+
+\begin{document}
+
+\newpage
+\setcounter{page}{1}
+\addtolength{\topmargin}{-1.6pt}
+\thispagestyle{firstpage}
+
+\begin{center}
+    \vspace*{-20mm}
+    \Huge Puzzles  \\
+    \vspace{5mm}
+    \large Henry Ginn  \\
+\end{center}
+\vspace{5mm}
+
+This document is a collection of interesting puzzles that I find that I started on the 12$^\text{th}$ of September, 2024. For each problem I give some background as to where I found it and its difficulty, then give some hints. The solution is then presented, and I give my thoughts on the problem, extensions, and other interesting points of relevance. It is split into five sections in decreasing order of how abstract the area is, and within each section it is organised chronologically by when it was added (and by proxy, when I found/solved the problem). A live version of this document is available to view using the following link: \url{https://www.overleaf.com/read/vwjpkymvvdst#c5f943}.
+
+\tableofcontents
+
+\renewcommand{\contentsname}{}
+
+\newpage
+
+\input{1 - Logic/1 - Logic}\newpage
+\input{2 - Numbers/2 - Numbers}\newpage
+\input{3 - Probability/3 - Probability}\newpage
+\input{4 - Geometry/4 - Geometry}\newpage
+\input{5 - Physics/5 - Physics}\newpage
+
+\newpage
+
+% Add Josepheus problem
+% Add spherical polar basis problem
+% Add umbrella problem
+% Add semicircle and quarter circle in square problem
+
+\fancyhf{}
+\fancyhead[L]{References}
+\fancyhead[R]{}
+\fancyfoot[C]{\thepage}
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{unsrtHenry.bst}
+\bibliography{bibliography.bib}
+
+\end{document}
