@@ -111,13 +111,19 @@
 \renewcommand{\thetable}{\Roman{table}} % Count in roman numerals
 \newcommand{\myhline}{\hline\noalign{\vskip 2pt}} % Space after hline
 
+% Workaround for inputting into tables as \input
+% is not equivalent to simply copy-pasting code.
+\makeatletter
+\newcommand\tableinput[1]{\@@input{#1}}
+\makeatother
+
+
 % Change the figure and table captions
 \captionsetup[table]{labelfont=bf, labelsep=colon}
 \captionsetup[figure]{labelfont=bf, labelsep=colon}
 
 \newcommand\innercontentsname[1]{%
   Contents for section~\ref{#1}}
-
 
 \let\oldthesubsection\thesubsection
 

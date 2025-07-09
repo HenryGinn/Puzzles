@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.5.27)  26 JUN 2025 20:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.5.27)  9 JUL 2025 08:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -726,24 +726,24 @@ LaTeX Info: Redefining \GenericError on input line 601.
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -805,19 +805,19 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 125.
+Package hyperref Info: Link coloring OFF on input line 131.
 
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 140
+LaTeX Font Info:    Trying to load font information for U+msa on input line 146
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 140
+LaTeX Font Info:    Trying to load font information for U+msb on input line 146
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -848,23 +848,26 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 LaTeX Warning: Citation `' on page 19 undefined on input line 11.
 
-
-LaTeX Warning: Reference `' on page 19 undefined on input line 17.
-
 (./1 - Logic/TheChessboardEncodingProblem/Chessboard_1.tikz)
 (./1 - Logic/TheChessboardEncodingProblem/Chessboard_2.tikz)
 (./1 - Logic/TheChessboardEncodingProblem/Chessboard_3.tikz)
 (./1 - Logic/TheChessboardEncodingProblem/Chessboard_4.tikz)
 (./1 - Logic/TheChessboardEncodingProblem/Chessboard_5.tikz)
-(./1 - Logic/TheChessboardEncodingProblem/Chessboard_6.tikz)) [19])
-(./2 - Numbers/2 - Numbers.tex (./main.ptc) [20]
-(./2 - Numbers/SixDigitAndTwoSetComparison.tex [21
+(./1 - Logic/TheChessboardEncodingProblem/Chessboard_6.tikz)
 
-]) [22]
+LaTeX Warning: Reference `fig:TheChessboardEncodingProblem_1' on page 19 undefi
+ned on input line 45.
+
+[19] (./1 - Logic/TheChessboardEncodingProblem/ChessboardExample.tikz)
+(./1 - Logic/TheChessboardEncodingProblem/ChessboardExampleTable.tex)) [20])
+(./2 - Numbers/2 - Numbers.tex (./main.ptc) [21]
+(./2 - Numbers/SixDigitAndTwoSetComparison.tex [22
+
+]) [23]
 (./2 - Numbers/AppendingCycliclyMappedSequence.tex)
-(./2 - Numbers/5By6MagicRectangle.tex [23]) [24]
-(./2 - Numbers/IrrationalToHighPowerNearInteger.tex) [25]
-(./2 - Numbers/SphericalPolarBasis.tex) [26]
+(./2 - Numbers/5By6MagicRectangle.tex [24]) [25]
+(./2 - Numbers/IrrationalToHighPowerNearInteger.tex) [26]
+(./2 - Numbers/SphericalPolarBasis.tex) [27]
 (./2 - Numbers/InterpolatingPolynomials.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -878,47 +881,47 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 5.
 
-) [27] (./2 - Numbers/SimultaneousEquationsViaJacobians.tex) [28])
-(./3 - Probability/3 - Probability.tex (./main.ptc) [29]
-(./3 - Probability/SumOfManyDice.tex) [30
+) [28] (./2 - Numbers/SimultaneousEquationsViaJacobians.tex) [29])
+(./3 - Probability/3 - Probability.tex (./main.ptc) [30]
+(./3 - Probability/SumOfManyDice.tex) [31
 
 ]
-(./3 - Probability/TheUmbrellaProblem.tex) [31])
-(./4 - Geometry/4 - Geometry.tex (./main.ptc) [32]
-(./4 - Geometry/CarpetCuttingProblem.tex) [33
+(./3 - Probability/TheUmbrellaProblem.tex) [32])
+(./4 - Geometry/4 - Geometry.tex (./main.ptc) [33]
+(./4 - Geometry/CarpetCuttingProblem.tex) [34
 
 ]
-(./4 - Geometry/SemicircleAndQuarterCircleInscribedInSquare.tex) [34]
-(./4 - Geometry/PaintingACube.tex) [35] (./4 - Geometry/TrianglesInACube.tex)
-[36]) (./5 - Physics/5 - Physics.tex (./main.ptc) [37]
-(./5 - Physics/TheBallAndTheBoatProblem.tex [38
+(./4 - Geometry/SemicircleAndQuarterCircleInscribedInSquare.tex) [35]
+(./4 - Geometry/PaintingACube.tex) [36] (./4 - Geometry/TrianglesInACube.tex)
+[37]) (./5 - Physics/5 - Physics.tex (./main.ptc) [38]
+(./5 - Physics/TheBallAndTheBoatProblem.tex [39
 
 ]
-<5 - Physics/TheBallAndTheBoat_Setup.pdf, id=463, 363.3575pt x 291.0875pt>
+<5 - Physics/TheBallAndTheBoat_Setup.pdf, id=472, 363.3575pt x 291.0875pt>
 File: 5 - Physics/TheBallAndTheBoat_Setup.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Setup.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Setup.pdf  used on input
  line 43.
 (pdftex.def)             Requested size: 239.52365pt x 191.88736pt.
-<5 - Physics/TheBallAndTheBoat_Case1.pdf, id=464, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case1.pdf, id=473, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case1.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case1.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case1.pdf  used on input
  line 52.
 (pdftex.def)             Requested size: 239.52365pt x 263.34888pt.
-<5 - Physics/TheBallAndTheBoat_Case2.pdf, id=465, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case2.pdf, id=474, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case2.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case2.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case2.pdf  used on input
  line 58.
 (pdftex.def)             Requested size: 239.52365pt x 263.34888pt.
-<5 - Physics/TheBallAndTheBoat_Case3.pdf, id=466, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case3.pdf, id=475, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case3.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case3.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case3.pdf  used on input
  line 64.
 (pdftex.def)             Requested size: 239.52365pt x 263.34888pt.
-<5 - Physics/TheBallAndTheBoat_Case4.pdf, id=467, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case4.pdf, id=476, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case4.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case4.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case4.pdf  used on input
@@ -926,7 +929,7 @@ Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case4.pdf  used on input
 (pdftex.def)             Requested size: 239.52365pt x 263.34888pt.
 Package hyperref Info: bookmark level for unknown subfigure defaults to 0 on in
 put line 74.
-) [39 <./5 - Physics/TheBallAndTheBoat_Setup.pdf>]) [40 <./5 - Physics/TheBallA
+) [40 <./5 - Physics/TheBallAndTheBoat_Setup.pdf>]) [41 <./5 - Physics/TheBallA
 ndTheBoat_Case1.pdf> <./5 - Physics/TheBallAndTheBoat_Case2.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ./5 - Physics/TheBallAndTheBoat_Case2.p
@@ -943,7 +946,7 @@ df): PDF inclusion: multiple pdfs with page group included in a single page
 \tf@ptc=\write6
 \openout6 = `main.ptc'.
 
- [41] (./main.aux)
+ [42] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -953,16 +956,16 @@ L3 programming layer <2024-01-22>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A7B15566BC62B87372BFB0521E6AE55C;6000.
+(rerunfilecheck)             Checksum: 91E0A7627E690F00E20F4952ED09AB88;6000.
  ) 
 Here is how much of TeX's memory you used:
- 25420 strings out of 474222
- 486394 string characters out of 5748733
- 1964975 words of memory out of 5000000
- 47002 multiletter control sequences out of 15000+600000
+ 25458 strings out of 474222
+ 487704 string characters out of 5748733
+ 1966975 words of memory out of 5000000
+ 47030 multiletter control sequences out of 15000+600000
  568508 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,11n,114p,1322b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,11n,114p,1322b,718s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
@@ -980,10 +983,10 @@ live/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type
 1/public/cm-super/sfrm1095.pfb>
-Output written on main.pdf (41 pages, 347481 bytes).
+Output written on main.pdf (42 pages, 355221 bytes).
 PDF statistics:
- 602 PDF objects out of 1000 (max. 8388607)
- 512 compressed objects within 6 object streams
- 154 named destinations out of 1000 (max. 500000)
+ 612 PDF objects out of 1000 (max. 8388607)
+ 521 compressed objects within 6 object streams
+ 157 named destinations out of 1000 (max. 500000)
  294 words of extra memory for PDF output out of 10000 (max. 10000000)
 
