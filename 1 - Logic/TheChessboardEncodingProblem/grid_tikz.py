@@ -4,7 +4,7 @@ import random
 import numpy as np
 
 
-random.seed(36)
+random.seed(30)
 
 square = np.array([
     [0, 0],
@@ -83,11 +83,11 @@ with open(f"ChessboardExample.tikz", "w+") as file:
 # Creating a table that describes the results
 
 region_to_flip_lookup = {
-    0: "Yes",
-    1: "No"}
+    0: "No",
+    1: "Yes"}
 
 lines = []
-encoded_parities = [(encoded_row not in rows) and (encoded_col not in cols)
+encoded_parities = [(encoded_row in rows) or (encoded_col in cols)
                     for rows, cols in region_rows_and_cols]
 
 for region_index, (rows, cols) in enumerate(region_rows_and_cols):
@@ -97,7 +97,7 @@ for region_index, (rows, cols) in enumerate(region_rows_and_cols):
         for col in range(8)
         if (row in rows or col in cols)])
     head_parity = head_total % 2
-    encoded_parity = encoded_parities[region_index]
+    encoded_parity = int(encoded_parities[region_index])
     parity_change = head_parity ^ encoded_parity
     region_to_flip = region_to_flip_lookup[parity_change]
     lines.append(f"{region_index + 1} & {head_total} & {head_parity} & {encoded_parity} & {parity_change} & {region_to_flip}  \\\\")

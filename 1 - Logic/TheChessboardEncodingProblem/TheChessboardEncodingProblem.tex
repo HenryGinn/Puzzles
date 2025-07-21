@@ -42,7 +42,7 @@ The solution works by being able to control the parity of the number of heads-up
 	\label{fig:TheChessboardEncodingProblem_Grids}
 \end{figure}
 
-In the example shown in figure~\ref{fig:TheChessboardEncodingProblem_Example} the key has been hidden in fourth row and third column. Using the first three digits to encode the column number and the last three digits to encode the row number, this is encoded as 011100. In the red highlighted region in figure~\ref{fig:TheChessboardEncodingProblem_1} there are 16 heads which is equal to 0 modulo 2. This matches the first digit in the number we want to encode which means we want to preserve the parity of heads in this region, therefore we will flip a coin outside the red highlighted region, that is, on the left. We can do a similar process for the other regions and this is described in table~\ref{tab:TheChessboardEncodingProblem_ExampleParity}
+In the example shown in figure~\ref{fig:TheChessboardEncodingProblem_Example} the key has been hidden in the cell in the third row and seventh column. Using the first three digits to encode the column number and the last three digits to encode the row number, this is encoded as 111011. In the red highlighted region in figure~\ref{fig:TheChessboardEncodingProblem_1} there are 19 heads which is equal to 1 modulo 2. This matches the first digit in the number we want to encode which means we want to preserve the parity of heads in this region. Therefore we will flip a coin outside the red highlighted region, that is, on the left hand side. We can do a similar process for the other regions and the results of this are given in table~\ref{tab:TheChessboardEncodingProblem_ExampleParity}
 
 \begin{figure}[H]
 	\centering
@@ -66,4 +66,38 @@ In the example shown in figure~\ref{fig:TheChessboardEncodingProblem_Example} th
 	\end{tabular}
 \end{table}
 
+Reading from the last column, we need to flip the coin with encoding 001011 which is the the second column and third row. Once this is done, the parities of the different regions would be read off as 111011, precisely giving the position of the square with the hidden key. Note that the position of the coin to flip is given by the XOR of the state encoded by the position of the hidden key and the state encoded by the board.
+
 \textbf{Extensions and Comments:}
+
+We notice that as there are $2^6$ different states to encode and $2^{64}$ boards, there must be $2^6$ sets of $2^{58}$ elements that are equivalent in some sense. We can make this intuition more rigorous. Consider the set of 64-tuples of binary numbers, $G = \{ 0, 1 \}^{64}$. For $x, y \in G$ we can define the binary option, $x \circ y := (x + y) \mod 2$, and note that this is equivalent to elementwise XOR. This can easily be seen to form an abelian group. Elements of this group represent states of the board. We can also make a group where each element corresponds to a square on the board.
+
+Define $f(x)$ to be the function that takes $x$ to the index of the cell that it encodes. With an abuse of notation using $\sum$ to mean repeated application of $\circ$, we can give this function explicitly as $f(x) = \sum_{i \in I_k} x_i$ where $I_k$ is the indexing set corresponding to the $k^\text{th}$ digit in the encoding. If we define $K := \ker{f}$ then it follows from the first isomorphism theorem that $K$ is a normal subgroup of $G$ and the quotient group $H = G / K$ is well-defined. $K$ represents all the board states that encode $0$ and we are dividing out this information. This means that we expect each element of $H$ to represent all the board states that encodes the same square.
+
+We could arrive at the same group through a congruence. Define an equivalence relation between board states where two states are equivalent if they encode the same cell, that is, $x \sim y \iff f(x) = f(y)$. It is easy to show this is an equivalence as the equivalency axioms are inherited from the equality relation. Equation~\eqref{eqn:TheChessboardEncodingProblem_SelfInverse} demonstrates that mapped elements are self-inverse from which if follows in equation~\eqref{eqn:TheChessboardEncodingProblem_CongruenceRespectsInverses} that the congruence relation respects inverses. Equation \eqref{eqn:TheChessboardEncodingProblem_LinearityOfF} shows that $f$ is linear and thus the congruence respects the binary operation as well, as shown in \eqref{eqn:TheChessboardEncodingProblem_CongruenceRespectsProducts}. This is essentially equivalent to saying that flipping the parity of a coin within a region flips the parity of the whole region.
+
+\begin{subequations}
+	\begin{align}
+	\begin{split}
+		f(x) \circ f(x) = 0 &\implies f(x) = f(x)^{-1}
+		\label{eqn:TheChessboardEncodingProblem_SelfInverse}
+	\end{split}\\
+	\begin{split}
+		f(x) = f(y) &\implies f(x)^{-1} = f(y)^{-1}
+		\label{eqn:TheChessboardEncodingProblem_CongruenceRespectsInverses}
+	\end{split}\\
+	\begin{split}
+		f(x)_k \circ f(y)_k = \sum_{i \in I_k} x_i \circ \sum_{i \in I_k} y_i &= \sum_{i \in I_k} x_i \circ y_i = \sum_{i \in I_k} (x \circ y)_i = f(x \circ y)_k
+		\label{eqn:TheChessboardEncodingProblem_LinearityOfF}
+	\end{split}
+	\end{align}
+	
+	\begin{equation}
+		\begin{aligned}
+			x^1 \sim y^1,\, x^2 \sim y^2 &\implies f(x^1) = f(y^1),\, f(x^2) = f(y^2)  \\
+			&\implies f(x^1 \circ x^2)_k = f(x^1) \circ f(x^2) = f(y^1) \circ f(y^2) = f(y^1 \circ y^2)  \\
+			&\implies x^1 \circ x^2 \sim y^1 \circ y^2
+		\end{aligned}
+		\label{eqn:TheChessboardEncodingProblem_CongruenceRespectsProducts}
+	\end{equation}
+\end{subequations}
