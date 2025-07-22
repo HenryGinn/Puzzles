@@ -1,7 +1,7 @@
 \documentclass[hidelinks, 11 pt]{article}
 
 \usepackage[a4paper, top=25.4mm, bottom=25.4mm, left=19.1mm, right=19.1mm, footskip=8mm]{geometry}
-\usepackage[skip=7pt]{parskip}
+\usepackage{parskip}
 \usepackage[list=true, listformat=simple]{subcaption}
 \usepackage{graphicx}
 \usepackage{float}
@@ -25,6 +25,8 @@
 % References
 \Crefname{figure}{}{}
 \newcommand\crefrangeconjunction{--}
+
+\widowpenalty=1000
 
 % ########### Header and footer ###########
 
@@ -94,11 +96,11 @@
 }
 
 % Spacing around headings
-\setlength{\parindent}{0pt}
 \titlespacing*{\section}{0pt}{10pt}{5pt}
 \titlespacing*{\subsection}{0pt}{5pt}{5pt}
 
 % Other spacing
+\setlength{\parskip}{7pt plus 4pt}
 \setlength{\parindent}{0mm} % Start of paragraph line indent
 \setlength{\skip\footins}{5mm} % Footnotes
 
@@ -116,7 +118,6 @@
 \makeatletter
 \newcommand\tableinput[1]{\@@input{#1}}
 \makeatother
-
 
 % Change the figure and table captions
 \captionsetup[table]{labelfont=bf, labelsep=colon}

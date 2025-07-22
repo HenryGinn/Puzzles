@@ -24,7 +24,7 @@ As each person sees nine distinguishable states, they can only be correct in nin
 
 \textbf{Extensions and Comments:}
 
-There are $3^27$ possible lookups to search through which sounds intimidating, but it is in fact possible to brute force it manually at this stage. Using a spreadsheet to compute which scenarios are guessed correctly for a given map, we can recurse through the space, rejecting an entry to the lookup if it does not cover a new scenario. This turns out to prune the tree very efficiently. I did not even need to backtrack when finding a solution this way, and my Python code finds all solutions in 3 seconds. It is possible to be more analytical about this however.
+There are $3^{27}$ possible lookups to search through which sounds intimidating, but it is in fact possible to brute force it manually at this stage. Using a spreadsheet to compute which scenarios are guessed correctly for a given map, we can recurse through the space, rejecting an entry to the lookup if it does not cover a new scenario. This turns out to prune the tree very efficiently. I did not even need to backtrack when finding a solution this way, and my Python code finds all solutions in 3 seconds. It is possible to be more analytical about this however.
 
 If all three are wearing the same colour hat, say blue, then all are looking at blue hats. We know that one of them must guess blue as otherwise this scenario would not be covered, but if all guess blue then more than one would guess correctly. Therefore for the pairs (red, red), (blue, blue), and (yellow, yellow), only one person can guess red, blue, and yellow respectively. In particular this shows that each person must have a different map for the 9 states.
 
