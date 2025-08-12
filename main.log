@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.5.27)  12 AUG 2025 08:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.5.27)  12 AUG 2025 16:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -866,8 +866,13 @@ ned on input line 45.
 ]) [24]
 (./2 - Numbers/AppendingCycliclyMappedSequence.tex) [25]
 (./2 - Numbers/5By6MagicRectangle.tex) [26]
-(./2 - Numbers/IrrationalToHighPowerNearInteger.tex) [27]
-(./2 - Numbers/SphericalPolarBasis.tex) [28]
+(./2 - Numbers/IrrationalToHighPowerNearInteger.tex
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 26.
+
+) [27] (./2 - Numbers/SphericalPolarBasis.tex) [28]
 (./2 - Numbers/InterpolatingPolynomials.tex
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -896,31 +901,31 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (./5 - Physics/TheBallAndTheBoatProblem.tex [41
 
 ]
-<5 - Physics/TheBallAndTheBoat_Setup.pdf, id=517, 363.3575pt x 291.0875pt>
+<5 - Physics/TheBallAndTheBoat_Setup.pdf, id=519, 363.3575pt x 291.0875pt>
 File: 5 - Physics/TheBallAndTheBoat_Setup.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Setup.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Setup.pdf  used on input
  line 43.
 (pdftex.def)             Requested size: 239.52365pt x 191.88736pt.
-<5 - Physics/TheBallAndTheBoat_Case1.pdf, id=518, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case1.pdf, id=520, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case1.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case1.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case1.pdf  used on input
  line 52.
 (pdftex.def)             Requested size: 239.52365pt x 263.34888pt.
-<5 - Physics/TheBallAndTheBoat_Case2.pdf, id=519, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case2.pdf, id=521, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case2.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case2.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case2.pdf  used on input
  line 58.
 (pdftex.def)             Requested size: 239.52365pt x 263.34888pt.
-<5 - Physics/TheBallAndTheBoat_Case3.pdf, id=520, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case3.pdf, id=522, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case3.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case3.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case3.pdf  used on input
  line 64.
 (pdftex.def)             Requested size: 239.52365pt x 263.34888pt.
-<5 - Physics/TheBallAndTheBoat_Case4.pdf, id=521, 363.3575pt x 399.4925pt>
+<5 - Physics/TheBallAndTheBoat_Case4.pdf, id=523, 363.3575pt x 399.4925pt>
 File: 5 - Physics/TheBallAndTheBoat_Case4.pdf Graphic file (type pdf)
 <use 5 - Physics/TheBallAndTheBoat_Case4.pdf>
 Package pdftex.def Info: 5 - Physics/TheBallAndTheBoat_Case4.pdf  used on input
@@ -958,13 +963,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 47F5159FD29448AE7E5F99710E40D778;5753.
  ) 
 Here is how much of TeX's memory you used:
- 25459 strings out of 474222
- 487595 string characters out of 5748733
+ 25463 strings out of 474222
+ 487709 string characters out of 5748733
  1970975 words of memory out of 5000000
- 47007 multiletter control sequences out of 15000+600000
+ 47010 multiletter control sequences out of 15000+600000
  568508 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,14n,114p,1322b,718s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,16n,114p,1322b,718s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
@@ -983,10 +988,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/publi
 c/cm-super/sfrm1095.pfb>
-Output written on main.pdf (44 pages, 379117 bytes).
+Output written on main.pdf (44 pages, 381755 bytes).
 PDF statistics:
- 666 PDF objects out of 1000 (max. 8388607)
- 571 compressed objects within 6 object streams
- 184 named destinations out of 1000 (max. 500000)
+ 668 PDF objects out of 1000 (max. 8388607)
+ 573 compressed objects within 6 object streams
+ 185 named destinations out of 1000 (max. 500000)
  286 words of extra memory for PDF output out of 10000 (max. 10000000)
 
