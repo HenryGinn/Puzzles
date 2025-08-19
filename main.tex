@@ -20,8 +20,6 @@
 \usepackage{lipsum}
 \usepackage{silence}
 
-%\WarningFilter{caption}{Unused \captionsetup}
-
 % References
 \Crefname{figure}{}{}
 \newcommand\crefrangeconjunction{--}
@@ -61,21 +59,14 @@
 
 % ########### Maths environment spacing ###########
 
-% Redefining space around equation environment
-%\AtBeginEnvironment{equation}{\vspace{-4mm}}
-%\AtBeginEnvironment{equation*}{\vspace{-4mm}}
-%\AtEndEnvironment{equation}{\vspace{-2mm}}
-%\AtEndEnvironment{equation*}{\vspace{-2mm}}
+% Redefining space around maths environment
+\AtBeginEnvironment{align}{\vspace{-8mm}}
+\AtEndEnvironment{align}{\vspace{-8mm}}
+\AtBeginEnvironment{align*}{\vspace{-8mm}}
+\AtEndEnvironment{align*}{\vspace{-8mm}}
 
-% Redefining space around align environment
-%\AtBeginEnvironment{align}{\vspace{-2mm}}
-%\AtBeginEnvironment{align*}{\vspace{-6mm}}
-%\AtEndEnvironment{align}{\vspace{-2mm}}
-%\AtEndEnvironment{align*}{\vspace{-10mm}}
-
-% Redefining space around subequations environment
-\AtEndEnvironment{subequations}{\vspace{1mm}}
-\AtEndEnvironment{subequations*}{\vspace{1mm}}
+\AtBeginEnvironment{equation}{\vspace{-4mm}}
+\AtEndEnvironment{equation}{\vspace{-2mm}}
 
 % ########### Other ###########
 
@@ -149,6 +140,10 @@ This document is a collection of interesting puzzles that I find that I started 
 \tableofcontents
 
 \renewcommand{\contentsname}{}
+
+\newpage
+
+\input{equation_formatting}
 
 \newpage
 

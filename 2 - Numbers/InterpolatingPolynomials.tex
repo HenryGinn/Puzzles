@@ -43,11 +43,13 @@ The problem now reduces to finding each of the $p_i$. In fact we can simplify th
 	\begin{equation}
 		p_i(x) = \frac{q_i(x)}{q_i(x_i)} \cdot y_i
 		\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningPi}
-	\end{equation}
+	\end{equation}\vspace{-2mm}
+	
 	\begin{equation}
 		q_i(x) = \prod_{\substack{j=1 \\ j \ne i}}^n (x - x_j)
 		\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningQi}
-	\end{equation}
+	\end{equation}\vspace{-2mm}
+	
 	\begin{equation}
 	p(x) = \sum_{i=1}^n \prod_{\substack{j=1 \\ j \ne i}}^n \frac{x - x_i}{x_j - x_i} y_i
 	\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningP}
@@ -62,7 +64,7 @@ Now that an interpolating polynomial has been constructed, it is necessary to sh
 		&= \sum_{i=1}^n \sum_{j \ne i} \left( \frac{x - x_j}{x_i - x_j} \sum_{k=0}^{n-2} a_k x^k \right)  \\
 		&= \sum_{k=0}^{n-2} a_k \sum_{i=1}^n \sum_{j \ne i} \frac{1}{x_i - x_j} (x^{k+1} - x_j x^k)  \\
 		&= \sum_{k=0}^{n-1} b_k x^k
-	\end{align}
+	\end{align}\vspace{-5mm}
 	\label{eqn:InterpolatingPolynomials_SubstituteDegeneratePoints}
 \end{subequations}
 
@@ -93,4 +95,18 @@ Choosing any $k$ of the $n$ coordinates will generate a minimum degree interpola
 % Minimality of polynomials
 % Uniqueness of minimal interpolating polynomial through Vandermonde determinant
 % Combining these properties to show equality from the two methods
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

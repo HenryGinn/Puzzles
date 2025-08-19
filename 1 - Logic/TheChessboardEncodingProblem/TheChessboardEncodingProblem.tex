@@ -78,18 +78,19 @@ We could arrive at the same group through a congruence. Define an equivalence re
 
 \begin{subequations}
 	\begin{align}
-	\begin{split}
-		f(x) \circ f(x) = 0 &\implies f(x) = f(x)^{-1}
-		\label{eqn:TheChessboardEncodingProblem_SelfInverse}
-	\end{split}\\
-	\begin{split}
-		f(x) = f(y) &\implies f(x)^{-1} = f(y)^{-1}
-		\label{eqn:TheChessboardEncodingProblem_CongruenceRespectsInverses}
-	\end{split}\\
-	\begin{split}
-		f(x)_k \circ f(y)_k = \sum_{i \in I_k} x_i \circ \sum_{i \in I_k} y_i &= \sum_{i \in I_k} x_i \circ y_i = \sum_{i \in I_k} (x \circ y)_i = f(x \circ y)_k
-		\label{eqn:TheChessboardEncodingProblem_LinearityOfF}
-	\end{split}
+		\notag\\[-6mm]
+		\begin{split}
+			f(x) \circ f(x) = 0 &\implies f(x) = f(x)^{-1}
+			\label{eqn:TheChessboardEncodingProblem_SelfInverse}
+		\end{split}\\[2mm]
+		\begin{split}
+			f(x) = f(y) &\implies f(x)^{-1} = f(y)^{-1}
+			\label{eqn:TheChessboardEncodingProblem_CongruenceRespectsInverses}
+		\end{split}\\[2mm]
+		\begin{split}
+			f(x)_k \circ f(y)_k = \sum_{i \in I_k} x_i \circ \sum_{i \in I_k} y_i &= \sum_{i \in I_k} x_i \circ y_i = \sum_{i \in I_k} (x \circ y)_i = f(x \circ y)_k
+			\label{eqn:TheChessboardEncodingProblem_LinearityOfF}
+		\end{split}\\[-6mm]\notag
 	\end{align}
 	
 	\begin{equation}
