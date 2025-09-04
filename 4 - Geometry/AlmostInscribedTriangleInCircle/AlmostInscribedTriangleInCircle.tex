@@ -104,32 +104,81 @@ Noting that $|AB| = |AC|$, we construct triangle $EBA$ to be congruent to triang
 	\label{eqn:AlmostInscribedTriangleInCircle_AngleDAE}
 \end{equation}
 
-By congruence of triangles $EBA$ and $DCA$, $\angle EBA = \angle DCA = 6-\degree$, and thus $\angle EBD = 120\degree$. Therefore $\angle EBD$ and $\angle DAE$, opposite angles of quadrilateral $AEBD$, add to $180\degree$. As $\angle AEB$ and $\angle ADC$ are equal by congruence of triangles $EBA$ and $DCA$ and $\angle BDA$ and $\angle ADC$ make the straight line $BDC$, we deduce that opposite angles of quadrilateral $AEBD$ ($\angle AEB$ and $\angle BDA$) add to $180\degree$ as well. Therefore quadrilateral $AEBD$ is a cyclic quadrilateral and thus point $E$ lies on the circle.
+By congruence of triangles $EBA$ and $DCA$, $\angle EBA = \angle DCA = 60\degree$, and thus $\angle EBD = 120\degree$. Therefore $\angle EBD$ and $\angle DAE$, opposite angles of quadrilateral $AEBD$, add to $180\degree$. As $\angle AEB$ and $\angle ADC$ are equal by congruence of triangles $EBA$ and $DCA$ and $\angle BDA$ and $\angle ADC$ make the straight line $BDC$, we deduce that opposite angles of quadrilateral $AEBD$ ($\angle AEB$ and $\angle BDA$) add to $180\degree$ as well. Therefore quadrilateral $AEBD$ is a cyclic quadrilateral and thus point $E$ lies on the circle.
 
-By definition $|AD| = |AE|$ which makes triangle $DAE$ isocoles. As shown before, $\angle DAE = 60\degree$, therefore $\angle AED + \angle EDA = 120\degree$. As these angles are equal from triangle $DAE$ being isoceles they must both be $60\degree$, and thus triangle $DAE$ is in fact equilateral. By rotational symmetry the centre of of the triangle must be the centre of the circle and by forming a $120\degree$ angle at the circle centre and using the cosine rule we see that the area of the circle is $3\pi$.
+By definition $|AD| = |AE|$ which makes triangle $DAE$ isocoles. As shown before, $\angle DAE = 60\degree$, therefore $\angle AED + \angle EDA = 120\degree$. As these angles are equal from triangle $DAE$ being isoceles they must both be $60\degree$, and thus triangle $DAE$ is in fact equilateral. By rotational symmetry the centre of of the triangle must be the centre of the circle. With the simple construction given in figure~\ref{fig:AlmostInscribedTriangle_FindingArea} and basic trigonometry we see that the area of the circle is $27\pi$ as shown in equation~\eqref{eqn:AlmostInscribedTriangleInCircle_ComputingRadiusAndArea}.
 
-\begin{center}
-	\begin{tikzpicture}[scale=3]
-		\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
-		
-		\coordinate (O) at (0, 0);
-		
-		\node at (A) [above = 0.1 of A] {$A$};
-		\node at (D) [below right = 0.1 of D] {$D$};
-		\node at (O) [left = 0.2 of O] {$O$};
-		\node at (F) [right = 0.2 of F] {$F$};
-		\node at (b) [right = 0.2 of O] {$4.5$};
-		
-		\draw (O) circle[radius=1];
-		\draw (A) -- (D);
-		\draw (O) -- (A);
-		\draw (O) -- (D);
-		\draw (O) -- (F);
-		
-		\pic[draw, angle radius=30, angle eccentricity=1.3, "$60\degree$"] {angle = F--O--A};
-		\label{fig:AlmostInscribedTriangle_FindingArea}
-	\end{tikzpicture}
-\end{center}
+\begin{equation}
+	r = \frac{4.5}{\sin(60\degree)} = \frac{4.5}{\frac{\sqrt{3}}{2}} = 3\sqrt{3} \implies \text{Area} = \pi r^2 = 27\pi
+	\label{eqn:AlmostInscribedTriangleInCircle_ComputingRadiusAndArea}
+\end{equation}
+
+\textbf{Hints 2:}
+
+\begin{enumerate}
+	\item Find an angle at the centre of the circle.
+	\item Draw a kite connecting the circle centre, $A$, $B$, and $D$.
+	\item The angle subtended by an arc at the circle centre is double the angle subtended by the same arc at the circle edge.
+\end{enumerate}
+
+\textbf{Solution 2:}
+
+Connect the circle centre, $O$, to points $A$ and $D$ to form a kite, as shown in figure~\ref{fig:AlmostInscribedTriangle_Kite} below. As the angle subtended by an arc at the centre is double the angle subtended at the circle edge we get $\angle DOA = 2 \cdot \angle DBA = 120\degree$ and the solution continues identically to solution 1.
+
+\begin{figure}[H]
+	\begin{center}
+		\hfill
+		\begin{tikzpicture}[scale=3]
+			\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
+			
+			\coordinate (O) at (0, 0);
+			
+			\node at (A) [above = 0.1 of A] {$A$};
+			\node at (B) [below left = 0.1 of B] {$B$};
+			\node at (C) [below right = 0.1 of C] {$C$};
+			\node at (D) [below right = 0.1 of D] {$D$};
+			\node at (O) [left = 0.15 of O] {$O$};
+			\node at (d) [right = 0.15 of d] {$9$};
+			
+			\draw (O) circle[radius=1];
+			\draw (A) -- (C);
+			\draw (C) -- (D);
+			\draw (A) -- (D);
+			\draw[fill=blue, fill opacity=0.2] (A) -- (B) -- (D) -- (O) -- (A);
+			
+			\pic[draw, angle radius=30, "\hspace{2mm}$60\degree$"] {angle = D--B--A};
+			\pic[draw, angle radius=30, "$120\degree$"] {angle = D--O--A};
+			
+			\label{fig:AlmostInscribedTriangle_Kite}
+		\end{tikzpicture}
+		\hfill
+		\begin{tikzpicture}[scale=3]
+			\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
+			
+			\coordinate (O) at (0, 0);
+			
+			\node at (A) [above = 0.1 of A] {$A$};
+			\node at (D) [below right = 0.1 of D] {$D$};
+			\node at (O) [left = 0.15 of O] {$O$};
+			\node at (F) [right = 0.15 of F] {$F$};
+			\node at (b) [right = 0.1 of b] {$4.5$};
+			\node at (c) [left = 0.1 of c] {$r$};
+			
+			\draw (O) circle[radius=1];
+			\draw (A) -- (D);
+			\draw (O) -- (A);
+			\draw (O) -- (D);
+			\draw (O) -- (F);
+			
+			\pic[draw, angle radius=30, "\hspace{2mm}$60\degree$"] {angle = F--O--A};
+			\pic[draw, angle radius=10] {right angle = A--a--O};
+			
+			\label{fig:AlmostInscribedTriangle_FindingArea}
+		\end{tikzpicture}
+		\hfill
+	\end{center}
+	\caption{Solution 2 and the common method for finding the circle area}
+\end{figure}
 
 \textbf{Extensions and Comments:}
 

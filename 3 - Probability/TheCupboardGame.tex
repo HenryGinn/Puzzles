@@ -1,0 +1,38 @@
+\subsection{The Cupboard Game}
+
+I found this problem on Reddit and like many good probability problems, the usual intuition is wrong. In hindsight I should have verified my intuition by explicit calculation, but I was lazy and did not bother so got it wrong. I rate this a 4/10 in difficulty, although I doubt anyone would get the answer to this very fast.
+
+There are eight cupboards arranged in two rows of four columns as shown below. Inside a randomly chosen cupboard there is a prize and Alice and Bob play a game to determine who gets the prize. Alice opens cupboards going along the rows first, so in order $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$. Bob opens cupboards going along the columns first, so in order $A$, $E$, $B$, $F$, $C$, $G$, $D$, $H$. Both open cupboard doors at the same time and if the the prize is inside a cupboard they have both picked simultaneously then it is a tie. Is one of them more likely to win, and if so, who?
+
+\begin{center}
+	\begin{tikzpicture}[scale=2]
+		\draw grid (4, 2);
+		\node at (0.5, 1.5) {$A$};
+		\node at (1.5, 1.5) {$B$};
+		\node at (2.5, 1.5) {$C$};
+		\node at (3.5, 1.5) {$D$};
+		\node at (0.5, 0.5) {$E$};
+		\node at (1.5, 0.5) {$F$};
+		\node at (2.5, 0.5) {$G$};
+		\node at (3.5, 0.5) {$H$};
+	\end{tikzpicture}
+\end{center}
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\textbf{Solution:}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccccccccccc}
+		\multirow{2}{*}{Turn} & \multicolumn{2}{c}{Player} & \multicolumn{8}{c}{Prize Location}  \\
+		 & Alice & Bob & $A$ & $B$ & $C$ & $D$ & $E$ & $F$ & $G$ & $H$
+	\end{tabular}
+\end{table}
+
+\textbf{Extensions and Comments:}
+

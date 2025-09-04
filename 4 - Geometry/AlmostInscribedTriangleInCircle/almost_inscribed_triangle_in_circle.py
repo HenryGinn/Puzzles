@@ -31,9 +31,12 @@ E = 0.5 * np.array([
 F = (A + D)
 a = (A + D) / 2
 b = (3*A + D) / 4
+c = A / 2
+d = (A + 2*D) / 3
 
-names = ["A", "B", "C", "D", "E", "F", "a", "b"]
-points = np.array([A, B, C, D, E, F, a, b])
+names = ["A", "B", "C", "D", "E", "F", "a", "b", "c", "d"]
+points = np.array([A, B, C, D, E, F, a, b, c, d])
+
 
 # Plotting with matplotlib
 
