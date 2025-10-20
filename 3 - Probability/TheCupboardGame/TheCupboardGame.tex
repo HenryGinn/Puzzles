@@ -29,8 +29,19 @@ There are eight cupboards arranged in two rows of four columns as shown below. I
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccccccccccc}
+		\myhline
 		\multirow{2}{*}{Turn} & \multicolumn{2}{c}{Player} & \multicolumn{8}{c}{Prize Location}  \\
-		 & Alice & Bob & $A$ & $B$ & $C$ & $D$ & $E$ & $F$ & $G$ & $H$
+		 & Alice & Bob & $A$ & $B$ & $C$ & $D$ & $E$ & $F$ & $G$ & $H$  \\
+		 \myhline
+		 1 & A & A & Draw  &       &       &       &       &       &       &        \\
+		 2 & B & E &       & Alice &       &       & Bob   &       &       &        \\
+		 3 & C & B &       &       & Alice &       &       &       &       &        \\
+		 4 & D & F &       &       &       & Alice &       & Bob   &       &        \\
+		 5 & E & C &       &       &       &       &       &       &       &        \\
+		 6 & F & G &       &       &       &       &       &       & Bob   &        \\
+		 7 & G & D &       &       &       &       &       &       &       &        \\
+		 8 & H & H &       &       &       &       &       &       &       & Draw   \\
+		 \myhline
 	\end{tabular}
 \end{table}
 

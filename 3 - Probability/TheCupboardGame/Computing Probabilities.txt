@@ -1,0 +1,37 @@
+1, 2, 3, 4, 5, 6, 7, 8
+1, 5, 2, 6, 3, 7, 4, 8
+
+P(B wins) = P(
+	5 and min > 2 or
+	2 and min > 3 or
+	6 and min > 4 or
+	3 and min > 5 or
+	7 and min > 6 or
+	4 and min > 7 or
+	8 and min > 8)
+
+= P(
+	5 and min > 2 or
+	2 and min > 3 or
+	6 and min > 4 or
+	3 and min > 5 or
+	7 and min > 6)
+
+= P(
+	5 and min > 2 or
+	6 and min > 4 or
+	7 and min > 6)
+
+P(A or B or C) = P(A) + P(B) + P(C) - P(A and B) - P(A and C) - P(B and C) + P(A and B and C)
+A = 5 and min > 2
+B = 6 and min > 4
+C = 7 and min > 6
+
+P(A) = 5 / 28
+P(B) = 3 / 28
+P(C) = 1 / 28
+P(A and B) = 1 / 28
+P(A and C) = 0
+P(B and C) = 0 
+P(A and B and C) = 0
+P(A or B or C) = (5 + 3 + 1 - 1) / 28 = 8 / 28
