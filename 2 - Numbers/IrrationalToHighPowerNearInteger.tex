@@ -15,7 +15,6 @@ $(1 + \sqrt{2})^n$ gets close to an integer when raised to a high power. Explain
 \textbf{Solution 1:}
 
 We define $a_n = \left( 1 + \sqrt{2} \right)^n$ and $b_n$ as the sum of $\left (1 + \sqrt{2} \right)^n$ and its conjugate. Using the binomial expansion we see in equation~\eqref{eqn:IrrationalToHighPowerNearInteger} that the odd powers of $\sqrt{2}$ cancel out, and thus $b_n$ is an integer. We also note that $\left| 1 - \sqrt{2} \right| < 1$, and therefore it annihilates when raising it to increasingly higher powers. This means $|a_n - b_n| \to 0$ as $n \to \infty$, and thus $a_n$ converges to an integer.
-
 \begin{align}
 	\begin{split}
 		b_n &= \left( 1 + \sqrt{2} \right)^n + \left( 1 - \sqrt{2} \right)^n  \\

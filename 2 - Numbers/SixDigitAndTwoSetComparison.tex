@@ -19,7 +19,6 @@ Consider the set of six digit numbers including leading zeros, that is, 000000 t
 Denote the number as the concatenation of six digits, $abcABC$, and using the same notation consider the map $\phi(abcABC) = (9 - a)(9 - b)(9 - c)ABC$. Intuitively it can be seen that $\phi$ uniquely pairs up numbers between the two sets, meaning that they must be the same size as otherwise one set would not be big enough to produce pairs for the other set.
 
 To prove this, it is shown that $\phi$ is a bijective involution between the sets, implying that they are the same size. First we see that $\phi$ is well-defined, as each digit from 0 to 9 is mapped to another digit from 0 to 9. Therefore the result of applying $\phi$ to a six digit base ten number is another six digit base ten number, and each digit in the input only affects the digit in the same position in the output. The following implications show that $\phi$ maps $X$ to $Y$.
-
 \begin{align*}
     & abcABC \in X  \\
     \iff & a + b + c = A + B + C  \\
