@@ -24,6 +24,26 @@ The second fastest horse would have either won their heat or have been beaten by
 	\item C1: The top three fastest horses were in different heats so all made it through to the sixth race.
 \end{enumerate}
 
-Together this makes A2, B3, A3, B2, and C1 which is five horses. If these horses are raced together then the top two positions give the second and third fastest horses.
+Together this makes A2, B1, A3, B1, and C1 which is five horses. If these horses are raced together then the top two positions give the second and third fastest horses.
 
 \textbf{Extensions and Comments:}
+
+The different possibilities for the final race are given in table~\ref{tab:25Horses_FinalRace}.
+
+\begin{table}[H]
+	\centering
+	\caption{Final race possibilities based on position of the fastest three horses}
+	\label{tab:25Horses_FinalRace}
+	\begin{tabular}{ccc@{\hspace{8mm}}cc}
+		\myhline
+		\multicolumn{3}{c}{Race} & \multicolumn{2}{c}{Horse Order}  \\
+		1 & 2 & 3 & Second & Third  \\
+		\myhline
+		1, 2, 3 &      &   & A2 & A3  \\
+		1, 2    & 3    &   & A2 & B1  \\
+		1       & 1, 2 &   & B1 & B2  \\
+		1, 3    & 1    &   & B1 & A2  \\
+		1       & 2    & 3 & B1 & C1  \\
+		\myhline
+	\end{tabular}
+\end{table}
