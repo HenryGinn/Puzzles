@@ -1,5 +1,7 @@
 \subsection{The Two Child Problem}
 
+This is a classic problem I believe originally posed by Martin Gardner, although I have given it here with the unambiguous phrasing. I do not know where the harder variant comes from. I rate this problem a 2/10 in difficulty.
+
 \textbf{Easy:} If a family with two children, one of which is a girl, is chosen at random, what is the probability that the other child is also a girl? \textbf{Harder:} If a family with two children, one which is a girl born on a Tuesday, is chosen at random, what is the probability that the other child is a girl?
 
 \textbf{Hints:}
@@ -12,18 +14,22 @@
 
 \textbf{Solution:}
 
+Enumerating all equally likely combinations gives Girl Girl, Girl Boy, Boy Girl, and Boy Boy. We are given the information that at least one of them is a girl, therefore the Boy Boy combination is eliminated. All combinations are still equally likely meaning the answer is $\frac{1}{3}$. This is also shown diagrammatically in table~\ref{tab:TheTwoChildProblem_StateSpaceEasy} where 1s indicate valid states.
+
 \begin{table}[H]
 	\centering
 	\caption{The state space for the easy variant}
 	\label{tab:TheTwoChildProblem_StateSpaceEasy}
 	\begin{tabular}{c|cc}
-		 & Girl & Boy  \\
+		& Girl & Boy  \\
 		\hline
 		&&  \\[-10pt]
 		Girl & 1 & 1  \\
 		Boy  & 1 & \\
 	\end{tabular}
 \end{table}
+
+Enumerating all states as before with the harder variant is far more tedious, but they can be represented easily in a diagram like before as shown in table~\ref{tab:TheTwoChildProblem_StateSpaceHard}. The numerator is given by the number of valid states in the Girl Girl quadrant and the denominator is the total number of valid states, giving a final answer of 13/27. 
 
 \newlength{\gap}
 \setlength{\gap}{3mm}
@@ -32,8 +38,7 @@
 	\centering
 	\caption{The state space for the harder variant}
 	\label{tab:TheTwoChildProblem_StateSpaceHard}
-	\begin{tabular}{cc|@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c}
-			 %&      & \multicolumn{7}{c}{Girl} & \multicolumn{7}{c}{Boy}  \\
+	\begin{tabular}{cc|@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}|c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c}
 		     &      & Girl & Girl & Girl & Girl & Girl & Girl & Girl & Boy  & Boy  & Boy  & Boy  & Boy  & Boy  & Boy  \\
 			 &      & Mon  & Tue  & Wed  & Thur & Fri  & Sat  & Sun  & Mon  & Tue  & Wed  & Thur & Fri  & Sat  & Sun  \\
 		\hline
@@ -45,6 +50,7 @@
 		Girl & Fri  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
 		Girl & Sat  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
 		Girl & Sun  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		\hline
 		Boy  & Mon  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
 		Boy  & Tue  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
 		Boy  & Wed  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
@@ -56,3 +62,26 @@
 \end{table}
 
 \textbf{Extensions and Comments:}
+\nopagebreak
+
+This can also be found more directly with Bayes' theorem which allows us to generalise the additional information known about the chosen girl. In our case the probability of being born on a Tuesday is $\frac{1}{7}$, but we can work with an arbitrary property $A$ with probability $x$ (we assume this having this property to be independent of being born a girl, such as being born on a Tuesday). Bayes' rule is shown below in equation~\eqref{eqn:TheTwoChildProblemBayesTheorem} where $G_A$ denotes a girl with property A.
+\begin{equation}
+	P(GG\ |\ G_A) = \frac{P(G_A\ |\ GG) P(GG)}{P(G_A)}
+	\label{eqn:TheTwoChildProblemBayesTheorem}
+\end{equation}
+
+The first probability in the numerator is given by the complement of two girls independently not having property A given there are two girls which is $1 - (1 - x)^2$. The law of total probability can be used to write the denominator as shown in equation~\eqref{eqn:TheTwoChildProblemDenominator}. We have a common factor of $\frac{1}{4}$ as $P(GG) = P(GB) = P(BG) = P(BB) = \frac{1}{4}$. The first of the remaining terms is what was found previously and the last term is immediately seen to be 0. As there is only one girl in each of the middle terms, each is simply the probability of having property $A$ which is $x$. Putting this together gives equation~\eqref{eqn:TheTwoChildProblemAnswer}.
+\begin{subequations}
+	\begin{align}
+		\begin{split}
+			P(G_A) =\ &P(G_A\ |\ GG)P(GG)\ +  \\
+			&P(G_A\ |\ GB)P(GB)\ +  \\
+			&P(G_A\ |\ BG)P(BG)\ +  \\
+			&P(G_A\ |\ BB)P(BB)
+		\end{split}\label{eqn:TheTwoChildProblemDenominator}
+	\end{align}
+	\begin{equation}
+		P(GG\ |\ G_A) = \frac{(1 - (1 - x)^2) \cdot x^2}{\frac{1}{4}(1 - (1 - x)^2 + x + x + 0)} = \frac{2 - x}{4 - x}
+		\label{eqn:TheTwoChildProblemAnswer}
+	\end{equation}
+\end{subequations}
