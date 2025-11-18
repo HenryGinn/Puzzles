@@ -1,0 +1,58 @@
+\subsection{The Two Child Problem}
+
+\textbf{Easy:} If a family with two children, one of which is a girl, is chosen at random, what is the probability that the other child is also a girl? \textbf{Harder:} If a family with two children, one which is a girl born on a Tuesday, is chosen at random, what is the probability that the other child is a girl?
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item Consider the state space.
+	\item Each item in the state space is equally likely.
+	\item Use Bayes' theorem.
+\end{enumerate}
+
+\textbf{Solution:}
+
+\begin{table}[H]
+	\centering
+	\caption{The state space for the easy variant}
+	\label{tab:TheTwoChildProblem_StateSpaceEasy}
+	\begin{tabular}{c|cc}
+		 & Girl & Boy  \\
+		\hline
+		&&  \\[-10pt]
+		Girl & 1 & 1  \\
+		Boy  & 1 & \\
+	\end{tabular}
+\end{table}
+
+\newlength{\gap}
+\setlength{\gap}{3mm}
+
+\begin{table}[H]
+	\centering
+	\caption{The state space for the harder variant}
+	\label{tab:TheTwoChildProblem_StateSpaceHard}
+	\begin{tabular}{cc|@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c@{\hspace{\gap}}c}
+			 %&      & \multicolumn{7}{c}{Girl} & \multicolumn{7}{c}{Boy}  \\
+		     &      & Girl & Girl & Girl & Girl & Girl & Girl & Girl & Boy  & Boy  & Boy  & Boy  & Boy  & Boy  & Boy  \\
+			 &      & Mon  & Tue  & Wed  & Thur & Fri  & Sat  & Sun  & Mon  & Tue  & Wed  & Thur & Fri  & Sat  & Sun  \\
+		\hline
+		&&&&&&&&&&&&&&&  \\[-10pt]
+		Girl & Mon  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Girl & Tue  & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    \\
+		Girl & Wed  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Girl & Thur &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Girl & Fri  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Girl & Sat  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Girl & Sun  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Boy  & Mon  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Boy  & Tue  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Boy  & Wed  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Boy  & Thur &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Boy  & Fri  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Boy  & Sat  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+		Boy  & Sun  &      & 1    &      &      &      &      &      &      &      &      &      &      &      &      \\
+	\end{tabular}
+\end{table}
+
+\textbf{Extensions and Comments:}

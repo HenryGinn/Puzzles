@@ -31,25 +31,21 @@ Given a finite set, $A \subset \mathbb{R}$, and a function $f : A \to \mathbb{R}
 \textbf{Solution:}
 
 The key to this problem is to use the fact that two polynomials can be added to get another polynomial. For each point, $(x_i, y_i)$, we can find a polynomial, $p_i(x)$, that is $0$ when evaluated on all $x_j$ where $j \ne i$ and satisfies $p(x_i) = y_i$. The sum of these polynomials gives us an interpolating polynomial by equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialInterpolates}.
-
 \begin{equation}
 	p(x_i) = \sum_j^n p_j(x_j) = \sum_j^n y_i \delta_{ij} = y_i
 	\label{eqn:InterpolatingPolynomials_LagrangePolynomialInterpolates}
 \end{equation}
 
 The problem now reduces to finding each of the $p_i$. In fact we can simplify the problem further as we only need to find a function, $q_i$, that is $0$ for $x_j$ for $j \ne i$ and satisfies $q_i(x_i) \ne 0$. Once such a function has been found, we can define $p_i$ as in equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningPi}. We can now deduce $q_i$ using the factor theorem: $x_0$ is a root of $p$ if and only if $p(x)$ divides $x - x_0$. This gives $q_i$ as the product in equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningQi}. The final polynomial is given in~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningP}.
-
 \begin{subequations}
 	\begin{equation}
 		p_i(x) = \frac{q_i(x)}{q_i(x_i)} \cdot y_i
 		\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningPi}
-	\end{equation}\vspace{-2mm}
-	
+	\end{equation}
 	\begin{equation}
 		q_i(x) = \prod_{\substack{j=1 \\ j \ne i}}^n (x - x_j)
 		\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningQi}
-	\end{equation}\vspace{-2mm}
-	
+	\end{equation}
 	\begin{equation}
 	p(x) = \sum_{i=1}^n \prod_{\substack{j=1 \\ j \ne i}}^n \frac{x - x_i}{x_j - x_i} y_i
 	\label{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningP}
@@ -57,19 +53,17 @@ The problem now reduces to finding each of the $p_i$. In fact we can simplify th
 \end{subequations}
 
 Now that an interpolating polynomial has been constructed, it is necessary to show it is of minimal order. We assume that the $n$ coordinates, $(x_i, y_i)$, are interpolated by a polynomial of order one less than what is needed in general, $\sum_{k=0}^{n-2} a_k x^k$. This gives a formula for $y_i$ in terms of $x_i$ which can be substituted into equation~\eqref{eqn:InterpolatingPolynomials_LagrangePolynomialDefiningP} and defines the polynomial $\sum_{k=0}^{n-1} b_k x^k$ as demonstrated in equation~\eqref{eqn:InterpolatingPolynomials_SubstituteDegeneratePoints}.
-
 \begin{subequations}
 	\begin{align}
 		p(x) &= \sum_{i=1}^n \sum_{j \ne i} \frac{x - x_j}{x_i - x_j} y_i  \\
 		&= \sum_{i=1}^n \sum_{j \ne i} \left( \frac{x - x_j}{x_i - x_j} \sum_{k=0}^{n-2} a_k x^k \right)  \\
 		&= \sum_{k=0}^{n-2} a_k \sum_{i=1}^n \sum_{j \ne i} \frac{1}{x_i - x_j} (x^{k+1} - x_j x^k)  \\
 		&= \sum_{k=0}^{n-1} b_k x^k
-	\end{align}\vspace{-5mm}
+	\end{align}
 	\label{eqn:InterpolatingPolynomials_SubstituteDegeneratePoints}
 \end{subequations}
 
 The aim is to show that the generated interpolating polynomial has a degree no higher than necessary to interpolate the points. This means we need to show that $b_{n-1} = 0$ which is done below in equation~\eqref{eqn:InterpolatingPolynomials_HighestPowerCoefficientIsZero}. In equation~\eqref{eqn:InterpolatingPolynomials_HighestPowerCoefficientIsZeroC} we have made the substitution $i = n + 1 - l$ and $j = n + 1 - m$. It is easy to see that the range $i = 1, \dots, n$ is equivalent to $l = 1, \dots, n$, and the same for $j$ and $m$ respectively (the other is just reversed) so the outer sums are the same. $i < j \iff n + 1 - l < n + 1 - m \iff -l < -m \iff l > m$ shows that the inner sums are over the same range as well.
-
 \begin{subequations}
 	\begin{align}
 		b_{n-1} &= a_{n-2} \sum_{i=1}^n \sum_{j \ne n} \frac{1}{x_i - x_j}  \\

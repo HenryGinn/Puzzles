@@ -1,8 +1,8 @@
 \subsection{The Chessboard Encoding Problem}
 
-This problem is from a collaboration between 3blue1brown and Matt Parker. I attempted this problem years ago, but could not do it, but on a second attempt recently I got it instanteously. I think I spoiled this problem for myself however as I had watched a video recently about a highly relevant problem, and I would never have got it so fast otherwise. I give this problem a difficulty of 5/10, although the ideas behind the solution did lead to someone winning the Turing Prize.
+This problem is from a collaboration between 3blue1brown and Matt Parker. I attempted this problem years ago, but could not do it, but on a second attempt recently I got it instantaneously. I think I spoiled this problem for myself however as I had watched a video recently about a highly relevant problem, and I would never have got it so fast otherwise. I give this problem a difficulty of 5/10, although the ideas behind the solution did lead to someone winning the Turing Prize.
 
-You and a colleague are inprisoned, although the prison warden gives you an opportunity for freedom. There is an $8 \times 8$ chessboard where each square is a hidden compartment, and the warden reveals to one of you, let us call them person A, which square the key to the door is hidden in. A coin is then placed on each square in a configuration decided by the warden that is not known to you or your colleague in advance. Person A has to turn over exactly one coin before leaving the room, at which point person B enters and needs to determine which square has the key. You are allowed to agree a strategy beforehand, although the warden will hear your strategy, and will try and find a configuration of coins to make your strategy not work.
+You and a colleague are imprisoned, although the prison warden gives you an opportunity for freedom. There is an $8 \times 8$ chessboard where each square is a hidden compartment, and the warden reveals to one of you, let us call them person A, which square the key to the door is hidden in. A coin is then placed on each square in a configuration decided by the warden that is not known to you or your colleague in advance. Person A has to turn over exactly one coin before leaving the room, at which point person B enters and needs to determine which square has the key. You are allowed to agree a strategy beforehand, although the warden will hear your strategy, and will try and find a configuration of coins to make your strategy not work.
 
 \textbf{Hints:}
 
@@ -75,7 +75,6 @@ We notice that as there are $2^6$ different states to encode and $2^{64}$ boards
 Define $f(x)$ to be the function that takes $x$ to the index of the cell that it encodes. With an abuse of notation using $\sum$ to mean repeated application of $\circ$, we can give this function explicitly as $f(x) = \sum_{i \in I_k} x_i$ where $I_k$ is the indexing set corresponding to the $k^\text{th}$ digit in the encoding. If we define $K := \ker{f}$ then it follows from the first isomorphism theorem that $K$ is a normal subgroup of $G$ and the quotient group $H = G / K$ is well-defined. $K$ represents all the board states that encode $0$ and we are dividing out this information. This means that we expect each element of $H$ to represent all the board states that encodes the same square.
 
 We could arrive at the same group through a congruence. Define an equivalence relation between board states where two states are equivalent if they encode the same cell, that is, $x \sim y \iff f(x) = f(y)$. It is easy to show this is an equivalence as the equivalency axioms are inherited from the equality relation. Equation~\eqref{eqn:TheChessboardEncodingProblem_SelfInverse} demonstrates that mapped elements are self-inverse from which if follows in equation~\eqref{eqn:TheChessboardEncodingProblem_CongruenceRespectsInverses} that the congruence relation respects inverses. Equation \eqref{eqn:TheChessboardEncodingProblem_LinearityOfF} shows that $f$ is linear and thus the congruence respects the binary operation as well, as shown in \eqref{eqn:TheChessboardEncodingProblem_CongruenceRespectsProducts}. This is essentially equivalent to saying that flipping the parity of a coin within a region flips the parity of the whole region.
-
 \begin{subequations}
 	\begin{align}
 		\notag\\[-6mm]
@@ -92,7 +91,6 @@ We could arrive at the same group through a congruence. Define an equivalence re
 			\label{eqn:TheChessboardEncodingProblem_LinearityOfF}
 		\end{split}\\[-6mm]\notag
 	\end{align}
-	
 	\begin{equation}
 		\begin{aligned}
 			x^1 \sim y^1,\, x^2 \sim y^2 &\implies f(x^1) = f(y^1),\, f(x^2) = f(y^2)  \\
