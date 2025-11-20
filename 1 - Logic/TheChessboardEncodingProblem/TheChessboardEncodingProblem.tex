@@ -7,14 +7,35 @@ You and a colleague are imprisoned, although the prison warden gives you an oppo
 \textbf{Hints:}
 
 \begin{enumerate}
-	\item Consider a board with two squares, then four squares.
-	\item There exists a reliable strategy if and only if the number of squares is a power of two~\cite{}.
+	\item Consider a $1 \times 2$ board, then a $2 \times 2$ board (this problem has a solution if and only if the number of squares is a power of 2, see the extensions and comments for a proof).
+	\item For the $2 \times 2$ board, if you can encode both the column and the row then you have encoded the entire position. Think of those two bits of information like binary bits.
 	\item Consider the parity of the number of coins that are heads-up in a region.
 \end{enumerate}
 
 \textbf{Solution:}
 
-The solution works by being able to control the parity of the number of heads-up coins in six regions. This produces a six-digit binary number which can be used to encode a square of the chessboard as $8 \times 8 = 64 = 2^6$. The key is to be able to control the parity in each region indepently, and the six regions shown in figure~\ref{fig:TheChessboardEncodingProblem_Grids} allow this.
+Suppose we had a $1 \times 2$ chessboard. We could encode whether the coin is on the left or the right by considering whether the coin on the left is heads-up. If the coin on the left is already a heads and we need to encode that the key is on the left then we can freely flip the coin on the right.
+
+Considering a $2 \times 2$ chessboard is the first non-trivial case. We will try and extend the idea from the $1 \times 2$ chessboard to encode whether the key is on the left side or the right side. Using the top left coin as an indicator for this would work, but we may not be able to also encode whether the key is on the top or bottom half. If we wanted to encode the column with a similar strategy, let us say for example by using the top right coin as an indicator, we may need to flip two different coins.
+
+The solution is to use two squares as an indicator for both, and have these two squares overlap. Before we look at how we could use two multiple squares as an indicator for one bit of information, we demonstrate how they could be used. Here there would be four squares to flip:
+
+\begin{enumerate}
+	\item The overlap between the row indicator pair and the column indicator pair
+	\item In the row indicator pair, but not in the column indicator pair
+	\item In the column indicator pair, but not in the row indicator pair
+	\item Not in the row indicator pair or the column indicator pair
+\end{enumerate}
+
+Before flipping any coins, the existing state of the board will indicator some row and column pair. If this is the correct row and column then we are done, and we would flip the coin on square 4 which does not change either of our indicators. If it is in the wrong row but the correct column, then we flip the coin on square 2. The other cases follow similarly.
+
+We can use multiple squares as an indicator by considering the parity of the number of heads. If there are an even number of heads, we say it encodes 0, or false, and if there are an odd number of heads we say it encodes 1, or true. This can be done for regions of any size. They key to our solution for a $2 \times 2$ board work was that the parity of each region could be controlled independently.
+
+The problem now is how to construct such regions for a larger board. If we flatten the $2 \times 2$ board into a $1 \times 4$ board by taking the bottom row and appending it on the right-hand side then we can map the strategy from before onto this new board. Being in the left column now means being in either the first or third square and being in the top row now means being in either the first or second square.
+
+For an $1 \times 8$ board we can extend this again, having the first four squares encoding left vs right side, the first and third disjoint pairs encoding the disjoint pair, and the odd-numbered squares encoding the oddness or the square. The way we extended the $1 \times 2$ board to a $2 \times 2$ board can now be done to get an $8 \times 8$ board. There are many ways of creating these regions however and we can modify our region choice slightly to give a nicer answer.
+
+As alluded to before, we want to produce a six-digit binary number which can be used to encode a square of the chessboard as $8 \times 8 = 64 = 2^6$. The six regions shown in figure~\ref{fig:TheChessboardEncodingProblem_Grids} allow this.
 
 \begin{figure}[H]
 	\begin{center}
@@ -42,7 +63,7 @@ The solution works by being able to control the parity of the number of heads-up
 	\label{fig:TheChessboardEncodingProblem_Grids}
 \end{figure}
 
-In the example shown in figure~\ref{fig:TheChessboardEncodingProblem_Example} the key has been hidden in the cell in the third row and seventh column. Using the first three digits to encode the column number and the last three digits to encode the row number, this is encoded as 111011. In the red highlighted region in figure~\ref{fig:TheChessboardEncodingProblem_1} there are 19 heads which is equal to 1 modulo 2. This matches the first digit in the number we want to encode which means we want to preserve the parity of heads in this region. Therefore we will flip a coin outside the red highlighted region, that is, on the left hand side. We can do a similar process for the other regions and the results of this are given in table~\ref{tab:TheChessboardEncodingProblem_ExampleParity}
+In the example shown in figure~\ref{fig:TheChessboardEncodingProblem_Example}, the key has been hidden in the cell in the third row and seventh column. Using the first three digits to encode the column number and the last three digits to encode the row number, this is encoded as 111011. In the red highlighted region in figure~\ref{fig:TheChessboardEncodingProblem_1} there are 19 heads which is equal to 1 modulo 2. This matches the first digit in the number we want to encode which means we want to preserve the parity of heads in this region. Therefore we will flip a coin outside the red highlighted region, that is, on the left hand side. We can do a similar process for the other regions and the results of this are given in table~\ref{tab:TheChessboardEncodingProblem_ExampleParity}
 
 \begin{figure}[H]
 	\centering
@@ -72,7 +93,7 @@ Reading from the last column, we need to flip the coin with encoding 001011 whic
 
 We notice that as there are $2^6$ different states to encode and $2^{64}$ boards, there must be $2^6$ sets of $2^{58}$ elements that are equivalent in some sense. We can make this intuition more rigorous. Consider the set of 64-tuples of binary numbers, $G = \{ 0, 1 \}^{64}$. For $x, y \in G$ we can define the binary option, $x \circ y := (x + y) \mod 2$, and note that this is equivalent to elementwise XOR. This can easily be seen to form an abelian group. Elements of this group represent states of the board. We can also make a group where each element corresponds to a square on the board.
 
-Define $f(x)$ to be the function that takes $x$ to the index of the cell that it encodes. With an abuse of notation using $\sum$ to mean repeated application of $\circ$, we can give this function explicitly as $f(x) = \sum_{i \in I_k} x_i$ where $I_k$ is the indexing set corresponding to the $k^\text{th}$ digit in the encoding. If we define $K := \ker{f}$ then it follows from the first isomorphism theorem that $K$ is a normal subgroup of $G$ and the quotient group $H = G / K$ is well-defined. $K$ represents all the board states that encode $0$ and we are dividing out this information. This means that we expect each element of $H$ to represent all the board states that encodes the same square.
+Define $f(x)$ to be the function that takes $x \in G$ to the index of the cell that it encodes. With an abuse of notation using $\sum$ to mean repeated application of $\circ$, we can give this function explicitly as {$f(x) = \sum_{i \in I_k} x_i$} where $I_k$ is the indexing set corresponding to the $k^\text{th}$ digit in the encoding. If we define $K := \ker{f}$ then it follows from the first isomorphism theorem that $K$ is a normal subgroup of $G$ and the quotient group $H = G / K$ is well-defined. $K$ represents all the board states that encode $0$ and we are dividing out this information. This means that we expect each element of $H$ to represent all the board states that encodes the same square.
 
 We could arrive at the same group through a congruence. Define an equivalence relation between board states where two states are equivalent if they encode the same cell, that is, $x \sim y \iff f(x) = f(y)$. It is easy to show this is an equivalence as the equivalency axioms are inherited from the equality relation. Equation~\eqref{eqn:TheChessboardEncodingProblem_SelfInverse} demonstrates that mapped elements are self-inverse from which if follows in equation~\eqref{eqn:TheChessboardEncodingProblem_CongruenceRespectsInverses} that the congruence relation respects inverses. Equation \eqref{eqn:TheChessboardEncodingProblem_LinearityOfF} shows that $f$ is linear and thus the congruence respects the binary operation as well, as shown in \eqref{eqn:TheChessboardEncodingProblem_CongruenceRespectsProducts}. This is essentially equivalent to saying that flipping the parity of a coin within a region flips the parity of the whole region.
 \begin{subequations}
@@ -93,8 +114,8 @@ We could arrive at the same group through a congruence. Define an equivalence re
 	\end{align}
 	\begin{equation}
 		\begin{aligned}
-			x^1 \sim y^1,\, x^2 \sim y^2 &\implies f(x^1) = f(y^1),\, f(x^2) = f(y^2)  \\
-			&\implies f(x^1 \circ x^2)_k = f(x^1) \circ f(x^2) = f(y^1) \circ f(y^2) = f(y^1 \circ y^2)  \\
+			x^1 \sim y^1,\, x^2 \sim y^2 &\implies f(x^1)_k = f(y^1)_k,\, f(x^2)_k = f(y^2)_k \quad \forall k  \\
+			&\implies f(x^1 \circ x^2)_k = f(x^1)_k \circ f(x^2)_k = f(y^1)_k \circ f(y^2)_k = f(y^1 \circ y^2) \quad \forall k  \\
 			&\implies x^1 \circ x^2 \sim y^1 \circ y^2
 		\end{aligned}
 		\label{eqn:TheChessboardEncodingProblem_CongruenceRespectsProducts}
