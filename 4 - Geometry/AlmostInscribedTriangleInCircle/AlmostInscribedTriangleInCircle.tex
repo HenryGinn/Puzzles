@@ -33,70 +33,6 @@ The triangle $ABC$ is equilateral and $|AD| = 9$. Find the area of the circle.
 
 \textbf{Solution 1:}
 
-\begin{figure}[H]
-	\begin{center}
-		\hfill
-		\begin{tikzpicture}[scale=3]
-			\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
-	
-			\node at (A) [above = 0.1 of A] {$A$};
-			\node at (B) [below left = 0.1 of B] {$B$};
-			\node at (C) [below right = 0.1 of C] {$C$};
-			\node at (D) [below right = 0.1 of D] {$D$};
-			\node at (E) [left = 0.1 of E] {$E$};
-			\node at (a) [left = 0.2 of a] {$9$};
-			
-			\draw (0, 0) circle[radius=1];
-			
-			\draw[fill=blue, fill opacity=0.2] (A) -- (D) -- (C) -- (A);
-			\draw[fill=blue, fill opacity=0.2] (A) -- (E) -- (B) -- (A);
-			\draw (B) -- (D);
-			
-			\tkzMarkSegment[pos=0.5, mark=|](A, E);
-			\tkzMarkSegment[pos=0.5, mark=|](A, D);
-			\tkzMarkSegment[pos=0.5, mark=||](A, B);
-			\tkzMarkSegment[pos=0.5, mark=||](A, C);
-			
-			\pic[draw, angle radius=30, "$60\degree$"] {angle = D--B--A};
-			\pic[draw, angle radius=30, "$60\degree$"] {angle = A--C--D};
-			\pic[draw, angle radius=30, "$60\degree$"] {angle = A--B--E};
-			\pic[draw, angle radius=30, angle eccentricity=1.3, "$\alpha$"] {angle = D--A--C};
-			\pic[draw, angle radius=30, angle eccentricity=1.3, "$\alpha$"] {angle = E--A--B};
-			\pic[draw, angle radius=30, angle eccentricity=1.3, "$\beta$"] {angle = B--A--D};
-			
-			\label{fig:AlmostInscribedTriangle_CyclicQuadrilateral}
-		\end{tikzpicture}
-		\hfill
-		\begin{tikzpicture}[scale=3]
-			\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
-			
-			\node at (A) [above = 0.1 of A] {$A$};
-			\node at (B) [below left = 0.1 of B] {$B$};
-			\node at (C) [below right = 0.1 of C] {$C$};
-			\node at (D) [below right = 0.1 of D] {$D$};
-			\node at (E) [left = 0.1 of E] {$E$};
-			\node at (a) [left = 0.2 of a] {$9$};
-			
-			\draw (0, 0) circle[radius=1];
-			\draw[fill=red, fill opacity=0.2] (A) -- (E) -- (D) -- (A);
-			\draw (A) -- (B);
-			\draw (A) -- (C);
-			\draw (B) -- (D);
-			\draw (B) -- (E);
-			\draw (C) -- (D);
-			
-			\tkzMarkSegment[pos=0.5, mark=|](A, E);
-			\tkzMarkSegment[pos=0.5, mark=|](A, D);
-			\tkzMarkSegment[pos=0.5, mark=|](E, D);
-			
-			\pic[draw, angle radius=30, angle eccentricity=1.3, "$60\degree$"] {angle = E--A--D};
-			\label{fig:AlmostInscribedTriangle_EquilaterialTriangle}
-		\end{tikzpicture}
-		\hfill
-	\end{center}
-	\caption{Solution 1}
-\end{figure}
-
 Noting that $|AB| = |AC|$, we construct triangle $EBA$ to be congruent to triangle $DCA$ as shown highlighted in figure~\ref{fig:AlmostInscribedTriangle_CyclicQuadrilateral}. Our aim is to show that the point added to form this triangle, $E$, lies on the circle. Defining $\alpha = \angle BAE$ and $\beta = \angle DAB$, we find $\angle DAE$ by equation~\eqref{eqn:AlmostInscribedTriangleInCircle_AngleDAE}.
 \begin{equation}
 	\angle DAE = \angle DAB + \angle BAE = \beta + \alpha = \alpha + \beta = \angle CAD + \angle DAB = 60\degree
@@ -110,6 +46,75 @@ By definition $|AD| = |AE|$ which makes triangle $DAE$ isocoles. As shown before
 	r = \frac{4.5}{\sin(60\degree)} = \frac{4.5}{\frac{\sqrt{3}}{2}} = 3\sqrt{3} \implies \text{Area} = \pi r^2 = 27\pi
 	\label{eqn:AlmostInscribedTriangleInCircle_ComputingRadiusAndArea}
 \end{equation}
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}{0.49\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=3]
+				\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
+				
+				\node at (A) [above = 0.1 of A] {$A$};
+				\node at (B) [below left = 0.1 of B] {$B$};
+				\node at (C) [below right = 0.1 of C] {$C$};
+				\node at (D) [below right = 0.1 of D] {$D$};
+				\node at (E) [left = 0.1 of E] {$E$};
+				\node at (a) [left = 0.2 of a] {$9$};
+				
+				\draw (0, 0) circle[radius=1];
+				
+				\draw[fill=blue, fill opacity=0.2] (A) -- (D) -- (C) -- (A);
+				\draw[fill=blue, fill opacity=0.2] (A) -- (E) -- (B) -- (A);
+				\draw (B) -- (D);
+				
+				\tkzMarkSegment[pos=0.5, mark=|](A, E);
+				\tkzMarkSegment[pos=0.5, mark=|](A, D);
+				\tkzMarkSegment[pos=0.5, mark=||](A, B);
+				\tkzMarkSegment[pos=0.5, mark=||](A, C);
+				
+				\pic[draw, angle radius=30, "$60\degree$"] {angle = D--B--A};
+				\pic[draw, angle radius=30, "$60\degree$"] {angle = A--C--D};
+				\pic[draw, angle radius=30, "$60\degree$"] {angle = A--B--E};
+				\pic[draw, angle radius=30, angle eccentricity=1.3, "$\alpha$"] {angle = D--A--C};
+				\pic[draw, angle radius=30, angle eccentricity=1.3, "$\alpha$"] {angle = E--A--B};
+				\pic[draw, angle radius=30, angle eccentricity=1.3, "$\beta$"] {angle = B--A--D};
+			\end{tikzpicture}
+			\caption{}
+			\label{fig:AlmostInscribedTriangle_CyclicQuadrilateral}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}{0.49\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=3]
+				\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
+				
+				\node at (A) [above = 0.1 of A] {$A$};
+				\node at (B) [below left = 0.1 of B] {$B$};
+				\node at (C) [below right = 0.1 of C] {$C$};
+				\node at (D) [below right = 0.1 of D] {$D$};
+				\node at (E) [left = 0.1 of E] {$E$};
+				\node at (a) [left = 0.2 of a] {$9$};
+				
+				\draw (0, 0) circle[radius=1];
+				\draw[fill=red, fill opacity=0.2] (A) -- (E) -- (D) -- (A);
+				\draw (A) -- (B);
+				\draw (A) -- (C);
+				\draw (B) -- (D);
+				\draw (B) -- (E);
+				\draw (C) -- (D);
+				
+				\tkzMarkSegment[pos=0.5, mark=|](A, E);
+				\tkzMarkSegment[pos=0.5, mark=|](A, D);
+				\tkzMarkSegment[pos=0.5, mark=|](E, D);
+				
+				\pic[draw, angle radius=30, angle eccentricity=1.3, "$60\degree$"] {angle = E--A--D};
+			\end{tikzpicture}
+			\caption{}
+			\label{fig:AlmostInscribedTriangle_EquilaterialTriangle}
+		\end{subfigure}
+	\end{center}
+	\caption{Solution 1}
+\end{figure}
 
 \textbf{Hints 2:}
 
@@ -125,59 +130,63 @@ Connect the circle centre, $O$, to points $A$ and $D$ to form a kite, as shown i
 
 \begin{figure}[H]
 	\begin{center}
-		\hfill
-		\begin{tikzpicture}[scale=3]
-			\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
-			
-			\coordinate (O) at (0, 0);
-			
-			\node at (A) [above = 0.1 of A] {$A$};
-			\node at (B) [below left = 0.1 of B] {$B$};
-			\node at (C) [below right = 0.1 of C] {$C$};
-			\node at (D) [below right = 0.1 of D] {$D$};
-			\node at (O) [left = 0.15 of O] {$O$};
-			\node at (d) [right = 0.15 of d] {$9$};
-			
-			\draw (O) circle[radius=1];
-			\draw (A) -- (C);
-			\draw (C) -- (D);
-			\draw (A) -- (D);
-			\draw[fill=blue, fill opacity=0.2] (A) -- (B) -- (D) -- (O) -- (A);
-			
-			\pic[draw, angle radius=30, "\hspace{2mm}$60\degree$"] {angle = D--B--A};
-			\pic[draw, angle radius=30, "$120\degree$"] {angle = D--O--A};
-			
+		\begin{subfigure}{0.49\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=3]
+				\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
+				
+				\coordinate (O) at (0, 0);
+				
+				\node at (A) [above = 0.1 of A] {$A$};
+				\node at (B) [below left = 0.1 of B] {$B$};
+				\node at (C) [below right = 0.1 of C] {$C$};
+				\node at (D) [below right = 0.1 of D] {$D$};
+				\node at (O) [left = 0.15 of O] {$O$};
+				\node at (d) [right = 0.15 of d] {$9$};
+				
+				\draw (O) circle[radius=1];
+				\draw (A) -- (C);
+				\draw (C) -- (D);
+				\draw (A) -- (D);
+				\draw[fill=blue, fill opacity=0.2] (A) -- (B) -- (D) -- (O) -- (A);
+				
+				\pic[draw, angle radius=30, "\hspace{2mm}$60\degree$"] {angle = D--B--A};
+				\pic[draw, angle radius=30, "$120\degree$"] {angle = D--O--A};
+			\end{tikzpicture}
+			\caption{}
 			\label{fig:AlmostInscribedTriangle_Kite}
-		\end{tikzpicture}
+		\end{subfigure}
 		\hfill
-		\begin{tikzpicture}[scale=3]
-			\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
-			
-			\coordinate (O) at (0, 0);
-			
-			\node at (A) [above = 0.1 of A] {$A$};
-			\node at (D) [below right = 0.1 of D] {$D$};
-			\node at (O) [left = 0.15 of O] {$O$};
-			\node at (F) [right = 0.15 of F] {$F$};
-			\node at (b) [right = 0.1 of b] {$4.5$};
-			\node at (c) [left = 0.1 of c] {$r$};
-			
-			\draw (O) circle[radius=1];
-			\draw (A) -- (D);
-			\draw (O) -- (A);
-			\draw (O) -- (D);
-			\draw (O) -- (F);
-			
-			\pic[draw, angle radius=30, "\hspace{2mm}$60\degree$"] {angle = F--O--A};
-			\pic[draw, angle radius=10] {right angle = A--a--O};
-			
+		\begin{subfigure}{0.49\textwidth}
+			\centering
+			\begin{tikzpicture}[scale=3]
+				\input{4 - Geometry/AlmostInscribedTriangleInCircle/Coordinates.tikz}
+				
+				\coordinate (O) at (0, 0);
+				
+				\node at (A) [above = 0.1 of A] {$A$};
+				\node at (D) [below right = 0.1 of D] {$D$};
+				\node at (O) [left = 0.15 of O] {$O$};
+				\node at (F) [right = 0.15 of F] {$F$};
+				\node at (b) [right = 0.1 of b] {$4.5$};
+				\node at (c) [left = 0.1 of c] {$r$};
+				
+				\draw (O) circle[radius=1];
+				\draw (A) -- (D);
+				\draw (O) -- (A);
+				\draw (O) -- (D);
+				\draw (O) -- (F);
+				
+				\pic[draw, angle radius=30, "\hspace{2mm}$60\degree$"] {angle = F--O--A};
+				\pic[draw, angle radius=10] {right angle = A--a--O};
+			\end{tikzpicture}
+			\caption{}
 			\label{fig:AlmostInscribedTriangle_FindingArea}
-		\end{tikzpicture}
-		\hfill
+		\end{subfigure}
 	\end{center}
 	\caption{Solution 2 and the common method for finding the circle area}
 \end{figure}
 
 \textbf{Extensions and Comments:}
 
-I tried solving this while on the train and was not bothered to get my whiteboard out. I managed to find and prove the cyclic quadrilateral, but did not spot the isocoles triangle which would have made the problem trivial.
+I tried solving this while on the train and was not bothered to get my whiteboard out. I managed to find and prove the cyclic quadrilateral, but did not spot the isocoles triangle.
