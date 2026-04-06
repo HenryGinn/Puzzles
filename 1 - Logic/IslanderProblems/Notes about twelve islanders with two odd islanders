@@ -1,0 +1,160 @@
+Counting number of states:
+	HH: 12 * 11 / 2
+	HL: 12 * 11
+	LL: 12 * 11 / 2
+
+Total = 4 / 2 * 12 * 11 = 4 * 66 = 264
+3 ^ 5 = 243 < 264 < 729 = 3^6, therefore six weighings are needed.
+
+Assumption: a light ball and heavy ball weigh the same as two regular ball. Later I want to consider the case where the light ball and heavy ball is lighter than two regular balls and also the case where no assumptions are made about the combined weight of the two odd balls. Further still, if there are two heavy balls they are not necessarily the same weight, and similarly for light balls. Taking this into account, the number of states decomposes as follows with each group having 66 states. This gives a total of 792 states which is more than 3^6 and less than 3^7 meaning 7 weighings are required.
+
+	HH, light heavy
+	HH, heavy light
+	HH, equal
+	HL, combined lighter
+	HL, combined equal
+	HL, combined heavier
+	LH, combined lighter
+	LH, combined equal
+	LH, combined heavier
+	LL, light heavy
+	LL, heavy light
+	LL, equal
+
+Approach: consider all cases for the first weighing, determine the number of states it splits into for having n balls on each side, and pick n that makes this split as even as possible.
+
+Start with n vs n where m = 12 - 2n
+- Balances:
+	- Both balls are on the scale								4n^2 - 2n
+		- Balls both H and on different sides						n^2
+		- Balls both L and on different sides						n^2
+		- Balls are H and L, on left side							n^2 - n
+		- Balls are H and L, on right side							n^2 - n
+	- Both balls not on the scale								2m^2 - 2m
+		- Both H													0.5(m^2 - m)
+		- Both L													0.5(m^2 - m)
+		- H and L													m^2 - m
+- Down on left:
+	- Both balls are on the scale								2n^2 - n
+		- H on left, L on right										n^2
+		- HH on left												0.5(n^2 - n)
+		- LL on right												0.5(n^2 - n)
+	- One ball on the scale										4nm
+		- H on left, H off scale									nm
+		- H on left, L off scale									nm
+		- L on right, H off scale									nm
+		- L on right, L off scale									nm
+- Down on right - mirror of down on left
+
+2m^2 - 2m
+	= 2 * (12 - 2n)^2 - 2 * (12 - 2n)
+	= 2 * (144 - 48n + 4n^2 - 12 + 2n)
+	= 8n^2 - 92n + 264
+
+4nm
+	= 4n * (12 - 2n)
+	= 48n - 8n^2
+
+Balanced:
+4n^2 - 2n + 8n^2 - 92n + 264
+	= 12n^2 - 94n + 264
+
+Down on left:
+2n^2 - n + 48n - 8n^2
+	= 47n - 6n^2
+
+Unbalanced = 2 * Down on left
+	= 94n - 12n^2
+
+Total = Balanced + Unbalanced
+	= 12n^2 - 94n + 264 + 94n - 12n^2
+	= 264
+
+This is good evidence that we have counted the cases correctly.
+Graphing these shows that both Balanced and Down on left are positive for 1 <= n <= 6 as expected
+
+We want to split the cases between Balanced, Down on left, and Down on right. This can be done by finding where they are equal.
+	12n^2 - 94n + 264 = 47n - 6n^2
+	18n^2 - 141n + 264 = 0
+	n^2 - 47n/6 + 44/3 = 0
+	(n - 47/12)^2 = 2209/144 - 44/3
+	(n - 47/12)^2 = 97/144
+
+The midpoint is given by 47/12 = 48/12 - small = 4 - small. The deviation of the roots from the midpoint is 97/144 = 100/144 - small = (10/12)^2. (4 - small) + (10/12 - small) and (4 - small) - (10/12 - small) are the two solutions. The latter of these will be very close to an integer meaning when the quadratic is evaluated on the integers, this solution will minimise the difference between Balanced and Down on the left. This gives us the first weighing as three balls vs three balls. Six weighings can distinguish between just under three times as many states as necessary means there is a lot of slack. Given this, it may be possible to find a solution with five balls on each side. As a check, the number of states is given explicitly below and it appears that four balls on each side could also work.
+
+	n	Balanced	Down on left	Difference
+	1	182			124				141
+	2	124			70				54
+	3	90			87				3
+	4	80			92				12
+	5	94			85				9
+	6	132			66				66
+
+At this stage I decided to redo the analysis with no assumptions about the weights of the balls.
+
+n = number of balls on one side
+m = number of balls off scale = 12 - 2n
+
+
+
+
+
+
+
+Scale state		Balls on balance	Description									Formula		1		2		3		4		5		6
+Balanced		2					Equal heavy on opposite sides				n^2													
+Balanced		2					Equal lights on opposite sides				n^2													
+Balanced		2					Opposite heavy and light on left side		n(n-1)												
+Balanced		2					Opposite heavy and light on right side		n(n-1)												
+Balanced		0					Equal heavy off scale						m(m-1)/2											
+Balanced		0					Non-equal heavy off scale					m(m-1)												
+Balanced		0					Equal light off scale						m(m-1)/2											
+Balanced		0					Non-equal light off scale					m(m-1)												
+Balanced		0					Heavier heavy and light off scale			m(m-1)												
+Balanced		0					Opposite heavy and light off scale			m(m-1)												
+Balanced		0					Lighter heavy and light off scale			m(m-1)												
+Down on left	2					Equal heavy on left							n(n-1)/2											
+Down on left	2					Non-equal heavy on left						n(n-1)												
+Down on left	2					Non-equal heavy, opposite sides				n^2
+Down on left	2					Equal light on right						n(n-1)/2											
+Down on left	2					Non-equal light on right					n(n-1)
+Down on left	2					Non-equal light, opposite sides				n^2
+Down on left	2					Heavier heavy on left, light on right		n^2													
+Down on left	2					Opposite heavy on left, light on right		n^2													
+Down on left	2					Lighter heavy on left, light on right		n^2													
+Down on left	2					Heavier heavy on left, light on left		n(n-1)/2													
+Down on left	1					Equal heavy on left							nm													
+Down on left	1					Heavier heavy on left						nm													
+Down on left	1					Lighter heavy on left						nm													
+Down on left	1					Equal light on right						nm													
+Down on left	1					Lighter light on right						nm													
+Down on left	1					Heavier light on right						nm													
+
+Total = (2 + 2*5)n^2 + (2 + 2*3.5)n(n-1) + 6m(m-1) + 6*2nm
+	= 21n^2 - 9n + 6m^2 - 6m + 12nm
+	= 21n^2 - 9n + 6 * ((12 - 2n)^2 - (12 - 2n) + 2n(12 - 2n))
+	= 21n^2 - 9n + 6 * (144 - 48n + 4n^2 - 12 + 2n + 24n - 4n^2)
+	= 21n^2 - 9n + 
+
+Before considering the second weighing we observe that unlike with one odd ball out, we cannot determine whether any individual ball is not the odd one out after one weighing. Being able to rule out balls significantly simplified the subsequent weighings and that simplification is not available at this stage of the problem. 
+
+For the second weighing we consider the case where the scales balance. This has 90 states so we need to come up with a split with 30 states in each weighing. Labelling the balls on the left as A, the balls on the right as B, and the balls off the scale as C, we can enumerate all possible second weighings.
+
+A		A
+A		B
+A		C
+B		B
+B		C
+C		C
+AA		AB
+AA		AC
+AA		BC
+AB		AB
+AB		AC
+AB		BB
+AB		BC
+AB		CC
+AC		AC
+AC		BB
+AC		BC
+AC		CC
