@@ -6,7 +6,7 @@ Counting number of states:
 Total = 4 / 2 * 12 * 11 = 4 * 66 = 264
 3 ^ 5 = 243 < 264 < 729 = 3^6, therefore six weighings are needed.
 
-Assumption: a light ball and heavy ball weigh the same as two regular ball. Later I want to consider the case where the light ball and heavy ball is lighter than two regular balls and also the case where no assumptions are made about the combined weight of the two odd balls. Further still, if there are two heavy balls they are not necessarily the same weight, and similarly for light balls. Taking this into account, the number of states decomposes as follows with each group having 66 states. This gives a total of 792 states which is more than 3^6 and less than 3^7 meaning 7 weighings are required.
+If the odd balls out are odd in the same direction (two heavy or two light) then they are not necessarily the same weight. If the balls are odd in opposite directions then they do not necessarily have the same total weight as two normal balls. Taking this into account the number of states decomposes as follows with each group having 66 states. This gives a total of 792 states which is more than 3^6 and less than 3^7 meaning 7 weighings are required to distinguish between all these states.
 
 	HH, light heavy
 	HH, heavy light
@@ -21,124 +21,78 @@ Assumption: a light ball and heavy ball weigh the same as two regular ball. Late
 	LL, heavy light
 	LL, equal
 
-Approach: consider all cases for the first weighing, determine the number of states it splits into for having n balls on each side, and pick n that makes this split as even as possible.
+At this stage there is a decision to make. The original question asks to determine which direction the balls are odd which only needs to be answer with HH, HL, or LL. Another question would be to determine all the details about the relative weights of the balls. The former needs 6 weighings and the latter needs 7. All 792 states need to be considered in the weighing process as they lead to different outcomes. If we are to answer the former question in six weighings then there will need to be some states where the balls are odd in the same directions but are nonetheless different that will have the same balance state sequence. We will need to make sure that these are the only states with the same balance state in order to answer the first question. A priori I do not know how to encode this constraint in the processing of information but I expect it will be clear in hindsight. For now I am going to solve this as if I am determining the difference between 792 states in "log(792)/log(3) + a little bit" weighings.
 
-Start with n vs n where m = 12 - 2n
-- Balances:
-	- Both balls are on the scale								4n^2 - 2n
-		- Balls both H and on different sides						n^2
-		- Balls both L and on different sides						n^2
-		- Balls are H and L, on left side							n^2 - n
-		- Balls are H and L, on right side							n^2 - n
-	- Both balls not on the scale								2m^2 - 2m
-		- Both H													0.5(m^2 - m)
-		- Both L													0.5(m^2 - m)
-		- H and L													m^2 - m
-- Down on left:
-	- Both balls are on the scale								2n^2 - n
-		- H on left, L on right										n^2
-		- HH on left												0.5(n^2 - n)
-		- LL on right												0.5(n^2 - n)
-	- One ball on the scale										4nm
-		- H on left, H off scale									nm
-		- H on left, L off scale									nm
-		- L on right, H off scale									nm
-		- L on right, L off scale									nm
-- Down on right - mirror of down on left
+Approach: consider all cases for the first weighing, determine the number of states it splits into for having n balls on each side, and pick n that makes this split as even as possible. This is done in TwelveIslandersTwoOdds.ods. For each n this should add up to 792, but I had to write a program to find the cases I had missed. In theory this was practicable to do by hand however and despite having all the numbers in a spreadsheet I am going to continue as if I had done this by hand. n is the number of balls on one side of the scale and m = 12 - 2n is the number of balls of the scale.
 
-2m^2 - 2m
-	= 2 * (12 - 2n)^2 - 2 * (12 - 2n)
-	= 2 * (144 - 48n + 4n^2 - 12 + 2n)
-	= 8n^2 - 92n + 264
+To find the number of states in each of the three balance positions it will be useful to compute nm and m(m-1)/2.
 
-4nm
-	= 4n * (12 - 2n)
-	= 48n - 8n^2
+nm
+	= n * (12 - 2n)
+	= 12n - 2n^2
+
+m(m - 1) / 2
+	= (12 - 2n) * (11 - 2n) / 2
+	= (6 - n) * (11 - 2n)
+	= 66 - 12n - 11n + 2n^2
+	= 2n^2 - 23n + 66
 
 Balanced:
-4n^2 - 2n + 8n^2 - 92n + 264
-	= 12n^2 - 94n + 264
+2n^2 + 4 * n(n-1) / 2 + 12 * m(m-1) / 2
+	= 2n^2 + 2n^2 - 2n + 12 * (2n^2 - 23n + 66)
+	= 2n^2 + 2n^2 - 2n + 24n^2 - 276n + 792
+	= 28n^2 - 278n + 792
 
-Down on left:
-2n^2 - n + 48n - 8n^2
-	= 47n - 6n^2
+Down on left and Down on right:
+5n^2 + 10 * n(n-1) / 2 + 12 * nm
+	= 5n^2 + 5n^2 - 5n + 12 * (12n - 2n^2)
+	= 5n^2 + 5n^2 - 5n + 144n - 24n^2
+	= -14n^2 + 139n
 
-Unbalanced = 2 * Down on left
-	= 94n - 12n^2
+We want the total cases to add to 792 independently of n which is the case. This is good evidence that we have counted the cases correctly. Graphing these shows that both Balanced and Down on left are positive for 1 <= n <= 6 as expected
 
-Total = Balanced + Unbalanced
-	= 12n^2 - 94n + 264 + 94n - 12n^2
-	= 264
+We want to split the cases between Balanced, Down on left, and Down on right. This can be done by finding where they are equal. As Down on left is equal to Down on right by symmetry, the following is equivalent to Unbalanced = Down on left = Down on right = Total / 3
+Balanced = Down on left
+28n^2 - 278n + 792 = -14n^2 + 139n
+42n^2 - 417n + 792 = 0
+Quadratic formula gives n = 2.56 and 7.37
 
-This is good evidence that we have counted the cases correctly.
-Graphing these shows that both Balanced and Down on left are positive for 1 <= n <= 6 as expected
-
-We want to split the cases between Balanced, Down on left, and Down on right. This can be done by finding where they are equal.
-	12n^2 - 94n + 264 = 47n - 6n^2
-	18n^2 - 141n + 264 = 0
-	n^2 - 47n/6 + 44/3 = 0
-	(n - 47/12)^2 = 2209/144 - 44/3
-	(n - 47/12)^2 = 97/144
-
-The midpoint is given by 47/12 = 48/12 - small = 4 - small. The deviation of the roots from the midpoint is 97/144 = 100/144 - small = (10/12)^2. (4 - small) + (10/12 - small) and (4 - small) - (10/12 - small) are the two solutions. The latter of these will be very close to an integer meaning when the quadratic is evaluated on the integers, this solution will minimise the difference between Balanced and Down on the left. This gives us the first weighing as three balls vs three balls. Six weighings can distinguish between just under three times as many states as necessary means there is a lot of slack. Given this, it may be possible to find a solution with five balls on each side. As a check, the number of states is given explicitly below and it appears that four balls on each side could also work.
-
-	n	Balanced	Down on left	Difference
-	1	182			124				141
-	2	124			70				54
-	3	90			87				3
-	4	80			92				12
-	5	94			85				9
-	6	132			66				66
-
-At this stage I decided to redo the analysis with no assumptions about the weights of the balls.
-
-n = number of balls on one side
-m = number of balls off scale = 12 - 2n
+This suggests weighing three balls against three balls, although I suspect that weighing two vs two would also work. This is quite different from the one-ball case where the first weighing involved four weighings. For now I will assume three balls each side for the first weighing.
 
 
+### Start of aside to explore why fewer balls on the scale are needed than in the single odd islander case ###
+
+Looking at a graph of the number of balanced states and number of states on the left side against n we see the balanced state decreases rapidly with n. I suspect that as these are quadratic functions of n, the curves are steeper for low n than in the one odd ball case. To explore this I am going to find the plots for the one odd ball case.
+
+Scale state		Description			Formula
+Balanced		Heavy, off scale	12 - 2n
+Balanced		Light, off scale	12 - 2n
+Down on left	Heavy, left side	n
+Down on left	Light, right side	n
+Down on right	Heavy, right side	n
+Down on right	Light, left side	n
+
+Balanced = 24 - 4n
+Down on left = Down on right = 2n
+
+Scaling this up by 792/24 = 33 to normalise the number of states to compare gradients / graphs, we get the following equations. Computing the gradients at n=0 confirms this.
+
+State			Odd balls	Number of states	Gradient of states	Gradient magnitude at n=0
+Balanced		1			792 - 132n			-132				132
+Balanced		2			28n^2 - 278n + 792	56n - 278			278
+Down on a side	1			66n					66					66
+Down on a side	2			139n - 14n^2		139					139
+
+Consider the extreme case of determining the weight order of balls where any number of them have different weights. Solving this problem would involve many one vs one comparisons. The two odd ball problem is closer to this than the original one odd ball problem so it makes sense that fewer balls would be compared at a time. 
+
+### End of aside to explore why fewer balls on the scale are needed than in the single odd islander case ###
 
 
-
-
-
-Scale state		Balls on balance	Description									Formula		1		2		3		4		5		6
-Balanced		2					Equal heavy on opposite sides				n^2													
-Balanced		2					Equal lights on opposite sides				n^2													
-Balanced		2					Opposite heavy and light on left side		n(n-1)												
-Balanced		2					Opposite heavy and light on right side		n(n-1)												
-Balanced		0					Equal heavy off scale						m(m-1)/2											
-Balanced		0					Non-equal heavy off scale					m(m-1)												
-Balanced		0					Equal light off scale						m(m-1)/2											
-Balanced		0					Non-equal light off scale					m(m-1)												
-Balanced		0					Heavier heavy and light off scale			m(m-1)												
-Balanced		0					Opposite heavy and light off scale			m(m-1)												
-Balanced		0					Lighter heavy and light off scale			m(m-1)												
-Down on left	2					Equal heavy on left							n(n-1)/2											
-Down on left	2					Non-equal heavy on left						n(n-1)												
-Down on left	2					Non-equal heavy, opposite sides				n^2
-Down on left	2					Equal light on right						n(n-1)/2											
-Down on left	2					Non-equal light on right					n(n-1)
-Down on left	2					Non-equal light, opposite sides				n^2
-Down on left	2					Heavier heavy on left, light on right		n^2													
-Down on left	2					Opposite heavy on left, light on right		n^2													
-Down on left	2					Lighter heavy on left, light on right		n^2													
-Down on left	2					Heavier heavy on left, light on left		n(n-1)/2													
-Down on left	1					Equal heavy on left							nm													
-Down on left	1					Heavier heavy on left						nm													
-Down on left	1					Lighter heavy on left						nm													
-Down on left	1					Equal light on right						nm													
-Down on left	1					Lighter light on right						nm													
-Down on left	1					Heavier light on right						nm													
-
-Total = (2 + 2*5)n^2 + (2 + 2*3.5)n(n-1) + 6m(m-1) + 6*2nm
-	= 21n^2 - 9n + 6m^2 - 6m + 12nm
-	= 21n^2 - 9n + 6 * ((12 - 2n)^2 - (12 - 2n) + 2n(12 - 2n))
-	= 21n^2 - 9n + 6 * (144 - 48n + 4n^2 - 12 + 2n + 24n - 4n^2)
-	= 21n^2 - 9n + 
+Observation: In the case where the scale tips down on one side and one ball is on the scale, the distribution of the number of states against n is reasonably flat. The number of combinations from the ball on the scale increases with n, but the number of states for a ball off the scale decreases with n and these appear to roughly cancel out. Where the scale is balanced there cannot be only one odd ball on the scale so this does not occur. 
 
 Before considering the second weighing we observe that unlike with one odd ball out, we cannot determine whether any individual ball is not the odd one out after one weighing. Being able to rule out balls significantly simplified the subsequent weighings and that simplification is not available at this stage of the problem. 
 
-For the second weighing we consider the case where the scales balance. This has 90 states so we need to come up with a split with 30 states in each weighing. Labelling the balls on the left as A, the balls on the right as B, and the balls off the scale as C, we can enumerate all possible second weighings.
+For the second weighing we first consider the case where the scales balance. This has 210 states so we need to come up with a split with around 70 states in each weighing. Labelling the balls on the left as A, the balls on the right as B, and the balls off the scale as C, we can enumerate all possible second weighings.
 
 A		A
 A		B
@@ -158,3 +112,82 @@ AC		AC
 AC		BB
 AC		BC
 AC		CC
+AAA		BBB
+AAA		BBC
+AAA		BCC
+AAA		CCC
+AAB		ABB
+AAB		ABC
+AAB		ACC
+AAB		BBC
+AAB		BCC
+AAB		CCC
+ABB		ABC
+ABB		BCC
+ABB		CCC
+ABC		ABC
+ABC		ACC
+ABC		CCC
+ABC		BBC
+ABC		BCC
+ABC		CCC
+ACC		BBB
+ACC		BBC
+ACC		BCC
+ACC		CCC
+BBB		CCC
+BBC		BCC
+BBC		CCC
+BCC		BCC
+BCC		CCC
+CCC		CCC
+
+In all weighings that do not involve any balls that were off the scale in the first weighing, all of the cases where the first weighing balanced will also balance. This adds up to far more than 70 so must be ruled out. We conclude that we must include at least one ball that was not on the scale in the first weighing. Unfortunately this does not rule out many of the weighings so I need something stronger. My first thought is that for each of the 210 cases I need to consider a weighing and see what happens. I would then count how many cases balanced, went down on the left, or down on the right, and eliminate based on that. This seems like a lot of work though so I want to find a smarter way.
+
+Identifying symmetries means we can reduce the number of cases to consider by almost half. During the process of identifying mirrors I found several configurations I had missed which means I may need to check with a program whether I truly have them all.
+
+Case			Mirror			Left	Balance	Right
+A		C		B		C		35		140		35
+C		C		Self-mirror		53		104		53
+AA		AC		BB		BC		41		128		41
+AA		BC		AC		BB		39		132		39
+AA		CC		BC		CC		61		88		61
+AB		AC		AB		BC		41		128		41
+AB		CC		Self-mirror		62		86		62
+AC		AC		BC		BC		62		86		62
+AC		BC		Self-mirror		61		88		61
+AC		CC		BC		CC		74		62		74
+CC		CC		Self-mirror		78		54		78
+AAA		BBC		AAC		BBB		35		140		35
+AAA		BCC		ACC		BBB		61		88		61
+AAA		CCC		BBB		CCC		78		54		78
+AAB		ABC		ABB		ABC		41		78		41
+AAB		ACC		ABB		BCC		65		80		65
+AAB		BBC		AAC		ABB		39		132		39
+AAB		BCC		ABB		ACC		64		82		64
+AAB		CCC		ABB		CCC		80		50		80
+AAC		ABC		ABC		BBC		64		82		64
+AAC		ACC		BBC		BCC		80		50		80
+AAC		BBC		Self-mirror		61		88		61
+AAC		BCC		ACC		BBC		78		54		78
+AAC		CCC		BBC		CCC		86		38		86
+ABC		ABC		Self-mirror		65		80		65
+ABC		ACC		ABC		BCC		80		50		80
+ABC		CCC		Self-mirror		87		36		87
+ACC		ACC		BCC		BCC		87		36		87
+ACC		BCC		Self-mirror		86		38		86
+ACC		CCC		BCC		CCC		85		40		85
+CCC		CCC		Self-mirror		75		60		75
+
+To gain some intuition I am going to start on A vs C (equivalently B vs C). For a given case such as this, some of the patterns in the first weighing can be grouped together. For example, equal heavies on both sides and equal lights on both sides can be treated identically. I expect this to roughly half the number of patterns. As I am filling this in, I feel like programming this is unavoidable lest I want to waste a lot of time counting combinations.
+
+After making a program to count states (turned out to be very easy and significantly faster - definitely the right move), I have found there is no obvious pattern which is what I expected. The number of cases which went down on the left was equal to the number of cases that went down on the right. I expected this as so far there has been nothing to break the asymmetry between left or right.
+
+It is not necessarily the case that weighing up to 3 vs 3 is sufficient, and in theory a weighing such as AAABBB vs CCCCCC might work. The ideal weighing splits 70 70 70 and the best I got with 3 vs 3 was 74 62 74. I am not bothered to do all of that by hand so I am going to program it. I still think writing out the first set of cases by hand was worthwhile as it gave me an idea of the problem complexity.
+
+After programming to generate all second weighings I got many more cases, but did not improve on my result from before. Noteable cases were as follows:
+	- AACC vs BBBC which matched the performance of AC vs CC
+	- AAACCC vs BBBCCC and AAABBB vs CCCCCC which both got 75 60 75.
+I sorted the cases by their deviation from a perfect split and found no patterns in symmetry of weighing or number of balls on each side of the scale. I think programming will be necessary for deciding all future cases. While I like the symmetry of AAACCC vs BBBCCC and AAABBB vs CCCCCC, I am going to continue with AC vs CC because I think it has a more even split and is simpler than AACC vs BBBC. I note that 75 and 60 are both less than 3^4 = 81 so at this stage we cannot rule out the possibility of distinguishing between all states.
+
+I will consider the case where the first and second weighing balanced. Now that more information from previous weighings is available and the islanders cannot be easily characterised based on weighing history, I think it will be more convenient to refer to balls by their number. There will be a fixed set of possible weighings to consider at every stage and this number may be quite large. If we were doing this by hand then we could group equivalent weighings (for example if 
