@@ -1,0 +1,96 @@
+The awkward thing about trying to formulate the 12 islanders as an integer programming problem is that things split into cases. I think I will have to have a set of indicator variables for each pattern of weighings. For each weighing, only the history of weighings can influence decisions. Given this, we need one indicator variable for the first weighing, three for the second, and nine for the third.
+
+Let x_{i, j} be the indicator variable for a weighing
+i	Weighing pattern ID
+j	Weighing number.
+
+Let h_{i, j} be the indicator variable for a weighing history
+i	Weighing number
+j	SubID
+
+I will worry about how to encode the fact that each state needs to have a different weighing pattern later as I imagine I will need some other machinery for that. I think it will be useful to try and encode how a strategy and state combine to give a weighing result. For the y indicator I had thought it would be useful to have a state ID, but using an islander ID and whether they are heavier or lighter encodes all the information about the state so a state ID is not necessary (islander ID and weight direction form a natural primary key).
+
+Let y_{i, j} be the indicator variable for a state
+i	Islander ID
+j	Odd direction (0 if lighter, 1 if heavier)
+
+Let z_{i, j, k, l} be the indicator variable for the weighing result.
+i	State ID
+j	Odd direction
+k	Weighing result (-1 if down on left, 0 if balanced, 1 if down on right)
+l	Weighing number
+
+z_{i, j, k, l} = -1 if odd islander is heavy (j = 1) and on the left at weighing number l 
+
+Weighing histories
+Depth	SubID	1	2
+0		1
+1		1		-1
+1		2		0
+1		3		1
+2		1		-1	-1	
+2		2		-1	0
+2		3		-1	1
+2		4		0	-1
+2		5		0	0
+2		6		0	1
+2		7		1	-1
+2		8		1	0
+2		9		1	1
+
+Weighing patterns
+ID	1	2	3
+1	-1	-1	-1
+2	-1	-1	0
+3	-1	-1	1
+4	-1	0	-1
+5	-1	0	0
+6	-1	0	1
+7	-1	1	-1
+8	-1	1	0
+9	-1	1	1
+10	0	-1	-1
+11	0	-1	0
+12	0	-1	1
+13	0	0	-1
+14	0	0	0
+15	0	0	1
+16	0	1	-1
+17	0	1	0
+18	0	1	1
+19	1	-1	-1
+20	1	-1	0
+21	1	-1	1
+22	1	0	-1
+23	1	0	0
+24	1	0	1
+25	1	1	-1
+26	1	1	0
+27	1	1	1
+
+y_{i, j} indicator
+ID	i	j
+1	1	L
+2	2	L
+3	3	L
+4	4	L
+5	5	L
+6	6	L
+7	7	L
+8	8	L
+9	9	L
+10	10	L
+11	11	L
+12	12	L
+13	1	H
+14	2	H
+15	3	H
+16	4	H
+17	5	H
+18	6	H
+19	7	H
+20	8	H
+21	9	H
+22	10	H
+23	11	H
+24	12	H

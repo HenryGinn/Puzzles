@@ -6,4 +6,5 @@
 *.ptc
 *.toc
 *.gz
-*.lock
+*.~lock*
+Puzzles.pdf
