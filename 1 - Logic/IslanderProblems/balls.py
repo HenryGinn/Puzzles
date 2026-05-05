@@ -74,7 +74,7 @@ def add_deviation_column(states, count):
     return count
 
 def solve(states, outcome_history, weighing_history):
-    if len(weighing_history) < 3:
+    if len(weighing_history) < weighing_count:
         count = count_splits(states, df)
         weighing_index = count.index[0]
         splits = split_states(states, df.iloc[weighing_index, :])
@@ -85,39 +85,78 @@ def solve(states, outcome_history, weighing_history):
         all_weighings.append(weighing_history)
 
 def postprocess_solution():
-    pass
+    global all_weighings, all_outcomes
+    all_weighings = pd.DataFrame(all_weighings)
+    all_outcomes = pd.DataFrame(all_outcomes)
+
+    all_outcomes = all_outcomes.iloc[::3, :-1]
+    all_weighings = all_weighings.iloc[::3, :]
+    outcomes = []
+    weighings = []
+    for i in range(weighing_count):
+        outcomes = [all_outcomes] + outcomes
+        weighings = [all_weighings.iloc[:, -1]] + weighings
+        all_outcomes = all_outcomes.iloc[::3, :-1]
+        all_weighings = all_weighings.iloc[::3, :-1]
+
+    outcomes = pd.concat(outcomes, axis=0)
+    weighings = pd.concat(weighings, axis=0)
+    solution = pd.concat((outcomes, weighings), axis=1).reset_index(drop=True)
+    solution.columns = weighing_columns[:-1] + ["ConfigurationID"]
+    configurations = df.iloc[solution["ConfigurationID"], :].reset_index(drop=True)
+    solution = pd.concat((solution, configurations), axis=1)
+    solution.to_csv("Solution.csv")
+
+def follow_solution(index, state):
+    state_solution = solution.copy()
+    for weighing_number in range(weighing_count):
+        weighing_ID = state_solution.loc[0, "ConfigurationID"]
+        result = get_result(state, weighing_ID)
+        state_solution = (
+            state_solution.loc[
+                state_solution.iloc[:, weighing_number] == result]
+            .reset_index(drop=True))
+        state_history[index, weighing_number] = outcome_lookup[result]
+
+def get_result(state, weighing_ID):
+    weighing = df.iloc[weighing_ID]
+    difference = weighing.multiply(state).sum()
+    result = weighing_result_lookup[(difference == 0, difference > 0)]
+    return result
+    
 
 outcomes = ["Left", "Balanced", "Right"]
+outcome_lookup = {outcome: i - 1 for i, outcome in enumerate(outcomes)}
+outcome_inverse_lookup = {value: key for key, value in outcome_lookup.items()}
 all_states = generate_states()
+
+weighing_result_lookup = {
+    (True, False): "Balanced",
+    (False, False): "Left",
+    (False, True): "Right"}
 
 df = pd.DataFrame([
     i for i in product([-1, 0, 1], repeat=12)
     if i.count(-1) == i.count(1)])
 
-first_weighing = df.iloc[41180, :]
-left, balanced, right = split_states(all_states, first_weighing)
-
 all_outcomes = []
 all_weighings = []
-solve(balanced, [], [])
-all_weighings = pd.DataFrame(all_weighings)
-all_outcomes = pd.DataFrame(all_outcomes)
 
-all_outcomes = all_outcomes.iloc[::3, :-1]
-all_weighings = all_weighings.iloc[::3, :]
-outcomes = []
-weighings = []
-for i in range(3):
-    outcomes = [all_outcomes] + outcomes
-    weighings = [all_weighings.iloc[:, -1]] + weighings
-    all_outcomes = all_outcomes.iloc[::3, :-1]
-    all_weighings = all_weighings.iloc[::3, :-1]
+weighing_count = 6
+weighing_columns = [f"Weighing{i+1}" for i in range(weighing_count)]
+solve(all_states, [], [])
+postprocess_solution()
+solution = pd.read_csv("Solution.csv", index_col=0)
+state_history = np.empty((all_states.shape[0], weighing_count), dtype="int8")
 
-outcomes = pd.concat(outcomes, axis=0)
-weighings = pd.concat(weighings, axis=0)
-solution = pd.concat((outcomes, weighings), axis=1).reset_index(drop=True)
-solution.columns = [f"Weighing{i+1}" for i in range(solution.shape[1]-1)] + ["ConfigurationID"]
-configurations = df.iloc[solution["ConfigurationID"], :].reset_index(drop=True)
-solution = pd.concat((solution, configurations), axis=1)
-solution.to_csv("Solution.csv")
+for index, state in all_states.iterrows():
+    follow_solution(index, state)
+
+state_history = pd.DataFrame(state_history)
+state_history = state_history.sort_values(by=list(state_history.columns))
+state_history = pd.concat((state_history.replace(outcome_inverse_lookup), all_states), axis=1)
+state_history.columns = weighing_columns + list(range(12))
+state_history.reset_index(drop=True, inplace=True)
+state_history.loc[:, "Configuration"] = state_history.loc[:, list(range(12))].apply(lambda x: sorted(list(set(x))), axis=1)
+state_history.to_csv("StateHistory.csv")
 
