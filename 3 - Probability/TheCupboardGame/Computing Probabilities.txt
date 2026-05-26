@@ -2,6 +2,7 @@
 1, 5, 2, 6, 3, 7, 4, 8
 
 P(B wins) = P(
+	1 and min > 1 or
 	5 and min > 2 or
 	2 and min > 3 or
 	6 and min > 4 or
@@ -9,13 +10,6 @@ P(B wins) = P(
 	7 and min > 6 or
 	4 and min > 7 or
 	8 and min > 8)
-
-= P(
-	5 and min > 2 or
-	2 and min > 3 or
-	6 and min > 4 or
-	3 and min > 5 or
-	7 and min > 6)
 
 = P(
 	5 and min > 2 or
@@ -35,3 +29,53 @@ P(A and C) = 0
 P(B and C) = 0 
 P(A and B and C) = 0
 P(A or B or C) = (5 + 3 + 1 - 1) / 28 = 8 / 28
+
+Let us make some observations about this where we will use n to denote the number of cupboards.
+	- We will always end up with some sort of P(X_1 or ... or X_n) structure.
+	- When we expand using the inclusion-exclusion principle, anything OR between three or more events will always be zero as each event involves the precise statement of one star and there are only two stars.
+	- There is at most one way of events of the form X or Y occuring. This is because it requires the exact placement of two stars which fixes all stars.
+	- Where X is the event "star a is present and minimum star is greater than b", the number of configurations is 0 if a is less than or equal to b and equal to n - 1 - b otherwise.
+	- The total number of states is 1/2 * n * (n - 1)
+
+Armed with this, we are ready to construct the general formula for Bob winning. If the cupboards are labelled 1 to n in the order they are visited by Alice then define y_n to be the cupboard that Bob visits at time step n. Let
+
+P(Bob wins)
+	= P(\cup_{k=1}^n Bob can win due to cupboard k)
+	= \sum_{k=1}^n P(Bob can win due to cupboard k) - \sum_{i=1, j>i}^n P(Bob can win due to cupboard i and j)
+
+# Bob can win due to cupboard k
+	= P(star at y_k and min star number is > k)
+	= 0 if y_k <= k, n - k - 1 otherwise
+	= I_{y_k > k} * (n - k - 1)
+
+# Bob can win due to cupboard i and j
+	= I_{min(y_i, y_j) > max(i, j)}
+
+P(Bob wins) = 1/N * sum_{i=1}^n \left(
+	I_{y_k > k} * (n - k - 1) - \sum_{j = i + 1}^n I_{min(y_i, y_j) > j} \right)
+
+
+To find the probability that Alice wins we can do exactly the same thing as with Bob, we simply need to define a different y_k so that the role of Alice and Bob is switched around. If the cupboards are labelled 1 to n in the order that Bob visits them then define y_k to be the cupboard that Alice visits at time step k. If we understand x_k and y_k as permutations then I suspect that they will be inverses. I will test this for the example from the problem before attempting to prove it.
+
+Bob		1	2	3	4	5	6	7	8
+Alice	1	3	5	7	2	4	6	8
+
+e		1	2	3	4	5	6	7	8
+x_k		1	3	5	7	2	4	6	8
+y_k		1	5	2	6	3	7	4	8
+x_k*y_k	1	2	3	4	5	6	7	8
+
+My intuition was correct. y_k is saying "How do I move from Alice's position to Bob's position?". x_k is saying "How do I move from Bob's position to Alice's position?". The composition of these maps is then asking how to move from Alice's position to Bob's position and back to Alice's position. If Alice's position is k, then after applying both maps we will get k, therefore the composition of the maps forms the identity. I am not sure how much this will help with determining whether Alice or Bob wins however.
+
+The problem reduces to determining which is bigger out of the Alice and Bob winning probabilities that we have computed. The normalising constant, 1/N, can be ignored because it is constant for both, but beyond that I imagine this will be awkward to do. I think it will be instructive to look at the actual values in the sums to spot some patterns. We will count the number of states (that is, ignoring the 1/N normalising constant) and implicitely define P(player wins) as \sum_{i=1}^n X_i +
+	Y_i \right)
+
+Time step	x_k		y_k		Alice X_i	Bob X_i		Alice Y_i	Bob Y_i
+1			1		1		
+2			3		5		
+3			5		2		
+4			7		6		
+5			2		3		
+6			4		7		
+7			6		4		
+8			8		8		

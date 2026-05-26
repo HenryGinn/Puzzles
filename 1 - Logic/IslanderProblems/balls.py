@@ -73,16 +73,35 @@ def add_deviation_column(states, count):
         for column in outcomes], axis=0)
     return count
 
-def solve(states, outcome_history, weighing_history):
+def solve(states, outcome_history, weighing_history, seen_configurations):
     if len(weighing_history) < weighing_count:
         count = count_splits(states, df)
-        weighing_index = count.index[0]
-        splits = split_states(states, df.iloc[weighing_index, :])
-        for split, outcome in zip(splits, outcomes):
-            solve(split, outcome_history + [outcome], weighing_history + [weighing_index])
+        count = count.index[count["Deviation"] == count.iloc[0, -1]]
+        for weighing_index in count:
+            seen_configurations_new = seen_configurations.copy()
+            splits = split_states(states, df.iloc[weighing_index, :])
+            for split, outcome in zip(splits, outcomes):
+                configuration = solve(
+                    split,
+                    outcome_history + [outcome],
+                    weighing_history + [weighing_index],
+                    seen_configurations)
+                if configuration is None:
+                    break
+        print(outcome_history)
+        print(weighing_history)
+        print(seen_configurations)
+        input()
     else:
-        all_outcomes.append(outcome_history)
-        all_weighings.append(weighing_history)
+        configurations = set(left.apply(lambda x: tuple(sorted(list(set(x)))), axis=1))
+        if len(configurations) == 1:
+            print("Configuration count test passed")
+            print(outcome_history)
+            print(weighing_history)
+            print(seen_configurations)
+            all_outcomes.append(outcome_history)
+            all_weighings.append(weighing_history)
+            seen_configurations_copy.add(configurations[0])
 
 def postprocess_solution():
     global all_weighings, all_outcomes
@@ -142,10 +161,19 @@ df = pd.DataFrame([
 all_outcomes = []
 all_weighings = []
 
-weighing_count = 6
+left, balanced, right = split_states(all_states, df.iloc[14832, :])
+left, balanced, right = split_states(left, df.iloc[60395, :])
+left, balanced, right = split_states(balanced, df.iloc[13285, :])
+left, balanced, right = split_states(balanced, df.iloc[16813, :])
+#left, balanced, right = split_states(left, df.iloc[37225, :])
+#left, balanced, right = split_states(left, df.iloc[25632, :])
+a = count_splits(balanced, df)
+
+weighing_count = 2
 weighing_columns = [f"Weighing{i+1}" for i in range(weighing_count)]
-solve(all_states, [], [])
-postprocess_solution()
+solve(balanced, [], [], set([]))
+#postprocess_solution()
+"""
 solution = pd.read_csv("Solution.csv", index_col=0)
 state_history = np.empty((all_states.shape[0], weighing_count), dtype="int8")
 
@@ -158,5 +186,5 @@ state_history = pd.concat((state_history.replace(outcome_inverse_lookup), all_st
 state_history.columns = weighing_columns + list(range(12))
 state_history.reset_index(drop=True, inplace=True)
 state_history.loc[:, "Configuration"] = state_history.loc[:, list(range(12))].apply(lambda x: sorted(list(set(x))), axis=1)
-state_history.to_csv("StateHistory.csv")
-
+#state_history.to_csv("StateHistory.csv")
+"""

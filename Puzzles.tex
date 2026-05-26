@@ -7,11 +7,11 @@
 \usepackage{float}
 \usepackage{fancyhdr}
 \usepackage{amsthm}
-\usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{quotes, angles, positioning, math}
+\usetikzlibrary{quotes, angles, positioning, math, calc, decorations.markings}
 \usepackage{tkz-euclide}
 \usepackage{multirow}
 \usepackage{gensymb}
@@ -112,8 +112,13 @@
 
 \let\oldthesubsection\thesubsection
 
-
 \begin{document}
+
+% Define arrow on part of the line
+% For example \path[->-=0.5] (A) -- (B)
+\tikzset{->-/.style={decoration={
+	markings,
+	mark=at position #1 with {\arrow[xshift=3]{Straight Barb [length=7, width=7]}}}, postaction={decorate}}}
 
 \newpage
 \setcounter{page}{1}
