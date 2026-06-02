@@ -1,0 +1,5 @@
+% Define arrow on part of the line
+% For example \path[->-=0.5] (A) -- (B)
+\tikzset{->-/.style={decoration={
+			markings,
+			mark=at position #1 with {\arrow[xshift=3]{Straight Barb [length=7, width=7]}}}, postaction={decorate}}}

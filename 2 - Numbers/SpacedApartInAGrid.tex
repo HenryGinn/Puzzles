@@ -1,0 +1,33 @@
+\subsection{Spaced Apart In A Grid}
+
+I found this problem in TBO's problem solving booklet. It has a very simple solution, but took me around 15 minutes to have the change of way of looking at the problem in order to solve it. I rate this problem a 3/10.
+
+The integers from $1$ to $n^2$ are put into an $n \times n$ grid. Prove that there must exist one pair of numbers that are adjacent (horizontally, vertically, or diagonally) that are within $n + 1$ of each other.
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item Use the pigeonhole principle.
+	\item Think about paths rather than $3 \times 3$ regions.
+\end{enumerate}
+
+\textbf{Solution:}
+
+The numbers 1 and $n^2$ must exist somewhere within the grid. If we define a step to be a hop to an adjacent square (either horizontall, vertically, or diagonally) then the number of steps between two squares is the maximum of the number of columns between the squares and the number of rows between the squares. This is because a diagonal step moves by one column and one row at the same time. This means that the maximum number of steps between two squares is $n - 1$.
+
+$n^2$ and $1$ are $n^2 - 1$ apart and we need to achieve this difference in $n - 1$ steps. We want the maximum difference between squares one step apart to be minimised which occurs when all differences are equal to the maximum. This is because lowering one difference between steps by one means another would need to increase by one to make up the deficiency. Equation~\ref{eqn:SpacedApartInAGrid_Pigeonhole} shows that this difference must be equal to $n + 1$ and thus the result is proved.
+
+\begin{equation}
+	\frac{n^2 - 1}{n - 1} = {n + 1}
+	\label{eqn:SpacedApartInAGrid_Pigeonhole}
+\end{equation}
+
+\textbf{Extensions and Comments:}
+
+I immediately knew to use the pigeonhole principle to solve this, although originally the adjacency property made me think of $3 \times 3$ regions. I struggled to think of how such an argument would work however.
+
+Drawing out the $n = 3$ case was an enlightening step as I saw that all such squares must see the central square. Having this square as less then $5$ meant that the difference to $9$ would be greater and having this square as greater than $5$ meant that the difference to $1$ would be greater. $5$ is the best we can do and this has a gap of $4$, exactly $n + 1$. This is what made me think of chaining things into paths which is the key to solving this problem.
+
+The second insight was determining how distance between two squares was independent of route, as long as each step moved nearer to the end squares in the direction that the two squares were greatest apart in. Understanding this norm allowed me to bound the distance between two squares.
+
+If we could make the equality in equation~\ref{eqn:SpacedApartInAGrid_Pigeonhole} into a strict inequality then because all differences must be integers then we could in fact show the stronger result that there must exist a difference between adjacent squares of $n + 2$. For $n = 2$ and $n = 3$ however this is not true. It may be the case that for higher values of $n$ this bound could be tightened.

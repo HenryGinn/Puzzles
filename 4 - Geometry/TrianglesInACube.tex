@@ -17,35 +17,28 @@ Place three points overlapping at a vertex of the cube. There are three edges co
 
 There are 24 orientation-preserving symmetries of the vertices of a cube, and these form the $O$ group. The vertices of an equilateral triangle have 3 orientation-preserving symmetries and form the $C_3$ group. The quotient set $O/C_3$ has size $\left| \frac{O}{C_3} \right| = \frac{|O|}{|C_3|} = \frac{24}{3} = 8$, and this is the number of triples of vertices with threefold rotational symmetry, in other words, the equilateral triangles.
 
-\begin{center}
-\begin{tikzpicture}[scale=5]
-	% Angles used:
-	% a = -0.6
-	% b = -0.3
-	% c =  0.4
-	
-	% Basis vectors used;
-	% 0.47509207, -0.00476773, -0.87992318
-	%-0.53942356,  0.78847323, -0.29552021
-	% 0.69520483,  0.6150506 ,  0.37202555
-	
-	\coordinate (V1) at ( 0.00000000,  0.00000000);
-	\coordinate (V2) at ( 0.61505060,  0.37202555);
-	\coordinate (V3) at ( 0.78847323, -0.29552021);
-	\coordinate (V4) at ( 1.40352383,  0.07650535);
-	\coordinate (V5) at (-0.00476773, -0.87992318);
-	\coordinate (V6) at ( 0.61028287, -0.50789762);
-	\coordinate (V7) at ( 0.78370550, -1.17544338);
-	\coordinate (V8) at ( 1.39875610, -0.80341783);
-	
-	\draw (V2) -- (V4) -- (V3) -- (V1) -- (V2);
-	\draw (V5) -- (V7) -- (V8) -- (V6) -- (V5);
-	\draw (V1) -- (V5);
-	\draw (V2) -- (V6);
-	\draw (V3) -- (V7);
-	\draw (V4) -- (V8);
-	
-\end{tikzpicture}
-\end{center}
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=5]
+			
+			\coordinate (000) at (0, 0, 0);
+			\coordinate (001) at (0, 0, 1);
+			\coordinate (010) at (0, 1, 0);
+			\coordinate (011) at (0, 1, 1);
+			\coordinate (100) at (1, 0, 0);
+			\coordinate (101) at (1, 0, 1);
+			\coordinate (110) at (1, 1, 0);
+			\coordinate (111) at (1, 1, 1);
+			
+			\draw (000) -- (001) -- (011) -- (010) -- (000);
+			\draw (100) -- (101) -- (111) -- (110) -- (100);
+			\draw (000) -- (100);
+			\draw (001) -- (101);
+			\draw (010) -- (110);
+			\draw (011) -- (111);
+			
+		\end{tikzpicture}
+	\end{center}
+\end{figure}
 
 \textbf{Extensions and Comments:}
