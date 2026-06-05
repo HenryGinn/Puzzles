@@ -6,6 +6,8 @@
 *.ptc
 *.toc
 *.gz
+*.html
+*.css
 *.~lock*
 Puzzles.pdf
 1 - Logic/IslanderProblems/TwelveIslandersTwoOdds.csv

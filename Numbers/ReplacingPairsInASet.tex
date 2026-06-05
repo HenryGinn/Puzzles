@@ -1,0 +1,24 @@
+\subsection{Replacing Pairs in a Set}
+
+I found this problem from the YouTube channel of a friend~\cite{ReplacingPairsInSet}. It is not a very tricky problem and took around five minutes so I give it a difficulty rating of 2/10, but I think it is a very neat problem with a nice solving path.
+
+Start with the numbers 1, 2, 3, 4, 5, 6, 7. Remove any two numbers, $a$ and $b$, from the list and replace them with $ab + a + b$. Repeat this until only a single number remains. Show that the final number is independent of the choices made and determine this number.
+
+\subsubsection{Hints}
+
+\begin{enumerate}
+	\item Attempting this naively by hand will be computationally hard - do not reach for your calculator, change your approach.
+	\item Do the process algebraically for $a$, $b$, and $c$ - what do you notice?
+	\item Use induction where step two is the induction step.
+	\item Expand $(x - a)(x - b)(x - c)$
+\end{enumerate}
+
+\subsubsection{Solution}
+
+When doing this with a list of three numbers, $a$, $b$, and $c$, we get $abc + ab + bc + ca + a + b + c$. This looks very similar to the coefficients in an expansion of the product of linear terms and we see this to be the case in equation~\eqref{eqn:ReplacingPairsInASet}. This process can be seen as equivalent to expanding these brackets, where choosing two numbers to replace is the same as choosing the corresponding pair of brackets. The answer follows from commutativity and associativity of real numbers. The final answer is $8! - 1$.
+\begin{equation}
+	abc + ab + bc + ca + a + b + c = (1 + a)(1 + b)(1 + c) - 1\label{eqn:ReplacingPairsInASet}
+\end{equation}
+
+
+\subsubsection{Extensions and Comments}

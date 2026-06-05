@@ -1,0 +1,326 @@
+\subsection{Wonky Chessboard}
+
+This problem is from \href{}{UKMT} and I first heard about it when my Dad showed it to me. This problem tested me as all my initial intuitions turned out to be wrong. While I can usually get a decent foothold into a problem and gain some insight by doing a lot of messy algebra, that approach got me nowhere. The solution I came up with is does not require any particularly advanced maths and could be done by someone with only GCSE-level knowledge. I rate this problem a 6/10 in difficulty.
+
+Take an arbitrary convex quadrilateral, $ABCD$. Divide each edge into $n$ sections of equal length and connect opposite points to form a grid as shown in figure~\ref{fig:WonkyChessboard_Problem}. Shade in regions such that there is exactly one shaded region in each row and in each column, that is, so that the shaded regions form a latin square. Show that the area of the quadrilateral $ABCD$ is $n$ times larger than the total area of the shaded regions.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale = 1.5]
+			\input{Geometry/WonkyChessboard/QuadrilateralCoordinates.tikz}
+			
+			\fill[red!20] (13) -- (23) -- (24) -- (14);
+			\fill[red!20] (00) -- (10) -- (11) -- (01);
+			\fill[red!20] (21) -- (31) -- (32) -- (22);
+			\fill[red!20] (32) -- (42) -- (43) -- (33);
+			
+			% Outer lines
+			\draw (00) -- (40) -- (44) -- (04) -- (00);
+			
+			% Internal lines
+			\draw (10) -- (14);
+			\draw (20) -- (24);
+			\draw (30) -- (34);
+			\draw (01) -- (41);
+			\draw (02) -- (42);
+			\draw (03) -- (43);
+			
+			% Corner labels
+			\node at (00) [below left = 0.1] {$A$};
+			\node at (40) [right = 0.1] {$B$};
+			\node at (44) [above right = 0.05] {$C$};
+			\node at (04) [above left = 0.05] {$D$};
+		
+		\end{tikzpicture}
+	\end{center}
+	\caption{The wonky chessboard}
+	\label{fig:WonkyChessboard_Problem}
+\end{figure}
+
+\textbf{Hints:}
+
+\begin{enumerate}
+	\item Consider the $n = 2$ case. How can the solution for thie case be used to solve for other $n$?
+	\item For the $n = 2$ case the problem is equivalent to showing that the sum of regions along one diagonal is equal to the sum of the regions along the other diagonal.
+	\item For the $n = 2$ case, connect the midpoints of the edges of $ABCD$ to form a quadrilateral.
+	\item Show that the quadrilateral in the previous hint is a parallelogram.
+\end{enumerate}
+
+\textbf{Solution:}
+
+We start by simplifying the problem to the $n = 2$ case and we split the problem into two parts:
+
+\begin{itemize}
+	\item Solve the problem for the $n = 2$ case.
+	\item Show how the solution for the $n = 2$ case can be used to produce a solution for other $n$.
+\end{itemize}
+
+We work backwards and start with the latter as it is simpler and better motivates why this solution is worth pursuing. The idea is to show that all latin square arrangements of shaded regions have the same area and then conclude that this area must be $n$ times smaller than the total quadrilateral area.
+
+If we assume that all latin square arrangements of shaded areas have the same total area then there are two ways of reaching the desired conclusion. Firstly we can see that we can cover the quadrilateral with an additional $n - 1$ latin squares such that no latin squares share the same regions. As there are $n$ latin squares of equal area that cover the whole quadrilateral they must each be $n$ times smaller in area than the whole quadrilateral.
+
+If we are not convinced that the quadrilateral can be decomposed into non-overlapping latin squares containing the original latin square then we can also argue by symmetry. Each latin square corresponds to a permutation matrix which in turn corresponds to an element of $S_n$ (a permutation of $n$ distinct elements). By symmetry there can be no bias in the number of permutations that move each element to each position. This means that if we ask how many times a given square is shaded as we consider all latin square arrangements, we will get the same answer independently of what square we choose.
+
+Now we show that if the problem statement is true for $n = 2$ then it can be used to demonstrate that all latin squares have the same area. Motivated by the idea that a latin square corresponds to a permutation matrix, we use the fact that all permutations of $n$ elements can be achieved by a series of swaps of adjacent elements, known as transpositions. This means the problem reduces to showing that a pair of rows that the shaded regions are in can be swapped.
+
+It is necessary to show that this swapping property is true for adjacent rows where the columns of the shaded regions are not necessarily adjacent. From this the fact that arbitrary rows can be swapped follows from the fact that an arbitrary finite permutation can be achieved by a sequence of transpositions that originally motivated this approach. Figure~\ref{fig:WonkyChessboard_Transpositions} shows an indicative example where the area of the red-shaded area, $L_1 + U_n$, needs to shown to be equal to the blue-shaded area, $L_n + U_1$.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale = 2.5]
+			\input{Geometry/WonkyChessboard/QuadrilateralCoordinates.tikz}
+			
+			\coordinate (A00) at (02);
+			\coordinate (A02) at (04);
+			\coordinate (A100) at (42);
+			\coordinate (A102) at (44);
+			
+			\coordinate (A10) at ($(A00)!0.1!(A100)$);
+			\coordinate (A20) at ($(A00)!0.2!(A100)$);
+			\coordinate (A30) at ($(A00)!0.3!(A100)$);
+			\coordinate (A40) at ($(A00)!0.4!(A100)$);
+			\coordinate (A50) at ($(A00)!0.5!(A100)$);
+			\coordinate (A60) at ($(A00)!0.6!(A100)$);
+			\coordinate (A70) at ($(A00)!0.7!(A100)$);
+			\coordinate (A80) at ($(A00)!0.8!(A100)$);
+			\coordinate (A90) at ($(A00)!0.9!(A100)$);
+			\coordinate (A12) at ($(A02)!0.1!(A102)$);
+			\coordinate (A22) at ($(A02)!0.2!(A102)$);
+			\coordinate (A32) at ($(A02)!0.3!(A102)$);
+			\coordinate (A42) at ($(A02)!0.4!(A102)$);
+			\coordinate (A52) at ($(A02)!0.5!(A102)$);
+			\coordinate (A62) at ($(A02)!0.6!(A102)$);
+			\coordinate (A72) at ($(A02)!0.7!(A102)$);
+			\coordinate (A82) at ($(A02)!0.8!(A102)$);
+			\coordinate (A92) at ($(A02)!0.9!(A102)$);
+			
+			\coordinate (A01) at ($(A00)!0.5!(A02)$);
+			\coordinate (A41) at ($(A40)!0.5!(A42)$);
+			\coordinate (A61) at ($(A60)!0.5!(A62)$);
+			\coordinate (A101) at ($(A100)!0.5!(A102)$);
+			
+			\coordinate (A11) at ($(A01)!0.1!(A101)$);
+			\coordinate (A21) at ($(A01)!0.2!(A101)$);
+			\coordinate (A31) at ($(A01)!0.3!(A101)$);
+			\coordinate (A51) at ($(A01)!0.5!(A101)$);
+			\coordinate (A71) at ($(A01)!0.7!(A101)$);
+			\coordinate (A81) at ($(A01)!0.8!(A101)$);
+			\coordinate (A91) at ($(A01)!0.9!(A101)$);
+			
+			\fill[red!20] (A00) -- (A01) -- (A11) -- (A10);
+			\fill[red!20] (A91) -- (A101) -- (A102) -- (A92);
+			\fill[blue!20] (A01) -- (A02) -- (A12) -- (A11);
+			\fill[blue!20] (A90) -- (A100) -- (A101) -- (A91);
+			
+			\draw (A00) -- (A40);
+			\draw (A01) -- (A41);
+			\draw (A02) -- (A42);
+			\draw (A60) -- (A100);
+			\draw (A61) -- (A101);
+			\draw (A62) -- (A102);
+			\draw (A00) -- (A02);
+			\draw (A10) -- (A12);
+			\draw (A20) -- (A22);
+			\draw (A30) -- (A32);
+			\draw (A70) -- (A72);
+			\draw (A80) -- (A82);
+			\draw (A90) -- (A92);
+			\draw (A100) -- (A102);
+			
+			\node at (barycentric cs:A00=1,A01=1,A10=1,A11=1) {$L_1$};
+			\node at (barycentric cs:A10=1,A11=1,A20=1,A21=1) {$L_2$};
+			\node at (barycentric cs:A20=1,A21=1,A30=1,A31=1) {$L_3$};
+			\node at (barycentric cs:A01=1,A02=1,A11=1,A12=1) {$U_1$};
+			\node at (barycentric cs:A11=1,A12=1,A21=1,A22=1) {$U_2$};
+			\node at (barycentric cs:A21=1,A22=1,A31=1,A32=1) {$U_3$};
+			\node at (barycentric cs:A70=1,A71=1,A80=1,A81=1) {$L_{n-2}$};
+			\node at (barycentric cs:A80=1,A81=1,A90=1,A91=1) {$L_{n-1}$};
+			\node at (barycentric cs:A90=1,A91=1,A100=1,A101=1) {$L_n$};
+			\node at (barycentric cs:A71=1,A72=1,A81=1,A82=1) {$U_{n-2}$};
+			\node at (barycentric cs:A81=1,A82=1,A91=1,A92=1) {$U_{n-1}$};
+			\node at (barycentric cs:A91=1,A92=1,A101=1,A102=1) {$U_n$};
+			\node at (A51) {$\dots$};
+			
+		\end{tikzpicture}
+	\end{center}
+	\caption{Swapping two rows where highlighted regions are an arbitrary number of columns apart.}
+	\label{fig:WonkyChessboard_Transpositions}
+\end{figure}
+
+Applying the result for $n = 2$ to each $2 \times 2$ subgrid in figure~\ref{fig:WonkyChessboard_Transpositions} gives equation~\eqref{WonkyChessboard_SubgridEquivalences}. The equations on the right hand side telescope when added together leaving $U_1 - U_n = L_1 - L_n$. This is equivalent to $U_1 + L_n = U_n + L_1$ which is precisely the comparison of areas desired.
+
+\begin{equation}
+	\begin{split}
+		U_1 + L_2 &= U_2 + L_1 \\
+		U_2 + L_3 &= U_3 + L_2 \\
+		& \vdotswithin{=}\\
+		U_k + L_{k+1} &= U_{k+1} + L_k \\
+		& \vdotswithin{=} \\
+		U_{n-2} + L_{n-1} &= U_{n-1} + L_{n-2} \\
+		U_{n-1} + L_n &= U_n + L_{n-1}
+	\end{split}
+	\quad \implies \quad
+	\begin{split}
+		U_1 - U_2 &= L_1 - L_2 \\
+		U_2 - U_3 &= L_2 - L_3 \\
+		& \vdotswithin{=} \\
+		U_k - U_{k+1} &= L_k - L_{k+1} \\
+		& \vdotswithin{=} \\
+		U_{n-2} - U_{n-1} &= L_{n-2} - L_{n-1} \\
+		U_{n-1} - U_n &=  L_{n-1} - L_n
+	\end{split}
+	\label{WonkyChessboard_SubgridEquivalences}
+\end{equation}
+
+It now remains to show that the $n = 2$ case is true, that is, the red-shaded region has equal area to the non-shaded region in figure~\ref{fig:WonkyChessboard_BaseCaseStatement}. We first show that the blue quadrilateral shown in figure~\ref{fig:WonkyChessboard_Parallelogram} formed by connecting the edge midpoints, $PQRS$, is a parallelogram. By symmetry triangles $MQR$ and $PMS$ are congruent, as are $PQM$ and $SMR$, meaning that the problem reduces to showing the combined area of triangles $QCR$ and $APS$ is equal to the combined area of $PBQ$ and $SRD$.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}{0.49\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1.3]
+				
+				\input{Geometry/WonkyChessboard/QuadrilateralCoordinates.tikz}
+				
+				\fill[red!20] (00) -- (20) -- (22) -- (02);
+				\fill[red!20] (22) -- (42) -- (44) -- (24);
+				
+				% Outer and internal lines
+				\draw (00) -- (40) -- (44) -- (04) -- (00);
+				\draw (02) -- (42);
+				\draw (20) -- (24);
+				
+				% Corner labels
+				\node at (00) [below left = 0.1] {$A$};
+				\node at (40) [right = 0.1] {$B$};
+				\node at (44) [above right = 0.05] {$C$};
+				\node at (04) [above left = 0.05] {$D$};
+				
+				% Midpoint labels
+				\node at (20) [below = 0.1] {$P$};
+				\node at (42) [right = 0.1] {$Q$};
+				\node at (24) [above = 0.1] {$R$};
+				\node at (02) [left = 0.1] {$S$};
+				
+			\end{tikzpicture}
+		\caption{A $2 \times 2$ wonky chessboard}
+		\label{fig:WonkyChessboard_BaseCaseStatement}
+		\end{subfigure}%
+		\hfill
+		\begin{subfigure}{0.49\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1.3]
+		
+				\input{Geometry/WonkyChessboard/QuadrilateralCoordinates.tikz}
+				
+				% Parallelogram
+				\draw[fill = blue!20] (20) -- (42) -- (24) -- (02) -- (20);
+				
+				% Outer and inner lines
+				\draw (00) -- (40) -- (44) -- (04) -- (00);
+				\draw (02) -- (42);
+				\draw (20) -- (24);
+				
+				% Corner labels
+				\node at (00) [below left = 0.1] {$A$};
+				\node at (40) [right = 0.1] {$B$};
+				\node at (44) [above right = 0.05] {$C$};
+				\node at (04) [above left = 0.05] {$D$};
+				
+				% Midpoint labels
+				\node at (20) [below = 0.1] {$P$};
+				\node at (42) [right = 0.1] {$Q$};
+				\node at (24) [above = 0.1] {$R$};
+				\node at (02) [left = 0.1] {$S$};
+				\node at (22) [above right = 0.1] {$M$};
+				
+				% Vector labels
+				\path[->-=0.5] (00) -- (20) node [midway, below = 0.1] {$\vec a$};
+				\path[->-=0.5] (40) -- (42) node [midway, right = 0.15] {$\vec b$};
+				\path[->-=0.5] (44) -- (24) node [midway, above = 0.1] {$\vec c$};
+				\path[->-=0.5] (04) -- (02) node [midway, left = 0.15] {$\vec d$};
+				
+			\end{tikzpicture}
+		\caption{The parallelogram formed by connecting midpoints}
+		\label{fig:WonkyChessboard_Parallelogram}
+		\end{subfigure}
+	\end{center}
+	\caption{The $n = 2$ case}
+	\label{fig:WonkyChessboard_BaseCase}
+\end{figure}
+
+We first prove that $PQRS$ is indeed a paralellogram. Define vectors $\vec a$, $\vec b$, $\vec c$, and $\vec d$ as $AP$, $BQ$, $CR$, and $DS$ respectively. It is sufficient to prove that $PQ$ is parallel to $SR$ and that $SP$ is parallel to $RQ$. Note that $2 \cdot (\vec a + \vec b + \vec c + \vec d) = \vec 0$ as this describes a complete path around the quadrilateral, starting and ending in the same location. This is applied in equation~\ref{eqn:WonkyChessboard_Parallel} shows that $PQ || SR$ and the proof for $SP || RQ$ follows almost identically.
+
+\begin{equation}
+	PQ = \vec a + \vec b = \vec a + \vec b - (\vec a + \vec b + \vec c + \vec d) = -(\vec c + \vec d) = SR
+	\label{eqn:WonkyChessboard_Parallel}
+\end{equation}
+
+If the triangle $APS$ is translated by $\vec a + \vec b$ (this can be thought of sliding it along an edge of the parallelogram) then $SP$ is mapped onto $RQ$. The new position of the remaining vertex, $A$, is labelled as $A'$ and is shown in figure~\ref{fig:WonkyChessboard_DiagonalsRed}. This forms a quadrilateral, $A'QCR$ with edges defined by $\vec a$, $\vec b$, $\vec c$, and $\vec d$. Similarly triangle $PBQ$ can be translated by $-(\vec c + \vec d)$ (sliding along the other edge of the parallelogram) to form $SB'RD$ as shown in figure~\ref{fig:WonkyChessboard_DiagonalsWhite}. This quadrilateral can be seen to be identical to $A'QCR$ as their edges are made of the same vectors, and therefore they have the same area. As these quadrilaterals are composed of the diagoally opposite triangles of interest we are done.
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{subfigure}{0.49\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1.3]
+				
+				\input{Geometry/WonkyChessboard/QuadrilateralCoordinates.tikz}
+				
+				\coordinate(A2) at ($(00) + (42) - (20)$);
+				\draw (A2) -- (42) -- (44) -- (24) -- (A2);
+				\draw (42) -- (24);
+				
+				% Vertex labels
+				\node at (A2) [below left = 0.05 of A2] {$A'$};
+				\node at (42) [below right = 0.05 of 42] {$Q$};
+				\node at (44) [above right = 0.05 of 44] {$C$};
+				\node at (24) [above left = 0.05 of 24] {$R$};
+				
+				% Vector labels
+				\path[->-=0.5] (A2) -- (42) node [midway, below = 0.1] {$\vec a$};
+				\path[->-=0.5] (42) -- (44) node [midway, right = 0.15] {$\vec b$};
+				\path[->-=0.5] (44) -- (24) node [midway, above = 0.1] {$\vec c$};
+				\path[->-=0.5] (24) -- (A2) node [midway, left = 0.15] {$\vec d$};
+				
+			\end{tikzpicture}
+		\caption{Red corners merged}
+		\label{fig:WonkyChessboard_DiagonalsRed}
+		\end{subfigure}%
+		\hfill
+		\begin{subfigure}{0.49\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=1.3]
+				\input{Geometry/WonkyChessboard/QuadrilateralCoordinates.tikz}
+				
+				\coordinate (B2) at ($(40) + (02) - (20)$);
+				\draw (02) -- (B2) -- (24) -- (04) -- (02);
+				\draw (02) -- (24);
+				
+				% Vertex labels
+				\node at (02) [below left = 0.05 of 02] {$S$};
+				\node at (B2) [below right = 0.05 of B2] {$B'$};
+				\node at (24) [above right = 0.05 of 24] {$R$};
+				\node at (04) [above left = 0.05 of 04] {$D$};
+				
+				% Vector labels
+				\path[->-=0.5] (02) -- (B2) node [midway, below = 0.1] {$\vec a$};
+				\path[->-=0.5] (B2) -- (24) node [midway, right = 0.15] {$\vec b$};
+				\path[->-=0.5] (24) -- (04) node [midway, above = 0.1] {$\vec c$};
+				\path[->-=0.5] (04) -- (02) node [midway, left = 0.15] {$\vec d$};
+				
+			\end{tikzpicture}
+			\caption{White corners merged}
+			\label{fig:WonkyChessboard_DiagonalsWhite}
+		\end{subfigure}
+	\end{center}
+	\caption{Sliding opposite corners along the sides of the parallelogram.}
+	\label{fig:WonkyChessboard_Diagonals}
+\end{figure}
+
+\textbf{Extensions and Comzments:}
+
+I think this problem is hard due to how flexible a quadrilateral can be. It appeared that very little concrete relationships could be established which is probably what made the algebra extremely messy when this was my approach. The non-parallel nature of the edges also scuppered several of my approaches, such as using the fact the triangles with the same base and perpendicular height have the same area - I could not figure out any way of applying this.
+
+I had wanted to transform the region into a simpler one and argue that solving the problem on this simpler region was sufficient to show the result. All linear transformations preserve the area, but unfortunately they also preserver parallel lines. This means the ``simpler" region would necessarily need to have no parallel lines in general which is hardly simpler at all. One of the earlier attempts I made was to compute the areas analytically by using a bilinear map from a regular grid and integrating as is done in the finite element method. I imagine such an approach is possible, but I found it too messy and gave up.
+
+I thik this problem is a nice reminder not to simply jump in with algebra and to consider all the tools at your disposal. Proving that the inscribed quadrilateral in figure~\ref{fig:WonkyChessboard_Parallelogram} is a parallelogram via algebra would be extremly messy, but proving that two lines are parallel is exactly what a vector-based approach is good for. Abstracting away information about the exact lengths and positions was just what was needed for this problem given its flexibility.

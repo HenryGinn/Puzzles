@@ -1,4 +1,12 @@
-\documentclass[hidelinks, 11 pt]{article}
+\DocumentMetadata{
+	tagging=on,
+	tagging-setup={math/setup=mathml-SE},
+	pdfstandard=ua-2,
+	pdfversion=2.0,
+	lang=en
+}
+
+\documentclass[11 pt]{article}
 
 \usepackage[a4paper, top=25.4mm, bottom=25.4mm, left=19.1mm, right=19.1mm, footskip=8mm]{geometry}
 \usepackage{parskip}
@@ -8,6 +16,7 @@
 \usepackage{fancyhdr}
 \usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage{unicode-math}
 \usepackage{amsfonts}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
@@ -15,7 +24,7 @@
 \usepackage{tkz-euclide}
 \usepackage{multirow}
 \usepackage{gensymb}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{titlesec}
 \usepackage{array}
 \usepackage{titletoc}
@@ -90,12 +99,15 @@
 
 % Section formatting
 \titleformat{\section}
-  {\centering\Large\bfseries\MakeUppercase}
-  {\thesection}{1em}{}
+	{\centering\Large\bfseries\MakeUppercase}
+	{\thesection}{1em}{}
+\titleformat{\subsubsection}[runin]
+	{\bfseries}
+	{}{0em}{}[:]
 
 % Tables
-\renewcommand{\thetable}{\Roman{table}} % Count in roman numerals
 \newcommand{\myhline}{\hline\noalign{\vskip 2pt}} % Space after hline
+\setcounter{tocdepth}{2} % Suppress subsubsections in table of contents
 
 % Workaround for inputting into tables as \input
 % is not equivalent to simply copy-pasting code.
@@ -125,11 +137,21 @@
 \addtolength{\topmargin}{-1.6pt}
 \thispagestyle{firstpage}
 
+\def\title{Puzzles}
+\def\author{Henry Ginn}
+
+\hypersetup{
+	pdftitle={\title},
+	pdfauthor={\author},
+	pdfkeywords={Mathematics, Logic, Puzzle},
+	pdfdisplaydoctitle=true
+}
+
 \begin{center}
     \vspace*{-20mm}
-    \Huge Puzzles  \\
+    \Huge \title  \\
     \vspace{5mm}
-    \large Henry Ginn  \\
+    \large \author  \\
 \end{center}
 \vspace{5mm}
 
@@ -141,17 +163,13 @@ This document is a collection of interesting puzzles that I find that I started 
 
 \newpage
 
-\input{1 - Logic}\newpage
-\input{2 - Numbers}\newpage
-\input{3 - Probability}\newpage
-\input{4 - Geometry}\newpage
-\input{5 - Physics}\newpage
+\input{Logic}\newpage
+\input{Numbers}\newpage
+\input{Probability}\newpage
+\input{Geometry}\newpage
+\input{Physics}\newpage
 
 \newpage
-
-% Add spherical polar basis problem
-% Add umbrella problem
-% Add semicircle and quarter circle in square problem
 
 \fancyhf{}
 \fancyhead[L]{References}

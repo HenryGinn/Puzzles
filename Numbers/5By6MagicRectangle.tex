@@ -1,0 +1,44 @@
+
+\subsection{5 by 6 Magic Rectangle}
+
+This is question 1 from the 1979 Grade 5 Leningrad Mathematical Olympiad~\cite{Grade5LeningradOlympiad}, so it was designed for children aged around 11. Despite this, most people I ask have not been able to solve it and give up very quickly. Personally I think the success rate would be higher if people were more tenacious, and I give this problem a difficulty of 2/10.
+
+The numbers 1 to 30 are each to be placed in a 5 by 6 grid without repeats such that all the rows sum to the same total, and all the columns sum to the same total. Determine whether this is possible, and if so, provide a solution.
+
+\subsubsection{Hints}
+
+\begin{enumerate}
+	\item Be more systematic than trying to move the numbers around to get the same totals.
+	\item Think about how you would calculate the totals for the rows and columns.
+\end{enumerate}
+
+\subsubsection{Solution}
+
+This problem becomes easy when you think about it systematically. Before placing any numbers in the table, the totals for the rows and columns should be found as a target to aim for. The sum of all the column totals will be equal to the sum of all the numbers in the grid, and similarly for the rows. This total is an invariant of the problem, any arrangement of numbers will give the same total sum. This invariant can be determined using the formula for the sum of the first $n$ natural numbers, giving $S = \frac{1}{2} \cdot 30 \cdot 31 = 15 \cdot 31$. As the column total is the same for all six columns, the sum of the column totals will be a multiple of six. This means the sum of all numbers in the grid is also a multiple of 6. $S = 15 \cdot 31$, which are both odd, therefore the column total cannot be a whole number. As the column total is the sum of whole numbers, this is a contradiction and the task is impossible.
+
+\subsubsection{Extensions and Comments}
+
+This method can show that such a grid is impossible if the dimensions of the grid are of different parities. This can be done by substituting a general odd number and a general even number, $n = 2a$ and $m = 2b + 1$ respectively, into the formula $S = \frac{1}{2} \cdot nm  \cdot (nm + 1)$. This is done in equation~\eqref{eqn:5By6MagicRectangleEvenOdd} and it is seen to be an odd multiple of $a$ as $\text{ODD} \cdot \text{ODD} = \text{ODD}$. For $S$ to divide $n$ it needs to be an even multiple of $a$ and thus we get a contradiction as before.
+\begin{equation}
+	S = \frac{1}{2} \cdot 2a \cdot (2b + 1) \cdot (2a \cdot (2b + 1) + 1) = a \cdot (2b + 1) \cdot (2(ab + a) + 1)
+	\label{eqn:5By6MagicRectangleEvenOdd}
+\end{equation}
+
+In the case of two even numbers or two odd numbers, the corresponding equation for $S$ divides both $n$ and $m$. This is seen in equations~\eqref{eqn:5By6MagicRectangleEvenEven} and~\eqref{eqn:5By6MagicRectangleOddOdd} respectively. Passing this test does not imply that such a magic rectangle is possible however, for example there are only two possible 2 by 2 grids and neither of them are magic.
+\begin{subequations}
+	\begin{align}
+		\notag\\[-6mm]
+		\begin{split}
+			S &= \frac{1}{2} \cdot 2a \cdot 2b \cdot (2a \cdot 2b + 1)  \\
+			&= n \cdot b \cdot (2a \cdot 2b + 1)  \\
+			&= m \cdot a \cdot (2a \cdot 2b + 1)
+			\label{eqn:5By6MagicRectangleEvenEven}
+		\end{split}\\[2mm]		
+		\begin{split}
+			S &= \frac{1}{2} (2a + 1) \cdot (2b + 1) \cdot ((2a + 1) \cdot (2b + 1) + 1)  \\
+			&= (2a + 1) \cdot (2b + 1) \cdot (2ab + a + b + 1)  \\
+			&= n \cdot m \cdot (2ab + a + b + 1)
+			\label{eqn:5By6MagicRectangleOddOdd}
+		\end{split}\\[-6mm]\notag
+	\end{align}
+\end{subequations}
