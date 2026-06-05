@@ -54,14 +54,11 @@ def split_states(states, weighing):
 def count_splits(states, df):
     # Each row is a weighing
     # Each column is a state
-    differences = np.multiply(
-        states.values.reshape(1, -1, 12),
-        df.values.reshape(-1, 1, 12)
-        ).sum(axis=2)
+    state_differences = differences[:, states]
     count = df.copy()
-    count.loc[:, "Left"] = (differences > 0).sum(axis=1)
-    count.loc[:, "Balanced"] = (differences == 0).sum(axis=1)
-    count.loc[:, "Right"] = (differences < 0).sum(axis=1)
+    count.loc[:, "Left"] = (state_differences > 0).sum(axis=1)
+    count.loc[:, "Balanced"] = (state_differences == 0).sum(axis=1)
+    count.loc[:, "Right"] = (state_differences < 0).sum(axis=1)
     add_deviation_column(states, count)
     count = count.sort_values("Deviation")
     return count
@@ -73,35 +70,32 @@ def add_deviation_column(states, count):
         for column in outcomes], axis=0)
     return count
 
-def solve(states, outcome_history, weighing_history, seen_configurations):
-    if len(weighing_history) < weighing_count:
-        count = count_splits(states, df)
-        count = count.index[count["Deviation"] == count.iloc[0, -1]]
-        for weighing_index in count:
-            seen_configurations_new = seen_configurations.copy()
-            splits = split_states(states, df.iloc[weighing_index, :])
-            for split, outcome in zip(splits, outcomes):
-                configuration = solve(
-                    split,
-                    outcome_history + [outcome],
-                    weighing_history + [weighing_index],
-                    seen_configurations)
-                if configuration is None:
-                    break
-        print(outcome_history)
-        print(weighing_history)
-        print(seen_configurations)
-        input()
+def solve(depth, states, outcomes, weighings, outcome_history, weighing_history):
+    if get_substates_count(states) <= 3**(weighing_count - depth):
+        if depth < weighing_count:
+            count = count_splits(states, df)
+            print(count)
+            input()
+            for weighing_index in count.index:
+                splits = split_states(states, df.iloc[weighing_index, :])
+                for split, outcome in zip(splits, outcomes):
+                    solve(
+                        depth + 1,
+                        split,
+                        outcomes + [outcome],
+                        weighings + [weighing_index])
+        else:
+            outcome_history.append(outcomes)
+            weighing_history.append(weighings)
     else:
-        configurations = set(left.apply(lambda x: tuple(sorted(list(set(x)))), axis=1))
-        if len(configurations) == 1:
-            print("Configuration count test passed")
-            print(outcome_history)
-            print(weighing_history)
-            print(seen_configurations)
-            all_outcomes.append(outcome_history)
-            all_weighings.append(weighing_history)
-            seen_configurations_copy.add(configurations[0])
+        return False
+
+def get_substates_count(states):
+    substates = np.array(all_states)
+    substates = np.where(substates > 3, 4, substates)
+    substates = np.where(substates < 3, 2, substates)
+    substates_count = np.unique(substates, axis=0).shape[0]
+    return substates_count
 
 def postprocess_solution():
     global all_weighings, all_outcomes
@@ -158,20 +152,14 @@ df = pd.DataFrame([
     i for i in product([-1, 0, 1], repeat=12)
     if i.count(-1) == i.count(1)])
 
-all_outcomes = []
-all_weighings = []
+differences = np.multiply(
+        all_states.values.reshape(1, -1, 12),
+        df.values.reshape(-1, 1, 12)
+        ).sum(axis=2)
 
-left, balanced, right = split_states(all_states, df.iloc[14832, :])
-left, balanced, right = split_states(left, df.iloc[60395, :])
-left, balanced, right = split_states(balanced, df.iloc[13285, :])
-left, balanced, right = split_states(balanced, df.iloc[16813, :])
-#left, balanced, right = split_states(left, df.iloc[37225, :])
-#left, balanced, right = split_states(left, df.iloc[25632, :])
-a = count_splits(balanced, df)
-
-weighing_count = 2
+weighing_count = 6
 weighing_columns = [f"Weighing{i+1}" for i in range(weighing_count)]
-solve(balanced, [], [], set([]))
+solve(0, all_states, [], [], [], [])
 #postprocess_solution()
 """
 solution = pd.read_csv("Solution.csv", index_col=0)
