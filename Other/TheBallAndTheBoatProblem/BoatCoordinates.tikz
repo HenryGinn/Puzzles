@@ -1,0 +1,18 @@
+\coordinate (TankA) at (0, 0);
+\coordinate (TankB) at (8, 0);
+\coordinate (TankC) at (8, 4);
+\coordinate (TankD) at (0, 4);
+
+\coordinate (BoatA) at (1, 3.5);
+\coordinate (BoatB) at (4, 3.5);
+\coordinate (BoatC) at (4, 5.5);
+\coordinate (BoatD) at (1, 5.5);
+
+\def\radius{0.75}
+\def\arrowoffsetv{1}
+\def\arrowoffseth{0.7}
+\def\labeloffset{0.2}
+\def\ballx{6}
+\def\submergedheight{3}
+\coordinate (ArrowLength) at (0, 1);
+\coordinate (Boat) at ($(BoatA)!0.5!(BoatB)$);

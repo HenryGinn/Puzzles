@@ -1,0 +1,103 @@
+% Date added: 2026/08/27
+
+\subsection{Three Pegs On A Square}
+
+I found this problem from 3Blue1Brown's monthly puzzles~\cite{ThreePegsOnASquare}. A pen and paper would be useful to solve this problem and I give it a difficulty of 3 out of 10.
+
+There is an infinite square grid of lattice points. There are three pegs on three corners of a square as shown in figure~\ref{fig:ThreePegsOnASquare_Problem}. A move consists of moving a peg over a peg to the opposite side, where the distance between the two pegs remains the same, as shown in figure~\ref{fig:ThreePegsOnASquare_MoveDefinition}. Is it possible to move one of the pegs to the last corner of the square? Prove it is not possible or find the fewest moves to do so.
+
+\def\dotradius{0.05}
+\def\pegradius{0.2}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\foreach \x in {0,1,...,7}{
+				\foreach \y in {0,1,...,5}{
+					\fill[color=black] (\x,\y) circle (\dotradius);
+				}
+			}
+			\fill[color=blue!60] (3,2) circle (\pegradius);
+			\fill[color=blue!60] (3,3) circle (\pegradius);
+			\fill[color=blue!60] (4,2) circle (\pegradius);
+		\end{tikzpicture}
+		\caption{Problem setup}
+		\label{fig:ThreePegsOnASquare_Problem}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\foreach \x in {0,1,...,7}{
+				\foreach \y in {0,1,...,5}{
+					\fill[color=black] (\x,\y) circle (\dotradius);
+				}
+			}
+			\node[circle, draw, minimum size=\pegradius, color=blue!60] (A) at (4,0) {};
+			\draw[->] (2,4) to [bend right=60] (A);
+			\fill[color=blue!60] (3,2) circle (\pegradius);
+			\fill[color=blue!60] (3,3) circle (\pegradius);
+			\fill[color=blue!60] (2,4) circle (\pegradius);
+			\draw[|<->|] ($(2,4)!0.15!(3,2)$) -- ($(2,4)!0.85!(3,2)$);
+			\draw[|<->|] ($(3,2)!0.15!(4,0)$) -- ($(3,2)!0.85!(4,0)$);
+		\end{tikzpicture}
+		\caption{Example move}
+		\label{fig:ThreePegsOnASquare_MoveDefinition}
+	\end{subfigure}
+	\caption{The three pegs on a square problem}
+	\label{fig:ThreePegsOnASquare}
+\end{figure}
+
+\subsubsection{Hints}
+
+\begin{enumerate}
+	\item It is not possible
+	\item Label the pegs $A$, $B$, and $C$. Label the points that a peg lands on with the name of the peg that landed there.
+	\item Prove that the labelling in the previous hint is well-defined. That is, each square can only be landed on by a single type of peg. By labelling the fourth corner of the square as type $D$, deduce the conclusion.
+	\item Consider the coordinates of a point before and after each move modulo 2.
+\end{enumerate}
+
+\subsubsection{Solution}
+
+Define the four corners of the square as $A$, $B$, $C$, and $D$ with coordinates $(0, 0)$, $(1, 0)$, $(1, 1)$, and $(0, 1)$ respectively. We call points reachable by a peg starting on point $i$ as a point of type $i$. Our method of proof will be to show that this definition is well-defined, that is, each point has a unique type. This is equivalent to showing that a peg starting on a point with a given label cannot reach any point that is reachable by a peg starting on a point with a different label. Once this is fact has been established then we see that the last corner of the square cannot be reached as it is of a different type to the points that the pegs started on.
+
+If a peg with position vector $\mathbf{i}$ jumps over a peg with position vector $\mathbf{j}$ then the position vector of the point that the peg lands is $\mathbf{j} + (\mathbf{j} - \mathbf{i})$. By playing out a few moves and labelling the points with a type according to the rule defined previously, we hypothesize that the labels follow a pattern that repeats every two rows and every two columns. This motivates us to consider the coordinates modulo 2. We apply this to our new position vector in~\eqref{eqn:ThreePegsOnASquare_PositionMod2}.
+\begin{alignat}
+	\begin{split}
+		& \mathbf{j} + (\mathbf{j} - \mathbf{i}) & & \mod 2 \\
+		\equiv{} & 2\mathbf{j} - \mathbf{i} & & \mod 2 \\
+		\equiv{} & \mathbf{i} & & \mod 2
+	\end{split}
+	\label{eqn:ThreePegsOnASquare_PositionMod2}
+\end{alignat}
+This shows that the position of a point of type $i$ modulo 2 is preserved. All of the initial pegs had different positions modulo 2, proving that a peg of type~$i$ can never land on a point of type~$j \ne i$. By our previous comments, we are done.
+
+\subsubsection{Extensions and Comments}
+
+In the solution presented we hypothesized that the pattern of how points repeated every two units in each direction, but never proved this fact. We showed that the pattern could not repeat in any direction by any number not divisible by 2. The pattern does in fact repeat every two units, which can be shown by the following observations. The pattern is shown in figure~\ref{fig:ThreePegsOnASquare_Pattern}.
+
+\begin{enumerate}
+	\item The original pattern of three pegs can be moved to the right by two units by a sequence of four moves. As a simple exercise, find such a sequence.
+	\item There exists a mirror of symmetry that cuts diagonally through the original peg positions, therefore if the three pegs can be moved to the right by two units then they can be moved up by the same sequence performed when mirrored.
+	\item The moves are reversible so if the pegs can move right by two then they can move left by two, and likewise for moving up and down by two.
+	\item All $2 \times 2$ squares can therefore be reached by the original three pegs.
+\end{enumerate}
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}
+			\foreach \x in {0,1,...,3}{
+				\foreach \y in {0,1,...,2}{
+					\fill[color=black] (2*\x + 1,2*\y + 1) {$A$};
+				}
+			}
+		\end{tikzpicture}
+		\caption{Pattern followed by the peg types}
+		\label{fig:ThreePegsOnASquare_Pattern}
+	\end{center}
+\end{figure}
+
+We also note that nothing about our proof relied on the fact that the game lives in two dimensions. If we take $n$ points where $1 \le n \le 2^k$ living on the corners of a $k$-dimensional unit hypercube embedded into a $k$-dimensional unit lattice then the same conclusions apply.
+
+The area of the triangle that has vertices at the pegs has a constant area. If peg~$i$ is being jumped over peg~$j$, we define the base of the triangle to be the vector from peg~$i$ to peg~$j$. The altitude of the triangle is the perpendicular height from the line passing through pegs~$i$ and~$j$ to the third peg. After peg~$i$ has been moved, the altitude remains the same because peg~$i$ and peg~$j$ define the same line. The length of the base is also the same by definition of a move, and therefore the area is preserved.

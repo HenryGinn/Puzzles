@@ -19,12 +19,13 @@
 \usepackage{amsfonts}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
+\usepackage{pgfplots}
 \usetikzlibrary{quotes, angles, positioning, math, calc, decorations.markings}
 \usepackage{tkz-euclide}
 \usepackage{multirow}
 \usepackage{gensymb}
 \usepackage{hyperref}
-\usepackage{titlesec}
+%\usepackage{titlesec}
 \usepackage{array}
 \usepackage{titletoc}
 \usepackage[nameinlink]{cleveref}
@@ -88,8 +89,8 @@
 }
 
 % Spacing around headings
-\titlespacing*{\section}{0pt}{10pt}{5pt}
-\titlespacing*{\subsection}{0pt}{5pt}{5pt}
+%\titlespacing*{\section}{0pt}{10pt}{5pt}
+%\titlespacing*{\subsection}{0pt}{5pt}{5pt}
 
 % Other spacing
 \setlength{\parskip}{7pt plus 4pt}
@@ -97,12 +98,19 @@
 \setlength{\skip\footins}{5mm} % Footnotes
 
 % Section formatting
-\titleformat{\section}
-	{\centering\Large\bfseries\MakeUppercase}
-	{\thesection}{1em}{}
-\titleformat{\subsubsection}[runin]
-{\bfseries}
-{}{0em}{}[:]
+%\titleformat{\section}
+%	{\centering\Large\bfseries\MakeUppercase}
+%	{\thesection}{1em}{}
+%\titleformat{\subsubsection}[runin]
+%{\bfseries}
+%{}{0em}{}[:]
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+	{-2.5ex\@plus -1ex \@minus -0.25ex}%
+	{1.25ex \@plus 0.25ex}%
+	{\normalfont\normalsize\bfseries}}
+\makeatother
 
 % Tables
 \setcounter{tocdepth}{2} % Suppress subsubsections in table of contents
@@ -122,3 +130,10 @@
 	Contents for section~\ref{#1}}
 
 \let\oldthesubsection\thesubsection
+
+\hypersetup{
+	colorlinks = true, % Colours links instead of ugly boxes
+	urlcolor = blue,
+	linkcolor = blue,
+	citecolor = blue
+}

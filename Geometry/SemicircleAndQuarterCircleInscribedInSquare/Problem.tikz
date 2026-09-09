@@ -1,0 +1,16 @@
+\draw (A) -- (B) -- (C) -- (D) --cycle;
+\draw (D) arc(180:360:5);
+\draw (Q) arc(90:180:8);
+\draw (Y) -- (Z);
+
+\node at (A) [below left = 0.05] {$A$};
+\node at (B) [below right = 0.05] {$B$};
+\node at (C) [above right = 0.05] {$C$};
+\node at (D) [above left = 0.05] {$D$};
+\node at (P) [above = 0.05] {$P$};
+\node at (Q) [right = 0.05] {$Q$};
+\node at (Y) [left = 0.05] {$Y$};
+\node at (Z) [right = 0.05] {$Z$};
+
+\pic {dimension={$(P)$}{$(D)$}{0.2}{$10$}};
+\pic {dimension={$(B)$}{$(Q)$}{0.3}{$8$}};

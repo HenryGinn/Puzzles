@@ -1,0 +1,15 @@
+\pgfmathsetmacro{\side}{(5 + 313^0.5)/2}
+\pgfmathsetmacro{\diagonal}{{sqrt(\side^2 + (\side - 5)^2)}}
+\pgfmathsetmacro{\cosT}{(\side - 5) / \diagonal}
+\pgfmathsetmacro{\sinT}{\side / \diagonal}
+\pgfmathsetmacro{\Xx}{\side - 8*\cosT}
+\pgfmathsetmacro{\Xy}{8*\sinT}
+\coordinate (A) at (0, 0);
+\coordinate (B) at (\side, 0);
+\coordinate (C) at (\side, \side);
+\coordinate (D) at (0, \side);
+\coordinate (P) at (10, \side);
+\coordinate (Q) at (\side, 8);
+\coordinate (X) at (\Xx, \Xy);
+\coordinate (Y) at ($(0, \Xy - \Xx*\cosT)$);
+\coordinate (Z) at ($(\side, {\Xy + (\side - \Xx) * \cosT})$);
