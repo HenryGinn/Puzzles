@@ -1,0 +1,53 @@
+\subsection{SumOfSquaresEqualsDoubleProduct}
+
+I found this problem in TBO's problem solving booklet.
+
+Prove that if $x$, $y$, $z \in \mathbb{Z}$ then the only solution to equation~\eqref{eqn:SumOfSquaresEqualsDoubleProduct_Question} is $x = y = z = 0$.
+\begin{equation}
+	x^2 + y^2 + z^2 = 2xyz
+	\label{eqn:SumOfSquaresEqualsDoubleProduct_Question}
+\end{equation}
+
+\subsubsection{Hints}
+
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\subsubsection{Solution 1}
+
+This solution is due to my friend, Chris Finn, and is much slicker than mine (offered as Solution 2). We first show that $x$, $y$, and $z$ are all even by considering the equation mod $4$. The right hand side can either be $0$ or $2$ and we split into cases. We use the fact that the square of an integer is equivalent to either $0$ or $1$ mod 4.
+
+If the right hand side is $0$ then at least one of $x$, $y$, or $z$ must be even. Without loss of generality let us say it is $x$. Looking at the left hand side we now have $0 + (0 \text{ or } 1) + (0 \text{ or } 1)$ which can only be 0 if $y$ and $z$ are both even as well.
+
+Alternatively, if the right hand side if $2$ then all of $x$, $y$, and $z$ must be odd and their squares are all equivalent to $1$ mod $4$. Their sum mod $4$ is equivalent to $3$ which is not equal to $2$ and we have a contradiction.
+
+As all variables are even, they must divide $2$ at least once. Suppose $2^n$ is the highest power of $2$ that divides $x$, $y$, and $z$. We can therefore write the variables as $x = a \cdot 2^{n}$, $y = b \cdot 2^{n}$, $z = c \cdot 2^{n}$, and substituting into the original equation gives equation~\eqref{eqn:SumOfSquaresEqualsDoubleProduct_SmallerSolution}.
+\begin{align}
+	& (a \cdot 2^n)^2 + (b \cdot 2^n)^2 + (c \cdot 2^n)^2 = (a \cdot 2^n) \cdot (b \cdot 2^n) \cdot (c \cdot 2^n) \\
+	\implies& 2^{2n} \left( a^2 + b^2 + c^n \right) = 2^{3n + 1} abc \\
+	\implies& a^2 + b^2 + c^n = 2^{n+1} abc
+	\label{eqn:SumOfSquaresEqualsDoubleProduct_SmallerSolution}
+\end{align}
+
+If we again consider this equation mod $4$ then we see that the right hand side must be $0$. For the left hand side to be $0$ we must have each of $a$, $b$, and $c$ to be $0$ or $2$ mod $4$, meaning they are even. As we can divide all by a factor of $2$, this contradicts the maximality of $n$ defined previously. We conclude that the only solution is where $x$, $y$, and $z$ can be infinitely divided by $2$ which is where $x = y = z = 0$ which is easily confirmed to be a solution.
+
+\subsubsection{Solution 2}
+
+We can rearrange equation~\eqref{eqn:SumOfSquaresEqualsDoubleProduct_Question} to equation~\eqref{eqn:SumOfSquaresEqualsDoubleProduct_CompletedSquare} by completing the square. Solving for $x$ gives equation~\eqref{eqn:SumOfSquaresEqualsDoubleProduct_SolveForX} and we conclude that for $x$ to be an integer we must have $y^2 z^2 - y^2 - z^2$ be a square number.
+\begin{multiequation}
+	\begin{aligned}
+		& x^2 + y^2 + z^2 = 2xyz
+		\begin{split}
+			\implies& (x - yz)^2 - y^2z^2 + y^2 + z^2 = 0
+			\label{eqn:SumOfSquaresEqualsDoubleProduct_CompletedSquare}
+		\end{split}
+		\begin{split}
+			\implies& x = yz \pm \sqrt{y^2 z^2 - y^2 - z^2}
+			\label{eqn:SumOfSquaresEqualsDoubleProduct_SolveForX}
+		\end{split}
+	\begin{aligned}
+\end{multiequation}
+
+\subsubsection{Extensions and Comments}
+

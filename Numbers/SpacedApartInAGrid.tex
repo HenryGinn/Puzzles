@@ -4,14 +4,14 @@ I found this problem in TBO's problem solving booklet. It has a very simple solu
 
 The integers from $1$ to $n^2$ are put into an $n \times n$ grid. Prove that there must exist one pair of numbers that are adjacent (horizontally, vertically, or diagonally) that are within $n + 1$ of each other.
 
-\textbf{Hints:}
+\subsubsection{Hints:}
 
 \begin{enumerate}
 	\item Use the pigeonhole principle.
 	\item Think about paths rather than $3 \times 3$ regions.
 \end{enumerate}
 
-\textbf{Solution:}
+\subsubsection{Solution:}
 
 The numbers 1 and $n^2$ must exist somewhere within the grid. If we define a step to be a hop to an adjacent square (either horizontall, vertically, or diagonally) then the number of steps between two squares is the maximum of the number of columns between the squares and the number of rows between the squares. This is because a diagonal step moves by one column and one row at the same time. This means that the maximum number of steps between two squares is $n - 1$.
 
@@ -22,7 +22,7 @@ $n^2$ and $1$ are $n^2 - 1$ apart and we need to achieve this difference in $n -
 	\label{eqn:SpacedApartInAGrid_Pigeonhole}
 \end{equation}
 
-\textbf{Extensions and Comments:}
+\subsubsection{Extensions and Comments:}
 
 I immediately knew to use the pigeonhole principle to solve this, although originally the adjacency property made me think of $3 \times 3$ regions. I struggled to think of how such an argument would work however.
 

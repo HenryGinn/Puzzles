@@ -1,0 +1,74 @@
+\subsection{SumAndReciprocalSumEqualZero}
+
+I found this problem in TBO's problem solving booklet.
+
+Show that there are no real solutions to $a + b + c = 0 = \frac{1}{a} + \frac{1}{b} + \frac{1}{c}$.
+
+\subsubsection{Hints}
+
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\subsubsection{Solution 1}
+
+This solution is due to my friend Chris Finn and is far more elegant than my solution. It is the simple one-line contradiction given in equation~\eqref{eqn:SumAndReciprocalSumEqualZero_ChrisSolution} where the final inequality is true because none of $a$, $b$, or $c$ can be equal to $0$.
+\begin{equation}
+	0 = 0^2 = (a + b + c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ac = a^2 + b^2 + c^2 + 2abc \left( \frac{1}{a} + \frac{1}{b} + \frac{1}{c} \right) = a^2 + b^2 + c^2 > 0
+	\label{eqn:SumAndReciprocalSumEqualZero_ChrisSolution}
+\end{equation}
+
+\subsubsection{Solution 2}
+
+This is my dad's solution and is also more elegant than my solution.
+\begin{aligned}
+	\begin{split}
+	& a + b + c = 0 \qquad \frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 0  \\
+	\implies& a = -b - c \qquad \frac{1}{abc} \left( ab + bc + ac \right) = 0  \\
+	\implies& (-b - c)b + bc + (-b - c)c = 0  \\
+	\implies& -b^2 - bc + bc - bc - c^2 = 0  \\
+	\implies& bc = -\left( b^2 + c^2 \right) < 0
+	\label{eqn:SumAndReciprocalSumEqualZero_DadSolution}
+	\end{split}
+\end{aligned}
+
+Equation~\eqref{eqn:SumAndReciprocalSumEqualZero_DadSolution} demonstrates that $b$ and $c$ must be of different signs. By symmetry we can do the exact same argument to show that the pairs $a$ and $b$ and $a$ and $c$ must have different signs as well. As there are three variables and only two signs, by the pigeonhole principle there must be at least two variables with the same sign. This would give a positive product which gives a contradiction.
+
+\subsubsection{Solution 3}
+
+My solution involves noting that the sums, $a + b + c = 0$ and $\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 0$ can also be written as the dot product shown in equation~\eqref{eqn:SumAndReciprocalSumEqualZero_VectorNormals}. Thinking of the vectors $(a, b, c)^T$ and $\frac{1}{a}, \frac{1}{b}, \frac{1}{c})^T$ as normals defining two planes, the statement given is equivalent to the vector $(1, 1, 1)^T$ lying within both planes.
+\begin{equation}
+	\left( \begin{array}{c} a\\ b\\ c \end{array} \right) \cdot \left( \begin{array}{c} 1\\ 1\\ 1\end{array} \right) = 0 \qquad \left( \begin{array}{c} \frac{1}{a}\\ \frac{1}{b}\\ \frac{1}{c}} \end{array} \right) \cdot \left( \begin{array}{c} 1\\ 1\\ 1} \end{array} \right) = 0
+	\label{eqn:SumAndReciprocalSumEqualZero_VectorNormals}
+\end{equation}
+
+\begin{equation}
+	\frac{1}{a} + \frac{1}{b} + \frac{1}{c} = 0 \implies \frac{bc + ac + ab}{abc} = 0 \implies ab + bc + ac = 0
+	\label{eqn:SumAndReciprocalSumEqualZero_ProductSumIsZero}
+\end{equation}
+
+\begin{equation}
+	\mathbf{v} \cdot \left( \begin{array}{c} a\\ b\\ c \end{array} \right) = \left( \begin{array}{c} c - b \\ a - c \\ b - a \end{array} \cdot \left( \begin{array}{c} a\\ b\\ c \end{array} \right) \right) = ac - ab + ab - bc + bc - ac = 0
+	\label{eqn:SumAndReciprocalSumEqualZero_FindingOrthogonalVector}
+\end{equation}
+
+\begin{equation}
+	\mathbf{u} = \left( \begin{array}{c} 1\\ 1\\ 1 \end{array} \right) \times \left( \begin{array}{c} c - b \\ a - c \\ b - a \end{array} \right) = \left( \begin{array}{c} b + c - 2a \\ c + a - 2b \\ a + b - 2c \end{array} \right)
+	\label{eqn:SumAndReciprocalSumEqualZero_CrossProduct}
+\end{equation}
+
+\begin{equation}
+	\mathbf{w} = \frac{1}{2}\left( \mathbf{u} - \mathbf{v} \right) = \frac{1}{2} \left[ \left( \begin{array}{c} b + c - 2a \\ c + a - 2b \\ a + b - 2c \end{array} \right) - \left( \begin{array}{c} c - b \\ a - c \\ b - a \end{array} \right] = \left( \begin{array}{c} a - b \\ b - c \\ c - a \end{array} \right)
+\end{equation}
+
+\begin{equation}
+	0 = \mathbf{w} \cdot \left( \begin{array}{c} a\\ b\\ c \end{array} \right) = \left( \begin{array}{c} a - b \\ b - c \\ c - a \end{array} \right) \cdot \left( \begin{array}{c} a\\ b\\ c \end{array} \right) = a^2 + b^2 + c^2 - (ab + bc + ac) = a^2 + b^2 + c^2 > 0
+\end{equation}
+
+\subsubsection{Extensions and Comments}
+
+Chris' method trivially extends to show that this result is true for equation~\eqref{eqn:SumAndReciprocalSumEqualZero_Extension}.
+\begin{equation}
+	x_1 + x_2 + \dots + x_{n-1} + x_n = 0 = \frac{1}{x_1} + \frac{1}{x_2} + \dots + \frac{1}{x_{n-1}} + \frac{1}{x_n}
+	\label{eqn:SumAndReciprocalSumEqualZero_Extension}
+\end{equation}

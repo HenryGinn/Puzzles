@@ -1,2 +1,2 @@
-pdflatex -synctex=1 -interaction=nonstopmode "Puzzles".tex
-pdflatex -synctex=1 -interaction=nonstopmode "Puzzles".tex
+luapdflatex -synctex=1 -interaction=nonstopmode "Puzzles".tex
+lualatex -synctex=1 -interaction=nonstopmode "Puzzles".tex
