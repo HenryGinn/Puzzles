@@ -1,0 +1,8 @@
+\coordinate (000) at (0, 0, 0);
+\coordinate (001) at (0, 0, 1);
+\coordinate (010) at (0, 1, 0);
+\coordinate (011) at (0, 1, 1);
+\coordinate (100) at (1, 0, 0);
+\coordinate (101) at (1, 0, 1);
+\coordinate (110) at (1, 1, 0);
+\coordinate (111) at (1, 1, 1);

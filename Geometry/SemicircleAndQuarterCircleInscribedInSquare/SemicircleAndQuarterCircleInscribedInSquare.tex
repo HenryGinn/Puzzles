@@ -1,0 +1,120 @@
+\subsection{Semicircle and Quarter Circle Inscribed in Square}
+
+I found this from Catriona Agg's collection of geometry problems. I rate it a difficulty of 2 out of 10 as there is only one moment of insight that is nicely breadcrumbed.
+
+Consider a square, $ABCD$. $P$ lies on $DC$ and forms the base of a semicircle inside the square where $DP$ is of length 10. $Q$ lies on $BC$ and forms the radius of a quarter circle centered at $B$ that lies inside the square so that the other end of the arc lies on $AB$. $BQ$ is of length $8$. The two arcs touch at $X$ and a line passes through $X$ and is tangent to both circles. The line intersects the left and right sides of the square at $Y$ and $Z$ respectively. How long is the line $YZ$?
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.6], alt={The geometry described in the question statement.}]
+		
+		\input{Geometry/SemicircleAndQuarterCircleInscribedInSquare/Coordinates.tikz}
+		\input{Geometry/SemicircleAndQuarterCircleInscribedInSquare/Problem.tikz}
+		\node at (X) [above = 0.2] {$X$};
+		
+	\end{tikzpicture}
+	\caption{The semicircle and quarter circle inscribed within the square.}
+	\label{fig:SemicircleAndQuarterCircleInscribedInSquare_Problem}
+\end{figure}
+
+\textbf{Hints:}
+
+\begin{enumerate}
+    \item Draw circle radii to points of interest.
+    \item The radius $BX$ is perpendicular to $YX$.
+    \item $YZ$ can be thought of as the hypotenuse of some triangle.
+\end{enumerate}
+
+\textbf{Solution:}
+
+A good first step with problems like this is to draw radii. We label the centre of the semicircle with base $DP$ as $E$ and draw lines $EX$ and $XB$ which are of length $5$ and $8$ respectively. We note that the line $EB$ must be straight because both $EX$ and $XB$ are at right angles to $YZ$. $EB$ therefore has a length of $5 + 8 = 13$, the sum of the radii.
+
+We next show that $EB$ has the same length as $YZ$. Draw a line segment parallel to $AB$ through $Y$ that connects to the other side of the square where it hits $BC$ at a point $Y'$. This forms the triangle $YY'Z$ as shown in figure~\ref{fig:SemicircleAndQuarterCircleInscribedInSquare_Solution}. We will show that triangle $YY'Z$ is congruent to triangle $BCE$ as $EB$ and $YZ$ form the hypotenuse of these triangles respectively.
+
+As it is immediate that both triangles are right-angled and that $|YY'| = |AB| = |BC|$ it remains to show that one of the other angles match. Triangle $BZX$ is similar to $BEC$ as they are both right-angle triangles and share the $\angle XBZ$. $\angle BZX$ is therefore equal to $CEX$ and thus the congruency is established and we are done.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.6], alt={The geometry described in the question statement with the lines from E to B and from Y to Y dash added. Triangles B C E and Y Y dash Z have been highlighted to draw attention to them.}]
+		
+		\input{Geometry/SemicircleAndQuarterCircleInscribedInSquare/Coordinates.tikz}
+		\coordinate (E) at ($(D)!0.5!(P)$);
+		\coordinate (Y') at ($(\side, \Xy - \Xx*\cosT)$);
+		
+		\begin{scope}[transparency group]
+			\begin{scope}[blend mode=multiply]
+				\fill[blue!20] (Y) -- (Z) -- (Y');
+				\fill[red!20] (E) -- (B) -- (C);
+			\end{scope}
+		\end{scope}
+		
+		\input{Geometry/SemicircleAndQuarterCircleInscribedInSquare/Problem.tikz}
+		\draw (Y) -- (Y');
+		\draw (E) -- (B);
+		\node at (X) [above left = -0.1 and 0.2] {$X$};
+		\node at (E) [above = 0.2] {$E$};
+		\node at (Y') [right = 0.2] {$Y'$};
+		
+	\end{tikzpicture}
+	\caption{The semicircle and quarter circle inscribed within the square.}
+	\label{fig:SemicircleAndQuarterCircleInscribedInSquare_Solution}
+\end{figure}
+
+\textbf{Extensions and Comments:}
+
+If we remove the semicircle and quarter circle from this problem and leave only $EB$ and $YZ$ intersecting at right angles then we can see a more general result. We note that as long as the lines touch opposite edges, the same argument given in the solution will show that $|EB| = |YZ|$. If $B$ does not coincide with a corner of the square then it can be thought of as coinciding with a corner of a rectangle.
+
+I was curious about where the intersection point was between the semicircle and quarter circle and how it changed as their sizes changed. First we place coordinates axes onto our system; let point $A$ lie at the origin with $AB$ and $AD$ pointing along the positive $x$ and positive $y$ axes respectively.
+
+If we denote the intersection as $(x, y)$ the we know that it must lie on the line from the origin to the centre of the semicircle. If we denote the distance $DE$ as $a$ and the side length of the square as $h$ then we have equation~\eqref{eqn:SemicircleAndQuarterCircleInscribedInSquare_GradientMatch}.
+\begin{equation}
+	\frac{x}{y} = \frac{a}{s} \implies a = \frac{xs}{y}
+	\label{eqn:SemicircleAndQuarterCircleInscribedInSquare_GradientMatch}
+\end{equation}
+
+We can make an equation of the semicircle as we know it is centred at $(a, s)$. As the semicircle passes through $C$ and the centre lies on $CD$, the radius must be of length $ED$ which is $s - a$. Substituting~\eqref{eqn:SemicircleAndQuarterCircleInscribedInSquare_GradientMatch} in to eliminate the dependence on the size of the quarter circle and semicircle we get equation~\eqref{eqn:SemicircleAndQuarterCircleInscribedInSquare_Locus} as the locus of points.
+\begin{subequations}
+	\begin{alignat}
+		& (x - a)^2 + (y - s)^2 &= (s - a)^2  \\
+		\implies & \left( x - \frac{xs}{y} \right)^2 + (y - s)^2 &= \left( s - \frac{xs}{y} \right)^2 \\
+		\implies & x^2\left( 1 - \frac{s}{y} \right)^2 + (y - s)^2 &= s^2 \left( 1 - \frac{x}{y} \right)^2 \\
+		\implies & x^2(y - s)^2 + y^2(y - s) &= s^2(y - x)^2
+	\end{alignat}
+	\label{eqn:SemicircleAndQuarterCircleInscribedInSquare_Locus}
+\end{subequations}
+
+\begin{subequations}
+	\begin{gather}
+		(x - a)^2 + (y - s)^2 = (s - a)^2  \\
+		\implies \left( x - \frac{xs}{y} \right)^2 + (y - s)^2 = \left( s - \frac{xs}{y} \right)^2 \\
+		\implies x^2\left( 1 - \frac{s}{y} \right)^2 + (y - s)^2 = s^2 \left( 1 - \frac{x}{y} \right)^2 \\
+		\implies x^2(y - s)^2 + y^2(y - s) = s^2(y - x)^2
+	\end{gather}
+	\label{eqn:SemicircleAndQuarterCircleInscribedInSquare_LocusB}
+\end{subequations}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.6], alt={The geometry described in the question statement.}]
+		
+		\input{Geometry/SemicircleAndQuarterCircleInscribedInSquare/Coordinates.tikz}
+		\input{Geometry/SemicircleAndQuarterCircleInscribedInSquare/Problem.tikz}
+		
+		%\begin{axis}
+		%	\addplot +[no markers,
+		%	raw gnuplot,
+		%	thick,
+		%	] gnuplot {
+		%		set contour base;
+		%		set cntrparam levels discrete 0.003;
+		%		unset surface;
+		%		set view map;
+		%		set isosamples 500;
+		%		splot exp(x)*cos(y)-1-x;
+		%	};
+		%\end{axis}
+		
+	\end{tikzpicture}
+	\caption{The locus of points where the intersection between the two circles lie as they change in size.}
+	\label{fig:SemicircleAndQuarterCircleInscribedInSquare_Locus}
+\end{figure}

@@ -1,0 +1,11 @@
+\def\arrowoffsetnoball{0.3}
+
+\coordinate (BoatAbove1) at ($(Boat) + (0, \arrowoffsetnoball)$);
+\coordinate (BoatBelow1) at ($(Boat) - (0, \arrowoffsetnoball)$);
+\coordinate (BoatAbove2) at ($(BoatAbove1) + (ArrowLength)$);
+\coordinate (BoatBelow2) at ($(BoatBelow1) - (ArrowLength)$);
+
+\draw[-Stealth] (BoatAbove1) -- (BoatAbove2);
+\draw[-Stealth] (BoatBelow1) -- (BoatBelow2);
+\node at (BoatAbove2) [above = \labeloffset] {$U_\text{Boat}$};
+\node at (BoatBelow2) [below = \labeloffset] {$W_\text{Boat}$};
